@@ -1,9 +1,9 @@
 # How to start
 - Install modules:
 ```bash
-yarn i
+npm i
 ```
 - Start the project
 ```bash
-yarn start
+npm start
 ```
