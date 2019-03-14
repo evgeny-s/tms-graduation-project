@@ -5,7 +5,5 @@ npm i
 ```
 - Start the project
 ```bash
-npm star
-
-
+npm start
 ```
