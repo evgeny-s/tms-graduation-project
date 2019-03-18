@@ -23,7 +23,7 @@ function AppsTable() {
           <td><Link className="btn btn-success" to="/app1">Перейти {'>'}</Link></td>
         </tr>
         <tr>
-            <th scope="row">1</th>
+            <th scope="row">2</th>
             <td>Игрушко</td>
             <td>Кирилл</td>
             <td><Link className="btn btn-success" to="/filippovich">Перейти {'>'}</Link></td>
