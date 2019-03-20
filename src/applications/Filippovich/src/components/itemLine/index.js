@@ -4,14 +4,15 @@ import './itemLine.css'
 import Item from '../item';
 
 
-function ItemLine() {
+function ItemLine({itemsType})
+{
     return (
         <div className="itemLine">
-            <Item type="player"/>
-            <Item type="wall"/>
-            <Item type="skill"/>
-            <Item type="bossWall"/>
-            <Item type="boss"/>
+            {
+                itemsType.map((value, index) => (
+                    <Item key={index} type={value}/>
+                ))
+            }
         </div>
     );
 }
