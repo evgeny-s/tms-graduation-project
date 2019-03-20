@@ -1,4 +1,5 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import './stats.css'
 
@@ -8,20 +9,35 @@ const mapStateToProps = state =>({
 
 const mapDispatchToProps = dispatch => ({
     clickStats: (e) => {
-        return console.log('clickStats');
+        console.log('clickStats');
     },
-    clickSoundButton: (e) =>
+    clickSoundButton: (e) =>{
+        e.stopPropagation();
         dispatch({
             type: 'CLICK_SOUND_BUTTON',
             payload: e.target.innerText === 'Sound Off' ? 'Sound On' : 'Sound Off',
         })
+    }
 });
 
 
 
-function Stats({buttonText, clickSoundButton, clickStats}) {
-    return (
-        <div className="user-stats col-3" onClick={clickStats}>
+class Stats extends React.Component{
+    myRef = React.createRef();
+
+    focusingDivElement = () => {
+        this.myRef.current.focus();
+         console.log( this.myRef.current );
+
+    }
+    componentDidMount() {
+        this.myRef.current.focus();
+    }
+
+    render(){
+        const {buttonText, clickSoundButton, clickStats} = this.props;
+        return (
+        <div ref={this.myRef}  className="user-stats col-3" onClick={this.focusingDivElement} onKeyDown={clickStats}>
             <p>Player Stats:</p>
             <p>Level:</p>
             <p>Experience:</p>
@@ -31,6 +47,6 @@ function Stats({buttonText, clickSoundButton, clickStats}) {
             <button onClick={clickSoundButton} type="button" className="btn btn-success">{buttonText}</button>
         </div>
     );
-}
+}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stats);
