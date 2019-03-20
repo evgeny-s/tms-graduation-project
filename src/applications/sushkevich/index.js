@@ -1,10 +1,12 @@
 import React from 'react';
 
 import withHeader from './../../hocs/withHeader';
+import App from './App';
+
 
 function Game() {
   return (
-    <div>Example of clicker app</div>
+    <App/>
   );
 }
 
