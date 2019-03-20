@@ -1,13 +1,14 @@
 import React from 'react';
 
-import Map from './Map';
+import Map from '../containers/Map';
 
 const Game = (props) => {
     return (
         <div className="game">
+            Some game
             <Map/>
         </div>
     )
 };
 
-export default Map;
+export default Game;
