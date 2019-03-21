@@ -1,15 +1,10 @@
-.item{
+.itemLine div{
     display: inline-block;
     width: 25px;
     height: 25px;
 }
 
-.player{
-    border-radius: 50%;
-    background-color: #00ff00;
-}
-
-.item .player{
+.pole{
     background-color: #ebebeb;
 }
 
@@ -18,17 +13,21 @@
 }
 
 .skill{
-    background-color: #ff0000;
+    background-color: #ff7bf8;
 }
 
 .certificate{
-    background-color: #ffff00;
+    background-color: rgb(255, 248, 165);
 }
 
 .bossWall{
-    background-color: #0005ff;
+    background-color: rgba(0, 5, 255, 0.58);
 }
 
 .boss{
-    background-color: #eaa000;
+    background-color: #ff0000;
+}
+
+.player{
+    background-color: #00ff00;
 }

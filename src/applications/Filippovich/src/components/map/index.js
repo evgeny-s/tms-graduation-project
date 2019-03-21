@@ -1,9 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import layout from '../../../db/db.json';
 import './map.css';
 import ItemLine from '../itemLine';
-import map from '../../../db/db';
+import db from '../../../db/db';
 
 
 const mapStateToProps = state =>({
@@ -27,7 +26,7 @@ const mapDispatchToProps = dispatch => ({
                     type:"KEY_DOWN",
                     payload: {
                         x: 0,
-                        y: -1
+                        y: 1
                     }});
                 break;
             case 38:
@@ -35,12 +34,12 @@ const mapDispatchToProps = dispatch => ({
                     type:"KEY_UP",
                     payload: {
                         x: 0,
-                        y: 1
+                        y: -1
                     }});
                 break;
             case 39:
                 dispatch({
-                    type:"KEY_RIGHT",
+                    type: "KEY_RIGHT",
                     payload: {
                         x: 1,
                         y: 0
@@ -72,8 +71,8 @@ class Map extends React.Component{
             <div ref={this.myRef} className="map" tabIndex="-1" onClick={this.focusingDivElement} onKeyDown={keyDown}>
 
                 {
-                    map.map.map((value, index) => (
-                        <ItemLine key={index} itemsType={value}/>
+                    db.map.map((value, index) => (
+                        <ItemLine key={index} yKoord={index} itemsType={value}/>
                     ))
                 }
 
