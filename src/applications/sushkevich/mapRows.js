@@ -2,7 +2,7 @@ import itemTypeConsts from './consts/mapItemTypes';
 
 const mapRows = {
     0: {
-        0: itemTypeConsts.SKILL,
+        0: itemTypeConsts.CERTIFICATE,
         1: itemTypeConsts.TRACK,
         2: itemTypeConsts.TRACK,
         3: itemTypeConsts.WALL,
@@ -21,7 +21,7 @@ const mapRows = {
         16: itemTypeConsts.TRACK,
         17: itemTypeConsts.TRACK,
         18: itemTypeConsts.WALL,
-        19 : itemTypeConsts.CERTIFICATE,
+        19 : itemTypeConsts.SKILL,
     },
     1: {
         0: itemTypeConsts.TRACK,
@@ -79,7 +79,7 @@ const mapRows = {
         8: itemTypeConsts.WALL,
         9: itemTypeConsts.WALL,
         10: itemTypeConsts.WALL,
-        11: itemTypeConsts.CERTIFICATE,
+        11: itemTypeConsts.SKILL,
         12: itemTypeConsts.WALL,
         13: itemTypeConsts.WALL,
         14: itemTypeConsts.TRACK,
@@ -156,7 +156,7 @@ const mapRows = {
         19: itemTypeConsts.TRACK,
     },
     7: {
-        0: itemTypeConsts.CERTIFICATE,
+        0: itemTypeConsts.SKILL,
         1: itemTypeConsts.TRACK,
         2: itemTypeConsts.WALL,
         3: itemTypeConsts.TRACK,

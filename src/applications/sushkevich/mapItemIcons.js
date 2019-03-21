@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default {
-    certificates: [
+    skills: [
         <i className="fas fa-shield-alt"></i>,
         <i className="fas fa-satellite-dish"></i>,
         <i className="fas fa-satellite"></i>,
@@ -28,7 +28,7 @@ export default {
         <i className="fas fa-feather-alt"></i>,
         <i className="fas fa-fire"></i>,
     ],
-    skills: [
+    certificates: [
         <i className="fas fa-biohazard"></i>,
         <i className="fas fa-flask"></i>,
         <i className="fas fa-laptop"></i>,
