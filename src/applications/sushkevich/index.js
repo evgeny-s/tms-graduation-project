@@ -7,6 +7,9 @@ import reducer from './reducers/index';
 
 import withHeader from './../../hocs/withHeader';
 import App from './App';
+
+import './styles/fonts.css';
+import './styles/icons.css';
 import './styles/style.css';
 
 const store = createStore(reducer, applyMiddleware(logger));

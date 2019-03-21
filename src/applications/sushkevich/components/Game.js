@@ -5,7 +5,6 @@ import Map from '../containers/Map';
 const Game = (props) => {
     return (
         <div className="game">
-            Some game
             <Map/>
         </div>
     )

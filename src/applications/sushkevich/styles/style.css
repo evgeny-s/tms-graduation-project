@@ -1,5 +1,63 @@
+
+
+.app header {
+    background-color: #1F2C23;
+    color: #FEFAE7;
+    text-align: center;
+    font-family: 'ralewayregular', sans-serif;
+    padding: 8px 0;
+    border-bottom: 1px solid #68D3B2;
+}
+
+.app .stats-bar {
+    display: inline-block;
+    width: 20%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.app .game {
+    display: inline-block;
+    width: 80%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.app .map {
+    border: 1px solid #68D3B2;
+}
+
+.app .map-row {
+    display: flex;
+}
+
 .app .map-item {
-    width: 20px;
-    height: 20px;
-    border: 1px solid red;
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+    text-align: center;
+}
+
+.app .player {
+    background-color: #00671A;
+    color: #ffffff;
+}
+
+.app .track {
+    background-color: #412865;
+}
+
+.app .wall {
+    background-color: #232323;
+}
+
+.app .skill {
+    background-color: #FC2034;
+}
+
+.app .certificate {
+    background-color: #39FFD5;
+    color: #F7B653;
 }
