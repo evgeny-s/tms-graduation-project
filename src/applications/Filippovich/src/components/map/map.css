@@ -1,5 +1,5 @@
 .map{
-    width: 700px;
-    height: 380px;
-    background-color: #48fffd;
+    display: block;
+    align-items: center;
+    /*background-color: rgba(0, 0, 0, 0);*/
 }

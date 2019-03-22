@@ -4,21 +4,15 @@ import db from '../../db/db';
 const initialState = {
     koords: {
         x: 10,
-        y: 5
+        y: 12
     },
+    viewPort: [ 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ],
     poleType: 'player',
     buttonText: 'Sound On'
 };
 
 function gamesReducer(state = initialState, action) {
     switch (action.type) {
-        case 'SET_ACTIVE':
-            db.map[action.payload.y][action.payload.x] = action.payload.poleType;
-            return update(state, {
-                $merge: {
-                    poleType: action.payload.poleType
-                }
-            });
         case 'CHANGE_ITEM_COLOR':
             return update(state, {
                 $merge: {
@@ -30,29 +24,41 @@ function gamesReducer(state = initialState, action) {
                 }
             });
         case 'KEY_UP':
-            if (state.koords.y <= 0 ||
+            if (state.koords.y <= state.viewPort[0] ||
                 db.map[state.koords.y + action.payload.y][state.koords.x + action.payload.x] === 'wall')
                    return state;
 
             let newKoords_up = {};
             newKoords_up.x = state.koords.x + action.payload.x;
             newKoords_up.y = state.koords.y + action.payload.y;
+
+            let newViewPort_up = state.viewPort;
+            if (state.koords.y <= state.viewPort[2] && state.koords.y >= 3)
+                newViewPort_up = [state.viewPort.slice(0, 1) - 1].concat(  state.viewPort.slice(0, state.viewPort.length - 1) );
+
             return update(state, {
                 $merge: {
-                    koords: newKoords_up
+                    koords: newKoords_up,
+                    viewPort: newViewPort_up,
                 },
             });
         case 'KEY_DOWN':
-            if (state.koords.y >= 9 ||
+            if (state.koords.y >= state.viewPort[9] ||
                 db.map[state.koords.y + action.payload.y][state.koords.x + action.payload.x] === 'wall')
                 return state;
 
             let newKoords_down = {};
             newKoords_down.x = state.koords.x + action.payload.x;
             newKoords_down.y = state.koords.y + action.payload.y;
+
+            let newViewPort_down = state.viewPort;
+            if (state.koords.y >= state.viewPort[7] && state.koords.y <= db.map.length - 4)
+                newViewPort_down = [].concat( state.viewPort.slice(1, state.viewPort.length), +state.viewPort.slice(state.viewPort.length - 1) + 1 );
+
             return update(state, {
                 $merge: {
-                    koords: newKoords_down
+                    koords: newKoords_down,
+                    viewPort: newViewPort_down,
                 },
             });
         case 'KEY_LEFT':

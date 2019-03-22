@@ -7,7 +7,6 @@ import './app.css'
 function App() {
     return (
         <div className="container filippovichGame">
-            <div className="col-12">Dungeon Crawler Game</div>
             <div className="user-interface row">
                 <Stats/>
                 <Panel/>

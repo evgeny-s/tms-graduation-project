@@ -9,14 +9,6 @@ const mapStateToProps = state =>({
 });
 
 const mapDispatchToProps = dispatch => ({
-    setActive: (y, x) => dispatch({
-        type: 'SET_ACTIVE',
-        payload: {
-            y,
-            x,
-            poleType: "wall"
-        },
-    })
 
 });
 
@@ -26,7 +18,7 @@ function ItemLine({itemsType, setActive, yKoord})
         <div className="itemLine">
             {
                 itemsType.map((value, index) => (
-                    <Item key={index} changeColor={setActive}
+                    <Item key={index}
                           yKoord={yKoord} xKoord={index} type={value}/>
                 ))
             }

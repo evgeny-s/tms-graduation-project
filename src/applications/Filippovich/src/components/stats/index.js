@@ -1,10 +1,10 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import {connect} from 'react-redux';
 import './stats.css'
 
 const mapStateToProps = state =>({
     buttonText: state.games.buttonText,
+
 });
 
 const mapDispatchToProps = dispatch => ({

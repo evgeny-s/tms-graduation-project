@@ -5,79 +5,87 @@ import ItemLine from '../itemLine';
 import db from '../../../db/db';
 
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
     koords: state.games.koords,
-
+    viewPort: state.games.viewPort,
 });
 
 const mapDispatchToProps = dispatch => ({
-    keyDown: (e) => {
+        keyLeft: () => dispatch({
+            type: "KEY_LEFT",
+            payload: {
+                x: -1,
+                y: 0
+            }
+        }),
+        keyDown: () => dispatch({
+            type: "KEY_DOWN",
+            payload: {
+                x: 0,
+                y: 1
+            }
+        }),
+        keyUp: () => dispatch({
+            type: "KEY_UP",
+            payload: {
+                x: 0,
+                y: -1
+            }
+        }),
+        keyRight: () => dispatch({
+            type: "KEY_RIGHT",
+            payload: {
+                x: 1,
+                y: 0
+            }
+        }),
+    }
+);
+
+
+class Map extends React.Component {
+    myRef = React.createRef();
+
+    _focusingDivElement = () => {
+        this.myRef.current.focus();
+    };
+
+    _keyPressed = (e) => {
         switch (e.keyCode) {
             case 37:
-                dispatch({
-                    type:"KEY_LEFT",
-                    payload: {
-                        x: -1,
-                        y: 0
-                    }});
+                this.props.keyLeft();
                 break;
             case 40:
-                dispatch({
-                    type:"KEY_DOWN",
-                    payload: {
-                        x: 0,
-                        y: 1
-                    }});
+                this.props.keyDown();
                 break;
             case 38:
-                dispatch({
-                    type:"KEY_UP",
-                    payload: {
-                        x: 0,
-                        y: -1
-                    }});
+                this.props.keyUp();
                 break;
             case 39:
-                dispatch({
-                    type: "KEY_RIGHT",
-                    payload: {
-                        x: 1,
-                        y: 0
-                    }});
+                this.props.keyRight();
                 break;
             default:
                 break;
         }
-    },
-});
-
-
-class Map extends React.Component{
-    myRef = React.createRef();
-
-    focusingDivElement = () => {
-        this.myRef.current.focus();
-
     };
 
     componentDidMount() {
         this.myRef.current.focus();
     };
 
-    render()
-    {
-        const {keyDown} = this.props;
-        return (
-            <div ref={this.myRef} className="map" tabIndex="-1" onClick={this.focusingDivElement} onKeyDown={keyDown}>
+    render() {
+        const {viewPort} = this.props;
 
+        return (
+            <div ref={this.myRef} className="map" tabIndex="-1"
+                 onClick={this._focusingDivElement} onKeyDown={this._keyPressed}>
                 {
-                    db.map.map((value, index) => (
-                        <ItemLine key={index} yKoord={index} itemsType={value}/>
+                    viewPort.map((viewPortValue, viewPortIndex) => (
+                        db.map.map((value, index) => (
+                            <ItemLine key={index} yKoord={index} itemsType={value}/>))
+                                .filter( item => item.key >= viewPortValue && item.key <= viewPortValue)
                     ))
                 }
-
-
-
             </div>
         );
     }

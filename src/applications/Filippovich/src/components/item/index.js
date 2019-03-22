@@ -20,12 +20,12 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-function Item ({type, changeColor, poleType, koords, yKoord, xKoord})
+function Item ({type, activateGame, poleType, koords, yKoord, xKoord})
 {
     let gamer;
     (koords.y === yKoord && koords.x === xKoord ) ? gamer = poleType : gamer = type;
     return (
-            <div className={gamer} onClick={changeColor.bind(null, yKoord, xKoord)} />
+            <div className={gamer} /*onClick={activateGame.bind(null, yKoord, xKoord)}*/ />
     );
 }
 
