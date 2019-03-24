@@ -62,6 +62,11 @@ const mapDispatchToProps = dispatch => ({
         //         poleType: "pole"
         //     },
         // })
+        edited: () =>
+            dispatch({
+                type: 'ITEM_EDITED',
+                payload: 'pole'
+            })
     }
 );
 
@@ -80,7 +85,8 @@ class Map extends React.Component {
                     if(gameService.isCertificate(keyTypes.LEFT, this.props.koordsPlayer)){
                         this.props.certificationCollected();
 
-                        gameService.changeDB(keyTypes.LEFT, this.props.koordsPlayer)
+                        gameService.changeDB(keyTypes.LEFT, this.props.koordsPlayer);
+                        // this.props.edited();
                     }
 
                     if(gameService.isSkill(keyTypes.LEFT, this.props.koordsPlayer)){
@@ -97,7 +103,8 @@ class Map extends React.Component {
                     if(gameService.isCertificate(keyTypes.DOWN, this.props.koordsPlayer)){
                         this.props.certificationCollected();
 
-                        gameService.changeDB(keyTypes.DOWN, this.props.koordsPlayer)
+                        gameService.changeDB(keyTypes.DOWN, this.props.koordsPlayer);
+                        // this.props.edited();
                     }
 
                     if(gameService.isSkill(keyTypes.DOWN, this.props.koordsPlayer)){
@@ -114,7 +121,8 @@ class Map extends React.Component {
                     if(gameService.isCertificate(keyTypes.UP, this.props.koordsPlayer)){
                         this.props.certificationCollected();
 
-                        gameService.changeDB(keyTypes.UP, this.props.koordsPlayer)
+                        gameService.changeDB(keyTypes.UP, this.props.koordsPlayer);
+                        this.props.edited();
                     }
 
                     if(gameService.isSkill(keyTypes.UP, this.props.koordsPlayer)){
@@ -131,7 +139,8 @@ class Map extends React.Component {
                     if(gameService.isCertificate(keyTypes.RIGHT, this.props.koordsPlayer)){
                         this.props.certificationCollected();
 
-                        gameService.changeDB(keyTypes.RIGHT, this.props.koordsPlayer)
+                        gameService.changeDB(keyTypes.RIGHT, this.props.koordsPlayer);
+                        // this.props.edited();
                     }
 
                     if(gameService.isSkill(keyTypes.RIGHT, this.props.koordsPlayer)){
@@ -151,6 +160,15 @@ class Map extends React.Component {
     componentDidMount() {
         this.myRef.current.focus();
     };
+
+    shouldComponentUpdate(nextProps, nextState, nextContext) {
+        if(nextProps.viewPort === this.props.viewPort) {
+            console.log('asdf');
+            return true;
+        }
+        return true;
+    }
+
 
     render() {
         const {viewPort} = this.props;

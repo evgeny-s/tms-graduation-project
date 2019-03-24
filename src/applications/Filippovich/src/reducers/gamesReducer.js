@@ -16,6 +16,7 @@ const initialState = {
     buttonText: 'Sound On',
     certifications: 0,
     skills: 0,
+    type: '',
 };
 
 function gamesReducer(state = initialState, action) {
@@ -34,7 +35,7 @@ function gamesReducer(state = initialState, action) {
             });
         case "ITEM_EDITED":
             return update(state, {
-                $set: {
+                $merge: {
                     type: action.payload,
                 }
             });

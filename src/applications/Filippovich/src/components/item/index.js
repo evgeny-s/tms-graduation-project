@@ -26,13 +26,13 @@ function Item ({type, changeColor, poleType, poleTypeOld, koordsPlayer, koordsPl
 {
     let gamer = type;
     // (koordsPlayer.y === yKoord && koordsPlayer.x === xKoord ) ? gamer = poleType : gamer = type;
-    if ( koordsPlayerOld.y === yKoord && koordsPlayerOld.x === xKoord ){
-        gamer = type;
-        console.log(type);
-    }
+    // if ( koordsPlayerOld.y === yKoord && koordsPlayerOld.x === xKoord ){
+    //     gamer = type;
+        // console.log(type);
+    // }
     if (koordsPlayer.y === yKoord && koordsPlayer.x === xKoord) {
         gamer = poleType;
-        console.log(type);
+        // console.log(type);
     }
     return (
             <div className={gamer} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
