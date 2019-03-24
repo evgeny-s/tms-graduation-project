@@ -4,7 +4,7 @@ import viewsConsts from '../consts/views';
 
 import Description from '../containers/Description';
 import Game from './Game';
-import PlayerStats from './PlayerStats';
+import PlayerStats from '../containers/PlayerStats';
 
 const Content = (props) => {
     return (

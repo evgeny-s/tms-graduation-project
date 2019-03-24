@@ -4,7 +4,7 @@ import mapItemTypes from '../consts/mapItemTypes';
 
 const Map = (props) => {
     return (
-        <div className="map">
+        <div className="map" onKeyDown={props.movePlayer} tabIndex="0">
             {
                 props.viewportRows.map((rowId) => {
                     return (

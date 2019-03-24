@@ -10,6 +10,7 @@
 }
 
 .app .stats-bar {
+    vertical-align: top;
     display: inline-block;
     width: 20%;
     -webkit-box-sizing: border-box;
@@ -17,9 +18,29 @@
     box-sizing: border-box;
 }
 
+.app .stats-bar {
+    font-family: 'ralewayregular', sans-serif;
+}
+
+.app .stats-bar h3 {
+    font-size: 24px;
+}
+
+.app .stats-bar ul {
+    padding: 0 5px;
+}
+
+.app .stats-bar li {
+    list-style-type: none;
+}
+
+.app .stats-bar li:first-letter {
+    text-transform: uppercase;
+}
+
 .app .game {
     display: inline-block;
-    width: 80%;
+    max-width: 80%;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -36,7 +57,6 @@
 .app .map-item {
     width: 30px;
     height: 30px;
-    border: 1px solid black;
     text-align: center;
 }
 
