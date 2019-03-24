@@ -4,7 +4,8 @@ import './stats.css'
 
 const mapStateToProps = state =>({
     buttonText: state.games.buttonText,
-
+    certifications: state.games.certifications,
+    skills: state.games.skills,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -12,22 +13,23 @@ const mapDispatchToProps = dispatch => ({
         dispatch({
             type: 'CLICK_SOUND_BUTTON',
             payload: e.target.innerText === 'Sound Off' ? 'Sound On' : 'Sound Off',
-        })
+        }),
+
 });
 
 
 
 class Stats extends React.Component{
     render(){
-        const {buttonText, clickSoundButton} = this.props;
+        const {certifications, skills, buttonText, clickSoundButton} = this.props;
         return (
         <div className="user-stats col-3">
-            <p>Player Stats:</p>
-            <p>Level:</p>
-            <p>Experience:</p>
-            <p>Attack:</p>
-            <p>Certifications:</p>
-            <p>Skills:</p>
+            <p>Player Stats</p>
+            <p>Level: 1</p>
+            <p>Experience 1:</p>
+            <p>Attack: 1</p>
+            <p>Certifications: {certifications}</p>
+            <p>Skills: {skills}</p>
             <button onClick={clickSoundButton} type="button" className="btn btn-success">{buttonText}</button>
         </div>
     );

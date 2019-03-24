@@ -2,12 +2,17 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './map.css';
 import ItemLine from '../itemLine';
+import gameService from '../../services/gameService';
 import db from '../../../db/db';
+import itemTypes from "../../consts/itemTypes";
+import keyTypes from '../../consts/keyTypes';
 
 
 const mapStateToProps = state => ({
-    koords: state.games.koords,
+    koordsPlayer: state.games.koordsPlayer,
     viewPort: state.games.viewPort,
+    certifications: state.games.certifications,
+    skills: state.games.skills,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -39,6 +44,24 @@ const mapDispatchToProps = dispatch => ({
                 y: 0
             }
         }),
+        certificationCollected: () =>
+            dispatch({
+                type: 'CERTIFICATION_COLLECTED',
+                payload: 1,
+            }),
+        skillCollected: () =>
+            dispatch({
+                type: 'SKILL_COLLECTED',
+                payload: 1,
+            }),
+        // changeColor: (y, x) => dispatch({
+        //     type: "CHANGE_ITEM_COLOR",
+        //     payload: {
+        //         y,
+        //         x,
+        //         poleType: "pole"
+        //     },
+        // })
     }
 );
 
@@ -53,16 +76,72 @@ class Map extends React.Component {
     _keyPressed = (e) => {
         switch (e.keyCode) {
             case 37:
-                this.props.keyLeft();
+                if(!gameService.isWall(keyTypes.LEFT, this.props.koordsPlayer)){
+                    if(gameService.isCertificate(keyTypes.LEFT, this.props.koordsPlayer)){
+                        this.props.certificationCollected();
+
+                        gameService.changeDB(keyTypes.LEFT, this.props.koordsPlayer)
+                    }
+
+                    if(gameService.isSkill(keyTypes.LEFT, this.props.koordsPlayer)){
+                        if(this.props.certifications >= 25){
+                            this.props.skillCollected();
+                        }
+                    }
+
+                    this.props.keyLeft();
+                }
                 break;
             case 40:
-                this.props.keyDown();
+                if(!gameService.isWall(keyTypes.DOWN, this.props.koordsPlayer)){
+                    if(gameService.isCertificate(keyTypes.DOWN, this.props.koordsPlayer)){
+                        this.props.certificationCollected();
+
+                        gameService.changeDB(keyTypes.DOWN, this.props.koordsPlayer)
+                    }
+
+                    if(gameService.isSkill(keyTypes.DOWN, this.props.koordsPlayer)){
+                        if(this.props.certifications >= 25){
+                            this.props.skillCollected();
+                        }
+                    }
+
+                    this.props.keyDown();
+                }
                 break;
             case 38:
-                this.props.keyUp();
+                if(!gameService.isWall(keyTypes.UP, this.props.koordsPlayer)){
+                    if(gameService.isCertificate(keyTypes.UP, this.props.koordsPlayer)){
+                        this.props.certificationCollected();
+
+                        gameService.changeDB(keyTypes.UP, this.props.koordsPlayer)
+                    }
+
+                    if(gameService.isSkill(keyTypes.UP, this.props.koordsPlayer)){
+                        if(this.props.certifications >= 25){
+                            this.props.skillCollected();
+                        }
+                    }
+                    this.props.keyUp();
+
+                }
                 break;
             case 39:
-                this.props.keyRight();
+                if(!gameService.isWall(keyTypes.RIGHT, this.props.koordsPlayer)){
+                    if(gameService.isCertificate(keyTypes.RIGHT, this.props.koordsPlayer)){
+                        this.props.certificationCollected();
+
+                        gameService.changeDB(keyTypes.RIGHT, this.props.koordsPlayer)
+                    }
+
+                    if(gameService.isSkill(keyTypes.RIGHT, this.props.koordsPlayer)){
+                        if(this.props.certifications >= 25){
+                            this.props.skillCollected();
+                        }
+                    }
+
+                    this.props.keyRight();
+                }
                 break;
             default:
                 break;
@@ -80,7 +159,7 @@ class Map extends React.Component {
             <div ref={this.myRef} className="map" tabIndex="-1"
                  onClick={this._focusingDivElement} onKeyDown={this._keyPressed}>
                 {
-                    viewPort.map((viewPortValue, viewPortIndex) => (
+                    viewPort.map((viewPortValue) => (
                         db.map.map((value, index) => (
                             <ItemLine key={index} yKoord={index} itemsType={value}/>))
                                 .filter( item => item.key >= viewPortValue && item.key <= viewPortValue)

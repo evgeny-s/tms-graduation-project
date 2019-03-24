@@ -4,7 +4,6 @@ import './itemLine.css'
 import Item from '../item';
 
 
-
 const mapStateToProps = state =>({
 });
 
@@ -12,7 +11,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-function ItemLine({itemsType, setActive, yKoord})
+function ItemLine({itemsType, yKoord})
 {
     return (
         <div className="itemLine">
