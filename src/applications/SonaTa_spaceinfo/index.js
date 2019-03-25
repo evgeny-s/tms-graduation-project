@@ -1,23 +1,30 @@
 import React from 'react';
 import withHeader from './../../hocs/withHeader';
 
-import LatLong from './components/LatLong.js';
-import Timestamp from './components/Timestamp.js';
-import Velocity from './components/Velocity.js';
+import thunk from 'redux-thunk';
+import {createStore, applyMiddleware} from 'redux'
+import {Provider} from 'react-redux';
+import App from './containers/App.js'
+import reducer from "./reducers/reducer";
 
-import {getSpaceInfo,resolvedGetData} from './containers/getSpaceInfo.js';
 
+const store = createStore(
+    reducer,
+    applyMiddleware(thunk)
+);
 
-function SpaceInfo() {
-    return (
-	<div>
-        <p>Current Data on the ISS:</p>
-        <LatLong value={}/>
-		<LatLong value={}/>
-        <Timestamp />
-        <Velocity />
-	</div>
-    );
+class SpaceInfo extends React.Component {
+
+    render() {
+        return (
+            <div>
+                <Provider store={store}>
+                    <App/>
+                </Provider>
+
+            </div>
+        );
+    }
 }
 
 export default withHeader(SpaceInfo);
