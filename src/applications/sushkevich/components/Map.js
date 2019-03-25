@@ -1,5 +1,5 @@
 import React from 'react';
-import MapItem from './MapItem';
+import MapItem from '../containers/MapItem';
 import mapItemTypes from '../consts/mapItemTypes';
 
 const Map = (props) => {
@@ -10,10 +10,10 @@ const Map = (props) => {
                     return (
                         <div key={rowId} className={`map-row row-${rowId}`}>
                             {
-                                Object.keys(props.mapRows[rowId]).map((col, i) => {
+                                Object.keys(props.map[rowId]).map((col, i) => {
                                     return <MapItem
                                         key={i}
-                                        type={props.mapRows[rowId][col]}
+                                        type={props.map[rowId][col]}
                                         id={`${rowId}:${col}`}/>
                                 })
                             }
@@ -26,3 +26,5 @@ const Map = (props) => {
 };
 
 export default Map;
+
+// ВОПРОС! Как сделать вызов функции dispatch в зависимости от условия ?
