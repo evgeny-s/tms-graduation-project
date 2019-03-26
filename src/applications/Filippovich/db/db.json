@@ -566,13 +566,4 @@
       "certificate"
     ]
   ]
-  ,
-  "type":[
-    "player",
-    "wall",
-    "skill",
-    "certificate",
-    "bossWall",
-    "boss"
-  ]
 }

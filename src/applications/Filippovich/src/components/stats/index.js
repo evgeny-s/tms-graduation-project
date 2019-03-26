@@ -27,7 +27,6 @@ class Stats extends React.Component{
             <p>Player Stats</p>
             <p>Level: 1</p>
             <p>Experience 1:</p>
-            <p>Attack: 1</p>
             <p>Certifications: {certifications}</p>
             <p>Skills: {skills}</p>
             <button onClick={clickSoundButton} type="button" className="btn btn-success">{buttonText}</button>

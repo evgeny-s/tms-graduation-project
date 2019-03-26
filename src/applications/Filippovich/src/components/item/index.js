@@ -1,13 +1,13 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {connect} from 'react-redux';
 import './item.css'
+import itemTypes from '../../consts/itemTypes'
 
 
-const mapStateToProps = state =>({
-    koordsPlayerOld: state.games.koordsPlayerOld,
-    koordsPlayer: state.games.koordsPlayer,
-    poleType: state.games.poleType,
-    poleTypeOld: state.games.poleTypeOld,
+const mapStateToProps = state => ({
+    koordsPlayerX: state.games.koordsPlayer.x,
+    koordsPlayerY: state.games.koordsPlayer.y,
+
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -22,21 +22,16 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-function Item ({type, changeColor, poleType, poleTypeOld, koordsPlayer, koordsPlayerOld, yKoord, xKoord})
+function Item({type, koordsPlayerX, koordsPlayerY, yKoord, xKoord})
 {
     let gamer = type;
-    // (koordsPlayer.y === yKoord && koordsPlayer.x === xKoord ) ? gamer = poleType : gamer = type;
-    // if ( koordsPlayerOld.y === yKoord && koordsPlayerOld.x === xKoord ){
-    //     gamer = type;
-        // console.log(type);
-    // }
-    if (koordsPlayer.y === yKoord && koordsPlayer.x === xKoord) {
-        gamer = poleType;
-        // console.log(type);
+    console.log('render');
+    if (koordsPlayerY === yKoord && koordsPlayerX === xKoord) {
+        gamer = itemTypes.PLAYER;
     }
     return (
-            <div className={gamer} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
+        <div className={gamer} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
     );
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Item);
+export default connect(mapStateToProps, mapDispatchToProps)(memo(Item));
