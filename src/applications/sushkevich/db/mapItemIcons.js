@@ -34,4 +34,5 @@ export default {
         <i className="fas fa-laptop"></i>,
     ],
     player: <i className="fas fa-robot"></i>,
+    boss: <i className="fas fa-skull"></i>,
 }

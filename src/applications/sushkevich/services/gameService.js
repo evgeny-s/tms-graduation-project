@@ -4,7 +4,15 @@ class GameService {
 
     isSkill(map, targetY, targetX) {
         return (map[targetY][targetX] === mapItemTypesConsts.SKILL);
-    }
+    };
+
+    isCertificate(map, targetY, targetX) {
+        return (map[targetY][targetX] === mapItemTypesConsts.CERTIFICATE);
+    };
+
+    isBoss(map, targetY, targetX) {
+        return (map[targetY][targetX] === mapItemTypesConsts.BOSS);
+    };
 
     isNotWall(map, wallY, wallX) {
         return (map[wallY][wallX] !== mapItemTypesConsts.WALL);

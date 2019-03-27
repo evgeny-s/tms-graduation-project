@@ -5,11 +5,11 @@ import config from '../db/config';
 
 class Map extends React.Component {
 
-    componentWillMount() {
+    componentDidMount() {
         document.addEventListener("keydown", this.moveItem);
     }
 
-    componentWillUnmout() {
+    componentDidUnmout() {
         document.removeEventListener("keydown", this.moveItem);
     }
 
@@ -27,6 +27,19 @@ class Map extends React.Component {
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
                     }
 
+                    if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, this.props.playerCoordinateY, targetX)) {
+                        this.props.getCertificate();
+
+                        if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
+                            this.props.levelUp();
+                            this.props.breakBossWalls();
+                        }
+                    }
+
+                    if (this.props.playerLevel === 3 && gameService.isBoss(this.props.map, this.props.playerCoordinateY, targetX)) {
+                        this.props.finishGame();
+                    }
+
                     this.props.moveLeft();
                 }
 
@@ -40,6 +53,19 @@ class Map extends React.Component {
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
                     }
 
+                    if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, this.props.playerCoordinateY, targetX)) {
+                        this.props.getCertificate();
+
+                        if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
+                            this.props.levelUp();
+                            this.props.breakBossWalls();
+                        }
+                    }
+
+                    if (this.props.playerLevel === 3 && gameService.isBoss(this.props.map, this.props.playerCoordinateY, targetX)) {
+                        this.props.finishGame();
+                    }
+
                     this.props.moveRight();
                 }
 
@@ -51,6 +77,19 @@ class Map extends React.Component {
                     if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, this.props.playerCoordinateX)) {
                         this.props.getSkill();
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
+                    }
+
+                    if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, targetY, this.props.playerCoordinateX)) {
+                        this.props.getCertificate();
+
+                        if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
+                            this.props.levelUp();
+                            this.props.breakBossWalls();
+                        }
+                    }
+
+                    if (this.props.playerLevel === 3 && gameService.isBoss(this.props.map, targetY, this.props.playerCoordinateX)) {
+                        this.props.finishGame();
                     }
 
                     this.props.moveUp();
@@ -67,6 +106,19 @@ class Map extends React.Component {
                     if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, this.props.playerCoordinateX)) {
                         this.props.getSkill();
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
+                    }
+
+                    if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, targetY, this.props.playerCoordinateX)) {
+                        this.props.getCertificate();
+
+                        if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
+                            this.props.levelUp();
+                            this.props.breakBossWalls();
+                        }
+                    }
+
+                    if (this.props.playerLevel === 3 && gameService.isBoss(this.props.map, targetY, this.props.playerCoordinateX)) {
+                        this.props.finishGame();
                     }
 
                     this.props.moveDown();

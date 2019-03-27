@@ -7,8 +7,9 @@ const mapStateToProps = (state) => ({
     viewportThreshold: state.game.viewportThreshold,
     playerCoordinateX: state.game.playerCoordinateX,
     playerCoordinateY: state.game.playerCoordinateY,
-    playerLevel: state.game.playerStats.level,
-    skillsGot: state.game.playerStats.skills,
+    playerLevel: state.stats.playerStats.level,
+    skillsGot: state.stats.playerStats.skills,
+    certificatesGot: state.stats.playerStats.certificates,
 });
 
 const mapDispatchToProps = (dispatch) => {
@@ -32,8 +33,17 @@ const mapDispatchToProps = (dispatch) => {
         getSkill: () => dispatch({
             type: 'GET_SKILL',
         }),
+        getCertificate: () => dispatch({
+            type: 'GET_CERTIFICATE',
+        }),
         levelUp: () => dispatch({
             type: 'LEVEL_UP',
+        }),
+        breakBossWalls: () => dispatch({
+            type: 'BREAK_BOSS_WALLS',
+        }),
+        finishGame: () => dispatch({
+            type: 'GAME_FINISHED',
         })
     }
 };

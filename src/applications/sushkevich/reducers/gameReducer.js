@@ -1,22 +1,16 @@
 import update from 'immutability-helper';
 import map from '../db/map';
 import mapItemTypesConsts from '../consts/mapItemTypes';
-import playerStatsConsts from '../consts/playerStats';
 import config from '../db/config';
+import headerConsts from '../consts/headerMessages';
 
 const initialState = {
     viewportRows: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     viewportThreshold: config.viewportThreshold,
     map,
+    headerMessage: headerConsts.default,
     playerCoordinateY: 6,
     playerCoordinateX: 10,
-    playerStats: {
-        [playerStatsConsts.LEVEL]: 1,
-        [playerStatsConsts.HIGHSCORE]: 0,
-        [playerStatsConsts.EXPERIENCE]: 0,
-        [playerStatsConsts.CERTIFICATES]: 0,
-        [playerStatsConsts.SKILLS]: 0,
-    },
 };
 
 function gameReducer(state = initialState, action) {
@@ -101,21 +95,21 @@ function gameReducer(state = initialState, action) {
                 }
             });
 
-        case `GET_SKILL`:
-            return update(state, {
-                playerStats: {
-                    $merge: {
-                        skills: state.playerStats.skills + 1,
+        case 'BREAK_BOSS_WALLS':
+            let nextMap = state.map;
+
+            Object.keys(nextMap).map((row) => {
+                Object.keys(nextMap[row]).map((col) => {
+                    if (nextMap[row][col] === mapItemTypesConsts.BOSS_WALL) {
+                        nextMap[row][col] = mapItemTypesConsts.TRACK;
                     }
-                }
+                })
             });
-        case 'LEVEL_UP':
+
             return update(state, {
-                playerStats: {
-                    $merge: {
-                        level: state.playerStats.level + 1,
-                    }
-                }
+                $merge: {
+                    map: nextMap,
+                },
             });
 
         default:

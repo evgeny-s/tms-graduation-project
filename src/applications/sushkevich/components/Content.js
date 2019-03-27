@@ -5,6 +5,7 @@ import viewsConsts from '../consts/views';
 import Description from '../containers/Description';
 import Game from './Game';
 import PlayerStats from '../containers/PlayerStats';
+import Result from '../components/Result';
 
 const Content = (props) => {
     return (
@@ -12,6 +13,7 @@ const Content = (props) => {
             <PlayerStats/>
             { props.view === viewsConsts.DESCRIPTION && <Description/>}
             { props.view === viewsConsts.GAME && <Game/>}
+            { props.view === viewsConsts.RESULT && <Result/>}
         </div>
     )
 };
