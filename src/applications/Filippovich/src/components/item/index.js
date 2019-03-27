@@ -22,16 +22,20 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-function Item({type, koordsPlayerX, koordsPlayerY, yKoord, xKoord})
+class Item extends React.PureComponent
 {
-    let gamer = type;
-    console.log('render');
-    if (koordsPlayerY === yKoord && koordsPlayerX === xKoord) {
-        gamer = itemTypes.PLAYER;
+    render()
+    {
+        let {type, koordsPlayerX, koordsPlayerY, yKoord, xKoord} = this.props;
+        let gamer = type;
+        if (koordsPlayerY === yKoord && koordsPlayerX === xKoord) {
+            gamer = itemTypes.PLAYER;
+        }
+        console.log('render');
+        return (
+            <div className={gamer} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
+        );
     }
-    return (
-        <div className={gamer} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
-    );
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(memo(Item));

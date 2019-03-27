@@ -2,12 +2,15 @@ import update from 'immutability-helper';
 import db from '../../db/db';
 
 const initialState = {
-    koordsPlayer: {
-        x: 10,
-        y: 12
-    },
+    // koordsPlayer: {
+    //     x: 10,
+    //     y: 12
+    // },
+    koordsPlayerX: 10,
+    koordsPlayerY: 12,
+
     viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    poleType: 'player',
+    poleType: 'pole',
     buttonText: 'Sound On',
     certifications: 0,
     skills: 0,
@@ -32,12 +35,13 @@ function gamesReducer(state = initialState, action)
         case 'ITEM_EDITED':
             return update(state, {
                 db: {
-                    [state.koordsPlayer.y + action.payload.y]: {
-                        [state.koordsPlayer.x + action.payload.x]: {
+                    // [state.koordsPlayer.y + action.payload.y]: {
+                    //     [state.koordsPlayer.x + action.payload.x]: {
+                            [state.koordsPlayerY + action.payload.y]: {
+                                [state.koordsPlayerX + action.payload.x]: {
                             $set: 'pole'
                         }
                     }
-
                 },
             });
         case 'KEY_UP':
@@ -72,6 +76,19 @@ function gamesReducer(state = initialState, action)
             });
         case 'KEY_LEFT':
             return update(state, {
+                // db: {
+                //     [state.koordsPlayer.y]: {
+                //         [state.koordsPlayer.x - 1]: {
+                //             $set: 'player'
+                //         }
+                //     },
+                //     [state.koordsPlayer.y]: {
+                //         [state.koordsPlayer.x]: {
+                //             $set: state.poleType
+                //         }
+                //     },
+                // },
+
                     koordsPlayer: {
                         x: {
                             $set: state.koordsPlayer.x - 1

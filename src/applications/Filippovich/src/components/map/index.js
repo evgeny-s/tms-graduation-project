@@ -9,6 +9,7 @@ import keyTypes from '../../consts/keyTypes';
 
 const mapStateToProps = state => ({
     koordsPlayer: state.games.koordsPlayer,
+    // koordsPlayerY: state.games.koordsPlayer.y,
     viewPort: state.games.viewPort,
     certifications: state.games.certifications,
     skills: state.games.skills,
@@ -73,7 +74,7 @@ const mapDispatchToProps = dispatch => ({
 );
 
 
-class Map extends React.PureComponent
+class Map extends React.Component
 {
     _keyPressed = (e) =>
     {
@@ -84,6 +85,8 @@ class Map extends React.PureComponent
                 if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
                     if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.certificationCollected();
+                        console.log('left');
+
                         this.props.itemEdited(keyType);
                     }
 
@@ -94,6 +97,7 @@ class Map extends React.PureComponent
 
                         }
                     }
+                    console.log('wert');
 
                     this.props.keyLeft();
                 }
@@ -191,8 +195,6 @@ class Map extends React.PureComponent
 
     render()
     {
-        const {viewPort, db, koordsPlayer} = this.props;
-
         return (
             <div className="map" >
                 {
