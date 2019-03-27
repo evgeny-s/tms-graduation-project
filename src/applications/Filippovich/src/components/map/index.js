@@ -2,14 +2,15 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './map.css';
 import Item from '../item';
+import ItemLine from '../itemLine';
 import gameService from '../../services/gameService';
 import itemTypes from "../../consts/itemTypes";
 import keyTypes from '../../consts/keyTypes';
 
 
 const mapStateToProps = state => ({
-    koordsPlayer: state.games.koordsPlayer,
-    // koordsPlayerY: state.games.koordsPlayer.y,
+    koordsPlayerX: state.games.koordsPlayerX,
+    koordsPlayerY: state.games.koordsPlayerY,
     viewPort: state.games.viewPort,
     certifications: state.games.certifications,
     skills: state.games.skills,
@@ -82,35 +83,34 @@ class Map extends React.Component
         switch (e.keyCode) {
             case 37:
                 keyType = keyTypes.LEFT;
-                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         this.props.certificationCollected();
                         console.log('left');
 
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         if (this.props.certifications >= 5) {
                             this.props.skillCollected();
                             this.props.itemEdited(keyType);
 
                         }
                     }
-                    console.log('wert');
 
                     this.props.keyLeft();
                 }
                 break;
             case 40:
                 keyType = keyTypes.DOWN;
-                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         this.props.certificationCollected();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         if (this.props.certifications >= 5) {
                             this.props.skillCollected();
                             this.props.itemEdited(keyType);
@@ -123,14 +123,14 @@ class Map extends React.Component
                 break;
             case 38:
                 keyType = keyTypes.UP;
-                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         this.props.certificationCollected();
                         this.props.itemEdited(keyType);
 
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         if (this.props.certifications >= 5) {
                             this.props.skillCollected();
                             this.props.itemEdited(keyType);
@@ -143,13 +143,13 @@ class Map extends React.Component
                 break;
             case 39:
                 keyType = keyTypes.RIGHT;
-                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         this.props.certificationCollected();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
                         if (this.props.certifications >= 5) {
                             this.props.skillCollected();
                             this.props.itemEdited(keyType);
@@ -198,10 +198,27 @@ class Map extends React.Component
         return (
             <div className="map" >
                 {
-                    // viewPort.map((viewPortValue) => (
+                    // this.props.viewPort.map((rowId) => (
+                    // {<div key={rowId} className="itemLine">}
+                            //{
+                                // Object.keys(this.props.db[rowId]).map((value, index) => (
+                                //     <Item key={`${rowId}-${index}`} yKoord={index} type={value}/>))
+                            // }
+                        // </div>
+                    // ))
+
+
+
+
+
+
+                    // this.props.viewPort.map((viewPortValue) => (
                     //
-                    //     db.map((value, index) => (
-                    // <ItemLine key={index} yKoord={index} itemsType={value}/>))
+                    //     this.props.db.map((value, index) =>
+                    //         {
+                    //             return <ItemLine key={index} yKoord={index} itemsType={value}/>
+                    //         }
+                    //     )
                     //             .filter( item => item.key >= viewPortValue && item.key <= viewPortValue)
                     // ))
 

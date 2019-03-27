@@ -4,38 +4,36 @@ import './item.css'
 import itemTypes from '../../consts/itemTypes'
 
 
-const mapStateToProps = state => ({
-    koordsPlayerX: state.games.koordsPlayer.x,
-    koordsPlayerY: state.games.koordsPlayer.y,
+// const mapStateToProps = state => ({
+//     koordsPlayerX: state.games.koordsPlayerX,
+//     koordsPlayerY: state.games.koordsPlayerY,
+//
+// });
+//
+// const mapDispatchToProps = dispatch => ({
+//     // changeColor: (y, x) => dispatch({
+//     //     type: "CHANGE_ITEM_COLOR",
+//     //     payload: {
+//     //         y,
+//     //         x,
+//     //         poleType: "pole"
+//     //     },
+//     // })
+//
+// });
 
-});
-
-const mapDispatchToProps = dispatch => ({
-    // changeColor: (y, x) => dispatch({
-    //     type: "CHANGE_ITEM_COLOR",
-    //     payload: {
-    //         y,
-    //         x,
-    //         poleType: "pole"
-    //     },
-    // })
-
-});
-
-class Item extends React.PureComponent
+function Item ({type})
 {
-    render()
-    {
-        let {type, koordsPlayerX, koordsPlayerY, yKoord, xKoord} = this.props;
-        let gamer = type;
-        if (koordsPlayerY === yKoord && koordsPlayerX === xKoord) {
-            gamer = itemTypes.PLAYER;
-        }
+    // return(
+        // let {type, koordsPlayerX, koordsPlayerY, yKoord, xKoord} = this.props;
+        // let gamer = type;
+        // if (koordsPlayerY === yKoord && koordsPlayerX === xKoord) {
+        //     gamer = itemTypes.PLAYER;
+        // }
         console.log('render');
         return (
-            <div className={gamer} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
-        );
-    }
+            <div className={type} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
+        )
 }
-
-export default connect(mapStateToProps, mapDispatchToProps)(memo(Item));
+export default memo(Item);
+// export default connect(mapStateToProps, mapDispatchToProps)(memo(Item));
