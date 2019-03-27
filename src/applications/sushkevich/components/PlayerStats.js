@@ -1,5 +1,6 @@
 import React from 'react';
-import mapItemTypes from '../consts/mapItemTypes';
+import playerStatsConsts from '../consts/playerStats';
+import config from '../db/config';
 
 const PlayerStats = (props) => {
     return (
@@ -8,7 +9,13 @@ const PlayerStats = (props) => {
             <ul>
                 {
                     Object.keys(props.playerStats).map((stat, i) => {
-                        return <li key={i}>{stat}: {props.playerStats[stat]} {(stat === mapItemTypes.CERTIFICATE || stat === mapItemTypes.SKILL) && `/${props.mapUnits[stat].length}`}</li> // ВОПРОС! Как бы вытянуть из констант строку?
+                        return <li key={i}>
+                            {stat}: {
+                                stat === playerStatsConsts.CERTIFICATES || stat === playerStatsConsts.SKILLS
+                                ? `${props.playerStats[stat]}/${config[stat]}`
+                                : props.playerStats[stat]
+                        }
+                        </li>
                     })
                 }
             </ul>

@@ -1,30 +1,106 @@
 import React from 'react';
-import MapItem from '../containers/MapItem';
-import mapItemTypes from '../consts/mapItemTypes';
+import MapItem from './MapItem';
+import gameService from '../services/gameService';
+import config from '../db/config';
 
-const Map = (props) => {
-    return (
-        <div className="map" onKeyDown={props.movePlayer} tabIndex="0">
-            {
-                props.viewportRows.map((rowId) => {
-                    return (
-                        <div key={rowId} className={`map-row row-${rowId}`}>
-                            {
-                                Object.keys(props.map[rowId]).map((col, i) => {
-                                    return <MapItem
-                                        key={i}
-                                        type={props.map[rowId][col]}
-                                        id={`${rowId}:${col}`}/>
-                                })
-                            }
-                        </div>
-                    )
-                })
-            }
-        </div>
-    )
-};
+class Map extends React.Component {
+
+    componentWillMount() {
+        document.addEventListener("keydown", this.moveItem);
+    }
+
+    componentWillUnmout() {
+        document.removeEventListener("keydown", this.moveItem);
+    }
+
+    moveItem = (event) => {
+        let targetX;
+        let targetY;
+
+        switch (event.keyCode) {
+            case 37:
+                targetX = this.props.playerCoordinateX - 1;
+
+                if (gameService.canMove(this.props.map, this.props.playerCoordinateY, targetX)) {
+                    if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, this.props.playerCoordinateY, targetX)) {
+                        this.props.getSkill();
+                        gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
+                    }
+
+                    this.props.moveLeft();
+                }
+
+                break;
+            case 39:
+                targetX = this.props.playerCoordinateX + 1;
+
+                if (gameService.canMove(this.props.map, this.props.playerCoordinateY, targetX)) {
+                    if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, this.props.playerCoordinateY, targetX)) {
+                        this.props.getSkill();
+                        gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
+                    }
+
+                    this.props.moveRight();
+                }
+
+                break;
+            case 38:
+                targetY = this.props.playerCoordinateY - 1;
+
+                if (gameService.canMove(this.props.map, targetY, this.props.playerCoordinateX)) {
+                    if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, this.props.playerCoordinateX)) {
+                        this.props.getSkill();
+                        gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
+                    }
+
+                    this.props.moveUp();
+
+                    let newViewportRows = gameService.shouldMapScrollUp(this.props.map, this.props.viewportRows, this.props.playerCoordinateY, this.props.viewportThreshold);
+                    newViewportRows && this.props.scrollMap(newViewportRows);
+                }
+
+                break;
+            case 40:
+                targetY = this.props.playerCoordinateY + 1;
+
+                if (gameService.canMove(this.props.map, targetY, this.props.playerCoordinateX)) {
+                    if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, this.props.playerCoordinateX)) {
+                        this.props.getSkill();
+                        gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
+                    }
+
+                    this.props.moveDown();
+
+                    let newViewportRows = gameService.shouldMapScrollDown(this.props.map, this.props.viewportRows, this.props.playerCoordinateY, this.props.viewportThreshold);
+                    newViewportRows && this.props.scrollMap(newViewportRows);
+                }
+
+                break;
+        }
+    };
+
+    render() {
+        return (
+            <div className="map" tabIndex="0">
+                {
+                    this.props.viewportRows.map((rowId) => {
+                        return (
+                            <div key={rowId} className={`map-row row-${rowId}`}>
+                                {
+                                    Object.keys(this.props.map[rowId]).map((col, i) => {
+                                        return <MapItem
+                                            key={`${rowId}-${i}`}
+                                            type={this.props.map[rowId][col]}
+                                            id={`${rowId}:${col}`}/>
+                                    })
+                                }
+                            </div>
+                        )
+                    })
+                }
+            </div>
+        )
+    }
+}
 
 export default Map;
-
-// ВОПРОС! Как сделать вызов функции dispatch в зависимости от условия ?

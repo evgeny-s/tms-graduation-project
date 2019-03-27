@@ -3,7 +3,7 @@ import viewsConsts from '../consts/views';
 import headerConsts from '../consts/headerMessages';
 
 const initialState = {
-    view: viewsConsts.DESCRIPTION,
+    view: viewsConsts.GAME,
     headerMessage: headerConsts.default,
 };
 

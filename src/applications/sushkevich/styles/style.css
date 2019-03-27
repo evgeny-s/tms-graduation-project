@@ -114,7 +114,7 @@
     background-color: #412865;
 }
 
-.app .track.player {
+.app .player {
     background-color: #00671A;
     color: #ffffff;
 }
@@ -123,11 +123,11 @@
     background-color: #232323;
 }
 
-.app .track.certificate {
+.app .certificate {
     background-color: #FC2034;
 }
 
-.app .track.skill {
+.app .skill {
     background-color: #39FFD5;
     color: #F7B653;
 }
