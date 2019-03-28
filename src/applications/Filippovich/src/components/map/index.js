@@ -1,16 +1,14 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import './map.css';
-import Item from '../item';
 import ItemLine from '../itemLine';
 import gameService from '../../services/gameService';
-import itemTypes from "../../consts/itemTypes";
 import keyTypes from '../../consts/keyTypes';
+import playerStats from '../../consts/playerStats';
 
 
 const mapStateToProps = state => ({
-    koordsPlayerX: state.games.koordsPlayerX,
-    koordsPlayerY: state.games.koordsPlayerY,
+    koordsPlayer: state.games.koordsPlayer,
     viewPort: state.games.viewPort,
     certifications: state.games.certifications,
     skills: state.games.skills,
@@ -30,15 +28,17 @@ const mapDispatchToProps = dispatch => ({
         keyRight: () => dispatch({
             type: 'KEY_RIGHT',
         }),
-        certificationCollected: () =>
+        getCertification: () =>
             dispatch({
                 type: 'CERTIFICATION_COLLECTED',
-                payload: 1,
             }),
-        skillCollected: () =>
+        getSkill: () =>
             dispatch({
                 type: 'SKILL_COLLECTED',
-                payload: 1,
+            }),
+        bossWallRuined: () =>
+            dispatch({
+                type: 'BOSS_WALL_RUINED'
             }),
         itemEdited: (side) =>
         {
@@ -70,6 +70,37 @@ const mapDispatchToProps = dispatch => ({
                     y: _y,
                 }
             })
+        },
+        itemNotEdited: (side) =>
+        {
+            let _x, _y;
+            switch (side) {
+                case 'up':
+                    _x = 0;
+                    _y = -1;
+                    break;
+                case 'down':
+                    _x = 0;
+                    _y = 1;
+                    break;
+                case 'left':
+                    _x = -1;
+                    _y = 0;
+                    break;
+                case 'right':
+                    _x = 1;
+                    _y = 0;
+                    break;
+                default:
+                    break;
+            }
+            dispatch({
+                type: 'ITEM_NOT_EDITED',
+                payload: {
+                    x: _x,
+                    y: _y,
+                }
+            })
         }
     }
 );
@@ -83,18 +114,36 @@ class Map extends React.Component
         switch (e.keyCode) {
             case 37:
                 keyType = keyTypes.LEFT;
-                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        this.props.certificationCollected();
-                        console.log('left');
+                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.itemNotEdited(keyType);
+                    }
 
+                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        if (this.props.certifications >= 5) {
-                            this.props.skillCollected();
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL) {
+                            this.props.getCertification();
                             this.props.itemEdited(keyType);
+                        } else {
+                            this.props.itemNotEdited(keyType);
+                        }
+                    }
+
+                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                            this.props.bossWallRuined();
+                            this.props.itemEdited(keyType);
+                        } else {
+                            this.props.itemNotEdited(keyType);
+                        }
+                    }
+
+                    if (gameService.isBoss(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
 
                         }
                     }
@@ -104,57 +153,103 @@ class Map extends React.Component
                 break;
             case 40:
                 keyType = keyTypes.DOWN;
-                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        this.props.certificationCollected();
+                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.itemNotEdited(keyType);
+                    }
+
+                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        if (this.props.certifications >= 5) {
-                            this.props.skillCollected();
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL) {
+                            this.props.getCertification();
                             this.props.itemEdited(keyType);
-
+                        } else {
+                            this.props.itemNotEdited(keyType);
                         }
                     }
+
+                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                            this.props.bossWallRuined();
+                            this.props.itemEdited(keyType);
+                        } else {
+                            this.props.itemNotEdited(keyType);
+                        }
+                    }
+
 
                     this.props.keyDown();
                 }
                 break;
             case 38:
                 keyType = keyTypes.UP;
-                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        this.props.certificationCollected();
+                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.itemNotEdited(keyType);
+                    }
+
+                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getSkill();
                         this.props.itemEdited(keyType);
 
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        if (this.props.certifications >= 5) {
-                            this.props.skillCollected();
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL) {
+                            this.props.getCertification();
                             this.props.itemEdited(keyType);
-
+                        } else {
+                            this.props.itemNotEdited(keyType);
                         }
                     }
-                    this.props.keyUp();
 
+                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                            this.props.bossWallRuined();
+                            this.props.itemEdited(keyType);
+                        } else {
+                            this.props.itemNotEdited(keyType);
+                        }
+                    }
+
+                    this.props.keyUp();
                 }
                 break;
             case 39:
                 keyType = keyTypes.RIGHT;
-                if (!gameService.isWall(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        this.props.certificationCollected();
+                if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.itemNotEdited(keyType);
+                    }
+
+                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayerX, this.props.koordsPlayerY, this.props.db)) {
-                        if (this.props.certifications >= 5) {
-                            this.props.skillCollected();
+                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL) {
+                            this.props.getCertification();
                             this.props.itemEdited(keyType);
                         }
+                        else {
+                            this.props.itemNotEdited(keyType);
+                        }
                     }
+
+                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                            this.props.bossWallRuined();
+                            this.props.itemEdited(keyType);
+                        } else {
+                            this.props.itemNotEdited(keyType);
+                        }
+                    }
+
 
                     this.props.keyRight();
                 }
@@ -164,69 +259,23 @@ class Map extends React.Component
         }
     };
 
-    componentWillMount() {
+    componentWillMount()
+    {
         document.addEventListener("keydown", this._keyPressed);
     };
 
-    componentWillUnmout() {
-        document.removeEventListener("keydown", this._keyPressed);
-    };
-
-    renderViewPort()
+    componentWillUnmout()
     {
-        let result = [];
-        for (let i = 0; i < 10; i++) {
-            let yIndex = this.props.viewPort[0] + i;
-            result.push(
-                <div key={yIndex} className="itemLine">
-                    {
-                        this.props.db[yIndex].map((value, index) => (
-
-                        <Item key={index} yKoord={yIndex} xKoord={index} type={value}/>
-                        ))
-                    }
-                </div>);
-
-            /*<ItemLine key={i} yKoord={yIndex} itemsType={this.props.db[yIndex]}/>);*/
-
-        }
-        return result;
+        document.removeEventListener("keydown", this._keyPressed);
     };
 
     render()
     {
         return (
-            <div className="map" >
+            <div className="map">
                 {
-                    // this.props.viewPort.map((rowId) => (
-                    // {<div key={rowId} className="itemLine">}
-                            //{
-                                // Object.keys(this.props.db[rowId]).map((value, index) => (
-                                //     <Item key={`${rowId}-${index}`} yKoord={index} type={value}/>))
-                            // }
-                        // </div>
-                    // ))
-
-
-
-
-
-
-                    // this.props.viewPort.map((viewPortValue) => (
-                    //
-                    //     this.props.db.map((value, index) =>
-                    //         {
-                    //             return <ItemLine key={index} yKoord={index} itemsType={value}/>
-                    //         }
-                    //     )
-                    //             .filter( item => item.key >= viewPortValue && item.key <= viewPortValue)
-                    // ))
-
-
-                    // db.map((value, index) => (
-                    //     ))
-                    //     .filter( item => item.key >= viewPort[0] && item.key <= viewPort[viewPort.length - 1] )
-                    this.renderViewPort.bind(this)()
+                    this.props.viewPort.map((yIndex) => (
+                        <ItemLine key={yIndex} yKoord={yIndex} itemsType={this.props.db[yIndex]}/>))
                 }
             </div>
         );

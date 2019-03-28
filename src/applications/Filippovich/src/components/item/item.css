@@ -14,15 +14,19 @@
 }
 
 .skill{
-    background-color: #ffaa00;
+    background-color: #dada00;
 }
 
 .certificate{
-    background-color: rgb(218, 218, 0);
+    background-color: rgb(255, 170, 0);
 }
 
-.bossWall{
-    background-color: rgb(124, 124, 124);
+.bossWallSmall{
+    background-color: rgb(255, 255, 255);
+}
+
+.bossWallBig{
+    background-color: rgb(255, 255, 255);
 }
 
 .boss{

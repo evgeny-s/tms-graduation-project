@@ -1,39 +1,20 @@
 import React, {memo} from 'react';
-import {connect} from 'react-redux';
+import {GiRobotGolem, GiSpikedDragonHead,
+    GiChewedSkull, GiHarryPotterSkull, GiPirateSkull, GiSurprisedSkull} from 'react-icons/gi';
+
+import certificationTypes from "../../consts/certificationTypes";
+import itemTypes from "../../consts/itemTypes";
 import './item.css'
-import itemTypes from '../../consts/itemTypes'
 
-
-// const mapStateToProps = state => ({
-//     koordsPlayerX: state.games.koordsPlayerX,
-//     koordsPlayerY: state.games.koordsPlayerY,
-//
-// });
-//
-// const mapDispatchToProps = dispatch => ({
-//     // changeColor: (y, x) => dispatch({
-//     //     type: "CHANGE_ITEM_COLOR",
-//     //     payload: {
-//     //         y,
-//     //         x,
-//     //         poleType: "pole"
-//     //     },
-//     // })
-//
-// });
-
-function Item ({type})
+function Item({type})
 {
-    // return(
-        // let {type, koordsPlayerX, koordsPlayerY, yKoord, xKoord} = this.props;
-        // let gamer = type;
-        // if (koordsPlayerY === yKoord && koordsPlayerX === xKoord) {
-        //     gamer = itemTypes.PLAYER;
-        // }
+    // type === itemTypes.BOSSWALL ? type =
         console.log('render');
-        return (
-            <div className={type} /*onClick={changeColor.bind(null, yKoord, xKoord)}*/ />
-        )
+    return (
+        <div className={type}>
+            { type === itemTypes.BOSSWALLSMALL ? <GiRobotGolem color='red'/> : '' }
+            { type === itemTypes.BOSSWALLBIG ? <GiSpikedDragonHead color='red'/> : '' }
+        </div>)
 }
+
 export default memo(Item);
-// export default connect(mapStateToProps, mapDispatchToProps)(memo(Item));

@@ -2,16 +2,15 @@ import update from 'immutability-helper';
 import db from '../../db/db';
 
 const initialState = {
-    // koordsPlayer: {
-    //     x: 10,
-    //     y: 12
-    // },
-    koordsPlayerX: 10,
-    koordsPlayerY: 12,
-
+    koordsPlayer: {
+        x: 11,
+        y: 12
+    },
     viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    poleType: 'pole',
+    prevPoleType: 'pole',
+    nextPoleType: 'pole',
     buttonText: 'Sound On',
+    experience: 0,
     certifications: 0,
     skills: 0,
     db: db.map,
@@ -23,101 +22,130 @@ function gamesReducer(state = initialState, action)
         case 'CERTIFICATION_COLLECTED':
             return update(state, {
                 $merge: {
-                    certifications: state.certifications + action.payload,
+                    certifications: state.certifications + 1,
                 }
             });
         case 'SKILL_COLLECTED':
             return update(state, {
                 $merge: {
-                    skills: state.skills + action.payload,
+                    skills: state.skills + 1,
+                }
+            });
+        case 'BOSS_WALL_RUINED':
+            return update(state, {
+                $merge: {
+                    experience: state.experience + 100,
                 }
             });
         case 'ITEM_EDITED':
             return update(state, {
                 db: {
-                    [state.koordsPlayerY + action.payload.y]: {
-                        [state.koordsPlayerX + action.payload.x]: {
-                            $set: 'pole'
-                        }
-                    }
-                },
-            });
-        case 'KEY_UP':
-            let newViewPort_up = state.viewPort;
-            if (state.koordsPlayerY <= state.viewPort[2] && state.koordsPlayerY >= 3)
-                newViewPort_up = [state.viewPort.slice(0, 1) - 1].concat(state.viewPort.slice(0, state.viewPort.length - 1));
-
-            return update(state, {
-                $merge: {
-                    viewPort: newViewPort_up,
-                    koordsPlayerY: state.koordsPlayerY - 1
-                },
-                db: {
-                    [state.koordsPlayerY]: {
-                        [state.koordsPlayerX]: {
-                            $set: 'pole'
-                        }
-                    },
-                    [state.koordsPlayerY - 1]: {
-                        [state.koordsPlayerX]: {
+                    [state.koordsPlayer.y + action.payload.y]: {
+                        [state.koordsPlayer.x + action.payload.x]: {
                             $set: 'player'
                         }
                     }
+                },
+                $merge: {
+                    nextPoleType: 'pole'
+                }
+            });
+        case 'ITEM_NOT_EDITED':
+            let tempPoleType = state.db[state.koordsPlayer.y + action.payload.y][state.koordsPlayer.x + action.payload.x];
+            console.log(tempPoleType);
+            return update(state, {
+                db: {
+                    [state.koordsPlayer.y + action.payload.y]: {
+                        [state.koordsPlayer.x + action.payload.x]: {
+                            $set: 'player'
+                        }
+                    }
+                },
+                $merge: {
+                    nextPoleType: tempPoleType,
+                }
+            });
+
+        case 'KEY_UP':
+            let newViewPort_up = state.viewPort;
+            if (state.koordsPlayer.y <= state.viewPort[2] && state.koordsPlayer.y >= 3)
+                newViewPort_up = [state.viewPort.slice(0, 1) - 1].concat(state.viewPort.slice(0, state.viewPort.length - 1));
+
+            return update(state, {
+                koordsPlayer: {
+                    y: {
+                        $set: state.koordsPlayer.y - 1
+                    }
+                },
+                db: {
+                    [state.koordsPlayer.y]: {
+                        [state.koordsPlayer.x]: {
+                            $set: state.prevPoleType
+                        }
+                    },
+                },
+                $merge: {
+                    viewPort: newViewPort_up,
+                    prevPoleType: state.nextPoleType
                 }
             });
         case 'KEY_DOWN':
             let newViewPort_down = state.viewPort;
-            if (state.koordsPlayerY >= state.viewPort[7] && state.koordsPlayerY <= state.db.length - 4)
+            if (state.koordsPlayer.y >= state.viewPort[7] && state.koordsPlayer.y <= state.db.length - 4)
                 newViewPort_down = [].concat(state.viewPort.slice(1, state.viewPort.length), +state.viewPort.slice(state.viewPort.length - 1) + 1);
 
             return update(state, {
-                $merge: {
-                    viewPort: newViewPort_down,
-                    koordsPlayerY: state.koordsPlayerY + 1
+                koordsPlayer: {
+                    y: {
+                        $set: state.koordsPlayer.y + 1
+                    }
                 },
                 db: {
-                    [state.koordsPlayerY]: {
-                        [state.koordsPlayerX]: {
-                            $set: 'pole'
+                    [state.koordsPlayer.y]: {
+                        [state.koordsPlayer.x]: {
+                            $set: state.prevPoleType
                         }
                     },
-                    [state.koordsPlayerY + 1]: {
-                        [state.koordsPlayerX]: {
-                            $set: 'player'
-                        }
-                    }
+                },
+                $merge: {
+                    viewPort: newViewPort_down,
+                    prevPoleType: state.nextPoleType
                 }
             });
         case 'KEY_LEFT':
             return update(state, {
-                $merge: {
-                    koordsPlayerX: state.koordsPlayerX - 1
+                koordsPlayer: {
+                    x: {
+                        $set: state.koordsPlayer.x - 1
+                    }
                 },
                 db: {
-                    [state.koordsPlayerY]: {
-                        [state.koordsPlayerX]: {
-                            $set: 'pole'
+                    [state.koordsPlayer.y]: {
+                        [state.koordsPlayer.x]: {
+                            $set: state.prevPoleType
                         },
-                        [state.koordsPlayerX - 1]: {
-                            $set: 'player'
-                        }
                     },
+                },
+                $merge: {
+                    prevPoleType: state.nextPoleType,
                 },
             });
         case 'KEY_RIGHT':
             return update(state, {
-                $merge: {
-                    koordsPlayerX: state.koordsPlayerX + 1
+                koordsPlayer: {
+                    x: {
+                        $set: state.koordsPlayer.x + 1
+                    }
                 },
                 db: {
-                    [state.koordsPlayerY]: {
-                        [state.koordsPlayerX]: {
-                            $set: 'pole'
+                    [state.koordsPlayer.y]: {
+                        [state.koordsPlayer.x]: {
+                            $set: state.prevPoleType
                         },
-                        [state.koordsPlayerX + 1]: {
-                            $set: 'player'
-                        }
                     },
+                },
+                $merge: {
+                    prevPoleType: state.nextPoleType,
                 },
             });
         case 'CLICK_SOUND_BUTTON':

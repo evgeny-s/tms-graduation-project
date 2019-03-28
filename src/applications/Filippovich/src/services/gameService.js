@@ -4,49 +4,97 @@ import keyTypes from '../consts/keyTypes';
 
 class GameService
 {
-    isWall(key, koordsX, koordsY, db)
+    isWall(key, koords, db)
     {
         switch (key) {
             case keyTypes.UP:
-                return koordsY <= 0 || db[koordsY - 1][koordsX] === itemTypes.WALL;
+                return koords.y <= 0 || db[koords.y - 1][koords.x] === itemTypes.WALL;
             case keyTypes.DOWN:
-                return koordsY >= db.length - 1 || db[koordsY + 1][koordsX] === itemTypes.WALL;
+                return koords.y >= db.length - 1 || db[koords.y + 1][koords.x] === itemTypes.WALL;
             case keyTypes.LEFT:
-                return koordsX <= 0 || db[koordsY][koordsX - 1] === itemTypes.WALL;
+                return koords.x <= 0 || db[koords.y][koords.x - 1] === itemTypes.WALL;
             case keyTypes.RIGHT:
-                return koordsX >= 19 || db[koordsY][koordsX + 1] === itemTypes.WALL;
+                return koords.x >= 19 || db[koords.y][koords.x + 1] === itemTypes.WALL;
             default:
                 return false;
         }
     }
 
-    isCertificate(key, koordsX, koordsY, db)
+    isBossWall(key, koords, db)
     {
         switch (key) {
             case keyTypes.UP:
-                return db[koordsY - 1][koordsX] === itemTypes.CERTIFICATION;
+                return db[koords.y - 1][koords.x] === itemTypes.BOSSWALL;
             case keyTypes.DOWN:
-                return db[koordsY + 1][koordsX] === itemTypes.CERTIFICATION;
+                return db[koords.y + 1][koords.x] === itemTypes.BOSSWALL;
             case keyTypes.LEFT:
-                return db[koordsY][koordsX - 1] === itemTypes.CERTIFICATION;
+                return db[koords.y][koords.x - 1] === itemTypes.BOSSWALL;
             case keyTypes.RIGHT:
-                return db[koordsY][koordsX + 1] === itemTypes.CERTIFICATION;
+                return db[koords.y][koords.x + 1] === itemTypes.BOSSWALL;
             default:
                 return false;
         }
     }
 
-    isSkill(key, koordsX, koordsY, db)
+    isBoss(key, koords, db)
     {
         switch (key) {
             case keyTypes.UP:
-                return db[koordsY - 1][koordsX] === itemTypes.SKILL;
+                return db[koords.y - 1][koords.x] === itemTypes.BOSS;
             case keyTypes.DOWN:
-                return db[koordsY + 1][koordsX] === itemTypes.SKILL;
+                return db[koords.y + 1][koords.x] === itemTypes.BOSS;
             case keyTypes.LEFT:
-                return db[koordsY][koordsX - 1] === itemTypes.SKILL;
+                return db[koords.y][koords.x - 1] === itemTypes.BOSS;
             case keyTypes.RIGHT:
-                return db[koordsY][koordsX + 1] === itemTypes.SKILL;
+                return db[koords.y][koords.x + 1] === itemTypes.BOSS;
+            default:
+                return false;
+        }
+    }
+
+    isPole(key, koords, db)
+    {
+        switch (key) {
+            case keyTypes.UP:
+                return db[koords.y - 1][koords.x] === itemTypes.POLE;
+            case keyTypes.DOWN:
+                return db[koords.y + 1][koords.x] === itemTypes.POLE;
+            case keyTypes.LEFT:
+                return db[koords.y][koords.x - 1] === itemTypes.POLE;
+            case keyTypes.RIGHT:
+                return db[koords.y][koords.x + 1] === itemTypes.POLE;
+            default:
+                return false;
+        }
+    }
+
+    isSkill(key, koords, db)
+    {
+        switch (key) {
+            case keyTypes.UP:
+                return db[koords.y - 1][koords.x] === itemTypes.SKILL;
+            case keyTypes.DOWN:
+                return db[koords.y + 1][koords.x] === itemTypes.SKILL;
+            case keyTypes.LEFT:
+                return db[koords.y][koords.x - 1] === itemTypes.SKILL;
+            case keyTypes.RIGHT:
+                return db[koords.y][koords.x + 1] === itemTypes.SKILL;
+            default:
+                return false;
+        }
+    }
+
+    isCertificate(key, koords, db)
+    {
+        switch (key) {
+            case keyTypes.UP:
+                return db[koords.y - 1][koords.x] === itemTypes.CERTIFICATION;
+            case keyTypes.DOWN:
+                return db[koords.y + 1][koords.x] === itemTypes.CERTIFICATION;
+            case keyTypes.LEFT:
+                return db[koords.y][koords.x - 1] === itemTypes.CERTIFICATION;
+            case keyTypes.RIGHT:
+                return db[koords.y][koords.x + 1] === itemTypes.CERTIFICATION;
             default:
                 return false;
         }

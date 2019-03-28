@@ -3,7 +3,8 @@ export default {
     WALL: "wall",
     SKILL: "skill",
     CERTIFICATION: "certificate",
-    BOSSWALL: "bossWall",
+    BOSSWALLSMALL: "bossWallSmall",
+    BOSSWALLBIG: "bossWallBig",
     BOSS: "boss",
     POLE: "pole"
 };
