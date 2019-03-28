@@ -5,3 +5,13 @@
 .game-name{
     padding: 10px 0;
 }
+
+.game-rules{
+    margin-top: 25px;
+    text-align: left;
+}
+
+.log{
+    margin: 20px 0;
+    text-align: right;
+}

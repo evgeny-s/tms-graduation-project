@@ -2,11 +2,19 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './stats.css'
 
-const mapStateToProps = state =>({
+const mapStateToProps = state => ({
     buttonText: state.games.buttonText,
-    certifications: state.games.certifications,
-    skills: state.games.skills,
+    level: state.games.level,
+    health: state.games.head,
     experience: state.games.experience,
+    skills: state.games.skills,
+    skillsLeftToCollect: 10,
+    certifications: state.games.certifications,
+    certificationsLeftToCollect: state.games.certificationsLeftToCollect,
+    ultimate: state.games.ultimate,
+    ultimateLeftToCollect: state.games.ultimateLeftToCollect,
+    medicine: state.games.medicine,
+    medicineLeftToCollect: state.games.medicineLeftToCollect,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -19,20 +27,28 @@ const mapDispatchToProps = dispatch => ({
 });
 
 
-class Stats extends React.Component{
-    render(){
-        const {experience, certifications, skills, buttonText, clickSoundButton} = this.props;
+class Stats extends React.Component
+{
+    render()
+    {
+        const {
+            level, health, experience, skills, skillsLeftToCollect, certifications, certificationsLeftToCollect,
+            ultimate, ultimateLeftToCollect, medicine, medicineLeftToCollect, buttonText, clickSoundButton
+        } = this.props;
         return (
-        <div className="user-stats col-3">
-            <p>Player Stats</p>
-            <p>Level: 1</p>
-            <p>Health: 5000</p>
-            <p>Experience: {experience}</p>
-            <p>Skills: {skills}/25</p>
-            <p>Certifications: {certifications}/5</p>
-            <button onClick={clickSoundButton} type="button" className="btn btn-success">{buttonText}</button>
-        </div>
-    );
-}}
+            <div className="user-stats col-3">
+                <p>Player Stats</p>
+                <p>Level: {level}</p>
+                <p>Health: {health}</p>
+                <p>Experience: {experience}</p>
+                <p>Skills: {skills}/{skillsLeftToCollect}</p>
+                <p>Certifications: {certifications}/{certificationsLeftToCollect}</p>
+                <p>Ultimate skills: {ultimate}/{ultimateLeftToCollect}</p>
+                <p>Medicament: {medicine}/{medicineLeftToCollect}</p>
+                <button onClick={clickSoundButton} type="button" className="btn btn-success">{buttonText}</button>
+            </div>
+        );
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stats);

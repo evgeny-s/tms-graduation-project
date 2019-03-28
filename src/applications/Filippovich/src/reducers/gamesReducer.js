@@ -10,9 +10,17 @@ const initialState = {
     prevPoleType: 'pole',
     nextPoleType: 'pole',
     buttonText: 'Sound On',
+    level: 1,
+    health: 100,
     experience: 0,
-    certifications: 0,
     skills: 0,
+    skillsLeftToCollect: 10,
+    certifications: 0,
+    certificationsLeftToCollect: 5,
+    ultimate: 0,
+    ultimateLeftToCollect: 3,
+    medicine: 0,
+    medicineLeftToCollect: 1,
     db: db.map,
 };
 

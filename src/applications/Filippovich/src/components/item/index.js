@@ -8,8 +8,7 @@ import './item.css'
 
 function Item({type})
 {
-    // type === itemTypes.BOSSWALL ? type =
-        console.log('render');
+    console.log('render');
     return (
         <div className={type}>
             { type === itemTypes.BOSSWALLSMALL ? <GiRobotGolem color='red'/> : '' }
