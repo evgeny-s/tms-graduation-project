@@ -1,5 +1,7 @@
 import update from 'immutability-helper';
 import db from '../../db/db';
+import itemTypes from '../consts/itemTypes';
+import playerStats from '../consts/playerStats';
 
 const initialState = {
     koordsPlayer: {
@@ -7,20 +9,19 @@ const initialState = {
         y: 12
     },
     viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
-    prevPoleType: 'pole',
-    nextPoleType: 'pole',
+    prevPoleType: itemTypes.POLE,
+    nextPoleType: itemTypes.POLE,
     buttonText: 'Sound On',
     level: 1,
-    health: 100,
+    health: playerStats['1'].PLAYER_HEALTH,
     experience: 0,
+    experienceLeftToCollect: playerStats['1'].PLAYER_EXPERIENCE,
     skills: 0,
-    skillsLeftToCollect: 10,
+    skillsLeftToCollect: playerStats['1'].SKILL_COUNT,
     certifications: 0,
-    certificationsLeftToCollect: 5,
+    certificationsLeftToCollect: 0,
     ultimate: 0,
-    ultimateLeftToCollect: 3,
-    medicine: 0,
-    medicineLeftToCollect: 1,
+    ultimateLeftToCollect: 0,
     db: db.map,
 };
 
@@ -44,6 +45,10 @@ function gamesReducer(state = initialState, action)
                 $merge: {
                     experience: state.experience + 100,
                 }
+            });
+        case 'EXPERIENCE_INCREACE':
+            return update(state, {
+               $merge:
             });
         case 'ITEM_EDITED':
             return update(state, {

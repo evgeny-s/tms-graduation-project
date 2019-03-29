@@ -20,85 +20,25 @@ class GameService
         }
     }
 
-    isBossWall(key, koords, db)
+    isNextItem(type, key, koords, db)
     {
         switch (key) {
             case keyTypes.UP:
-                return db[koords.y - 1][koords.x] === itemTypes.BOSSWALL;
+                return db[koords.y - 1][koords.x] === type;
             case keyTypes.DOWN:
-                return db[koords.y + 1][koords.x] === itemTypes.BOSSWALL;
+                return db[koords.y + 1][koords.x] === type;
             case keyTypes.LEFT:
-                return db[koords.y][koords.x - 1] === itemTypes.BOSSWALL;
+                return db[koords.y][koords.x - 1] === type;
             case keyTypes.RIGHT:
-                return db[koords.y][koords.x + 1] === itemTypes.BOSSWALL;
+                return db[koords.y][koords.x + 1] === type;
             default:
                 return false;
         }
     }
 
-    isBoss(key, koords, db)
-    {
-        switch (key) {
-            case keyTypes.UP:
-                return db[koords.y - 1][koords.x] === itemTypes.BOSS;
-            case keyTypes.DOWN:
-                return db[koords.y + 1][koords.x] === itemTypes.BOSS;
-            case keyTypes.LEFT:
-                return db[koords.y][koords.x - 1] === itemTypes.BOSS;
-            case keyTypes.RIGHT:
-                return db[koords.y][koords.x + 1] === itemTypes.BOSS;
-            default:
-                return false;
-        }
-    }
 
-    isPole(key, koords, db)
-    {
-        switch (key) {
-            case keyTypes.UP:
-                return db[koords.y - 1][koords.x] === itemTypes.POLE;
-            case keyTypes.DOWN:
-                return db[koords.y + 1][koords.x] === itemTypes.POLE;
-            case keyTypes.LEFT:
-                return db[koords.y][koords.x - 1] === itemTypes.POLE;
-            case keyTypes.RIGHT:
-                return db[koords.y][koords.x + 1] === itemTypes.POLE;
-            default:
-                return false;
-        }
-    }
 
-    isSkill(key, koords, db)
-    {
-        switch (key) {
-            case keyTypes.UP:
-                return db[koords.y - 1][koords.x] === itemTypes.SKILL;
-            case keyTypes.DOWN:
-                return db[koords.y + 1][koords.x] === itemTypes.SKILL;
-            case keyTypes.LEFT:
-                return db[koords.y][koords.x - 1] === itemTypes.SKILL;
-            case keyTypes.RIGHT:
-                return db[koords.y][koords.x + 1] === itemTypes.SKILL;
-            default:
-                return false;
-        }
-    }
 
-    isCertificate(key, koords, db)
-    {
-        switch (key) {
-            case keyTypes.UP:
-                return db[koords.y - 1][koords.x] === itemTypes.CERTIFICATION;
-            case keyTypes.DOWN:
-                return db[koords.y + 1][koords.x] === itemTypes.CERTIFICATION;
-            case keyTypes.LEFT:
-                return db[koords.y][koords.x - 1] === itemTypes.CERTIFICATION;
-            case keyTypes.RIGHT:
-                return db[koords.y][koords.x + 1] === itemTypes.CERTIFICATION;
-            default:
-                return false;
-        }
-    }
 }
 
 export default new GameService();

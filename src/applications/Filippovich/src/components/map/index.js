@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import './map.css';
 import ItemLine from '../itemLine';
 import gameService from '../../services/gameService';
+import itemTypes from '../../consts/itemTypes';
 import keyTypes from '../../consts/keyTypes';
 import playerStats from '../../consts/playerStats';
 
@@ -10,8 +11,18 @@ import playerStats from '../../consts/playerStats';
 const mapStateToProps = state => ({
     koordsPlayer: state.games.koordsPlayer,
     viewPort: state.games.viewPort,
-    certifications: state.games.certifications,
+
+    level: state.games.level,
+    health: state.games.health,
+    experience: state.games.experience,
+    experienceLeftToCollect: state.games.experienceLeftToCollect,
     skills: state.games.skills,
+    skillsLeftToCollect: state.games.skillsLeftToCollect,
+    certifications: state.games.certifications,
+    certificationsLeftToCollect: state.games.certificationsLeftToCollect,
+    ultimate: state.games.ultimate,
+    ultimateLeftToCollect: state.games.ultimateLeftToCollect,
+
     db: state.games.db,
 });
 
@@ -115,17 +126,17 @@ class Map extends React.Component
             case 37:
                 keyType = keyTypes.LEFT;
                 if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.POLE, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.itemNotEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL) {
+                    if (gameService.isNextItem(itemTypes.CERTIFICATION, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT) {
                             this.props.getCertification();
                             this.props.itemEdited(keyType);
                         } else {
@@ -133,8 +144,9 @@ class Map extends React.Component
                         }
                     }
 
-                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                    if (gameService.isNextItem(itemTypes.BOSSWALLSMALL, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
+                            && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
                             this.props.bossWallRuined();
                             this.props.itemEdited(keyType);
                         } else {
@@ -142,8 +154,9 @@ class Map extends React.Component
                         }
                     }
 
-                    if (gameService.isBoss(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                    if (gameService.isNextItem(itemTypes.BOSS, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
+                            && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
 
                         }
                     }
@@ -154,17 +167,17 @@ class Map extends React.Component
             case 40:
                 keyType = keyTypes.DOWN;
                 if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.POLE, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.itemNotEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL) {
+                    if (gameService.isNextItem(itemTypes.CERTIFICATION, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT) {
                             this.props.getCertification();
                             this.props.itemEdited(keyType);
                         } else {
@@ -172,8 +185,9 @@ class Map extends React.Component
                         }
                     }
 
-                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                    if (gameService.isNextItem(itemTypes.BOSSWALLSMALL, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
+                            && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
                             this.props.bossWallRuined();
                             this.props.itemEdited(keyType);
                         } else {
@@ -188,18 +202,18 @@ class Map extends React.Component
             case 38:
                 keyType = keyTypes.UP;
                 if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.POLE, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.itemNotEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
 
                     }
 
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL) {
+                    if (gameService.isNextItem(itemTypes.CERTIFICATION, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT) {
                             this.props.getCertification();
                             this.props.itemEdited(keyType);
                         } else {
@@ -207,8 +221,9 @@ class Map extends React.Component
                         }
                     }
 
-                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                    if (gameService.isNextItem(itemTypes.BOSSWALLSMALL, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
+                            && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
                             this.props.bossWallRuined();
                             this.props.itemEdited(keyType);
                         } else {
@@ -222,17 +237,17 @@ class Map extends React.Component
             case 39:
                 keyType = keyTypes.RIGHT;
                 if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                    if (gameService.isPole(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.POLE, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.itemNotEdited(keyType);
                     }
 
-                    if (gameService.isSkill(keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
 
-                    if (gameService.isCertificate(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL) {
+                    if (gameService.isNextItem(itemTypes.CERTIFICATION, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT) {
                             this.props.getCertification();
                             this.props.itemEdited(keyType);
                         }
@@ -241,8 +256,9 @@ class Map extends React.Component
                         }
                     }
 
-                    if (gameService.isBossWall(keyType, this.props.koordsPlayer, this.props.db)) {
-                        if (this.props.skills >= playerStats.SKILL && this.props.certifications >= playerStats.CERTIFICATION) {
+                    if (gameService.isNextItem(itemTypes.BOSSWALLSMALL, keyType, this.props.koordsPlayer, this.props.db)) {
+                        if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
+                            && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
                             this.props.bossWallRuined();
                             this.props.itemEdited(keyType);
                         } else {
