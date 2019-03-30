@@ -28,16 +28,31 @@ const initialState = {
 function gamesReducer(state = initialState, action)
 {
     switch (action.type) {
-        case 'CERTIFICATION_COLLECTED':
-            return update(state, {
-                $merge: {
-                    certifications: state.certifications + 1,
-                }
-            });
         case 'SKILL_COLLECTED':
             return update(state, {
                 $merge: {
                     skills: state.skills + 1,
+                    experience: state.experience + action.payload,
+                }
+            });
+        case 'CERTIFICATION_COLLECTED':
+            return update(state, {
+                $merge: {
+                    certifications: state.certifications + 1,
+                    experience: state.experience + action.payload,
+                }
+            });
+        case 'ULTIMATE_COLLECTED':
+            return update(state, {
+                $merge: {
+                    ultimate: state.ultimate + 1,
+                    experience: state.experience + action.payload,
+                }
+            });
+        case 'MEDICINE_COLLECTED':
+            return update(state, {
+                $merge: {
+                    health: state.health + action.payload,
                 }
             });
         case 'BOSS_WALL_RUINED':
@@ -45,10 +60,6 @@ function gamesReducer(state = initialState, action)
                 $merge: {
                     experience: state.experience + 100,
                 }
-            });
-        case 'EXPERIENCE_INCREACE':
-            return update(state, {
-               $merge:
             });
         case 'ITEM_EDITED':
             return update(state, {

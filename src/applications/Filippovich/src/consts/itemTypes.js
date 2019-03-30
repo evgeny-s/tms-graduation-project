@@ -6,5 +6,6 @@ export default {
     BOSSWALLSMALL: "bossWallSmall",
     BOSSWALLBIG: "bossWallBig",
     BOSS: "boss",
-    POLE: "pole"
+    POLE: "pole",
+    MEDECINE: 'medecine',
 };

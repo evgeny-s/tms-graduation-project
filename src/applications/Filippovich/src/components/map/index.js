@@ -39,13 +39,25 @@ const mapDispatchToProps = dispatch => ({
         keyRight: () => dispatch({
             type: 'KEY_RIGHT',
         }),
-        getCertification: () =>
-            dispatch({
-                type: 'CERTIFICATION_COLLECTED',
-            }),
         getSkill: () =>
             dispatch({
                 type: 'SKILL_COLLECTED',
+                payload: 100,
+            }),
+        getCertification: () =>
+            dispatch({
+                type: 'CERTIFICATION_COLLECTED',
+                payload: 500,
+            }),
+        getUltimate: () =>
+            dispatch({
+                type: 'ULTIMATE_COLLECTED',
+                payload: 1500,
+            }),
+        getMedicine: () =>
+            dispatch({
+                type: 'MEDICINE_COLLECTED',
+                payload: 1000,
             }),
         bossWallRuined: () =>
             dispatch({
@@ -130,7 +142,12 @@ class Map extends React.Component
                         this.props.itemNotEdited(keyType);
                     }
 
-                    if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
+                    if (gameService.isNextItem(itemTypes.MEDECINE, keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getMedicine();
+                        this.props.itemEdited(keyType);
+                    }
+
+                        if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
                     }
@@ -171,6 +188,11 @@ class Map extends React.Component
                         this.props.itemNotEdited(keyType);
                     }
 
+                    if (gameService.isNextItem(itemTypes.MEDECINE, keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getMedicine();
+                        this.props.itemEdited(keyType);
+                    }
+
                     if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
@@ -206,6 +228,11 @@ class Map extends React.Component
                         this.props.itemNotEdited(keyType);
                     }
 
+                    if (gameService.isNextItem(itemTypes.MEDECINE, keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getMedicine();
+                        this.props.itemEdited(keyType);
+                    }
+
                     if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.getSkill();
                         this.props.itemEdited(keyType);
@@ -239,6 +266,11 @@ class Map extends React.Component
                 if (!gameService.isWall(keyType, this.props.koordsPlayer, this.props.db)) {
                     if (gameService.isNextItem(itemTypes.POLE, keyType, this.props.koordsPlayer, this.props.db)) {
                         this.props.itemNotEdited(keyType);
+                    }
+
+                    if (gameService.isNextItem(itemTypes.MEDECINE, keyType, this.props.koordsPlayer, this.props.db)) {
+                        this.props.getMedicine();
+                        this.props.itemEdited(keyType);
                     }
 
                     if (gameService.isNextItem(itemTypes.SKILL, keyType, this.props.koordsPlayer, this.props.db)) {
