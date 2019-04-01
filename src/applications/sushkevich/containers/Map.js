@@ -30,17 +30,30 @@ const mapDispatchToProps = (dispatch) => {
             type: 'SCROLL_MAP',
             payload: newViewportRows,
         }),
-        getSkill: () => dispatch({
-            type: 'GET_SKILL',
-        }),
-        getCertificate: () => dispatch({
-            type: 'GET_CERTIFICATE',
-        }),
+        getSkill: () => {
+            dispatch({
+                type: 'GET_SKILL',
+            });
+            dispatch({
+                type: 'GET_SKILL_MESSAGE',
+            });
+        },
+        getCertificate: () => {
+            dispatch({
+                type: 'GET_CERTIFICATE',
+            });
+            dispatch({
+                type: 'GET_CERTIFICATE_MESSAGE',
+            })
+        },
         levelUp: () => dispatch({
             type: 'LEVEL_UP',
         }),
         breakBossWalls: () => dispatch({
             type: 'BREAK_BOSS_WALLS',
+        }),
+        clearNotificationsMessage: () => dispatch({
+            type: 'CLEAR_MESSAGE',
         }),
         finishGame: () => dispatch({
             type: 'GAME_FINISHED',

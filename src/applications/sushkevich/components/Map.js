@@ -13,6 +13,10 @@ class Map extends React.Component {
         document.removeEventListener("keydown", this.moveItem);
     }
 
+    clearNotificationsMessage() {
+        setTimeout(this.props.clearNotificationsMessage, 2000);
+    }
+
     moveItem = (event) => {
         let targetX;
         let targetY;
@@ -21,14 +25,16 @@ class Map extends React.Component {
             case 37:
                 targetX = this.props.playerCoordinateX - 1;
 
-                if (gameService.canMove(this.props.map, this.props.playerCoordinateY, targetX)) {
+                if (gameService.canMove(this.props.map, this.props.playerCoordinateY, targetX, this.props.playerLevel)) {
                     if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, this.props.playerCoordinateY, targetX)) {
                         this.props.getSkill();
+                        this.clearNotificationsMessage();
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
                     }
 
                     if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, this.props.playerCoordinateY, targetX)) {
                         this.props.getCertificate();
+                        this.clearNotificationsMessage();
 
                         if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
                             this.props.levelUp();
@@ -47,14 +53,16 @@ class Map extends React.Component {
             case 39:
                 targetX = this.props.playerCoordinateX + 1;
 
-                if (gameService.canMove(this.props.map, this.props.playerCoordinateY, targetX)) {
+                if (gameService.canMove(this.props.map, this.props.playerCoordinateY, targetX, this.props.playerLevel)) {
                     if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, this.props.playerCoordinateY, targetX)) {
                         this.props.getSkill();
+                        this.clearNotificationsMessage();
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
                     }
 
                     if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, this.props.playerCoordinateY, targetX)) {
                         this.props.getCertificate();
+                        this.clearNotificationsMessage();
 
                         if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
                             this.props.levelUp();
@@ -73,14 +81,16 @@ class Map extends React.Component {
             case 38:
                 targetY = this.props.playerCoordinateY - 1;
 
-                if (gameService.canMove(this.props.map, targetY, this.props.playerCoordinateX)) {
+                if (gameService.canMove(this.props.map, targetY, this.props.playerCoordinateX, this.props.playerLevel)) {
                     if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, this.props.playerCoordinateX)) {
                         this.props.getSkill();
+                        this.clearNotificationsMessage();
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
                     }
 
                     if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, targetY, this.props.playerCoordinateX)) {
                         this.props.getCertificate();
+                        this.clearNotificationsMessage();
 
                         if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
                             this.props.levelUp();
@@ -102,14 +112,16 @@ class Map extends React.Component {
             case 40:
                 targetY = this.props.playerCoordinateY + 1;
 
-                if (gameService.canMove(this.props.map, targetY, this.props.playerCoordinateX)) {
+                if (gameService.canMove(this.props.map, targetY, this.props.playerCoordinateX, this.props.playerLevel)) {
                     if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, this.props.playerCoordinateX)) {
                         this.props.getSkill();
+                        this.clearNotificationsMessage();
                         gameService.isLevelUp(this.props.skillsGot, config.skills) && this.props.levelUp();
                     }
 
                     if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, targetY, this.props.playerCoordinateX)) {
                         this.props.getCertificate();
+                        this.clearNotificationsMessage();
 
                         if (gameService.isLevelUp(this.props.certificatesGot, config.certificates)) {
                             this.props.levelUp();

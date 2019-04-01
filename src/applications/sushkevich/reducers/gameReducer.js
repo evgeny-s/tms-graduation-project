@@ -2,13 +2,11 @@ import update from 'immutability-helper';
 import map from '../db/map';
 import mapItemTypesConsts from '../consts/mapItemTypes';
 import config from '../db/config';
-import headerConsts from '../consts/headerMessages';
 
 const initialState = {
     viewportRows: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     viewportThreshold: config.viewportThreshold,
     map,
-    headerMessage: headerConsts.default,
     playerCoordinateY: 6,
     playerCoordinateX: 10,
 };

@@ -5,8 +5,13 @@
     color: #FEFAE7;
     text-align: center;
     font-family: 'ralewayregular', sans-serif;
-    padding: 8px 0;
     border-bottom: 1px solid #68D3B2;
+    display: flex;
+    min-height: 35px;
+}
+
+.app header .header-text {
+    margin: auto;
 }
 
 .app .content {

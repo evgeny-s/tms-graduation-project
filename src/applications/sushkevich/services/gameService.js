@@ -15,15 +15,21 @@ class GameService {
     };
 
     isNotWall(map, wallY, wallX) {
-        return (map[wallY][wallX] !== mapItemTypesConsts.WALL);
+        return (map[wallY][wallX] !== mapItemTypesConsts.WALL && map[wallY][wallX] !== mapItemTypesConsts.BOSS_WALL);
     };
 
     isNotBorder(map, targetY, targetX) {
         return !!(map[targetY] && map[targetY][targetX]);
     }
 
-    canMove(map, targetY, targetX) {
-        return (this.isNotBorder(map, targetY, targetX) && this.isNotWall(map, targetY, targetX));
+    canMove(map, targetY, targetX, level) {
+        if (level === 1) {
+            return (this.isNotBorder(map, targetY, targetX) && this.isNotWall(map, targetY, targetX) && !this.isCertificate(map, targetY, targetX));
+        }
+
+        else {
+            return (this.isNotBorder(map, targetY, targetX) && this.isNotWall(map, targetY, targetX));
+        }
     };
 
     isLevelUp(itemsGot, itemsAll) {

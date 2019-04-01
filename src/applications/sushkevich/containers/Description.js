@@ -3,9 +3,14 @@ import Description from '../components/Description';
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        onPlayClick: () => dispatch({
-            type: 'PLAY_GAME'
-        }),
+        onPlayClick: () => {
+            dispatch({
+                type: 'PLAY_GAME'
+            });
+            dispatch({
+                type: 'RESET_MESSAGE',
+            })
+        },
     };
 };
 
