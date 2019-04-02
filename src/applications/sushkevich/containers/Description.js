@@ -5,10 +5,10 @@ const mapDispatchToProps = (dispatch) => {
     return {
         onPlayClick: () => {
             dispatch({
-                type: 'PLAY_GAME'
+                type: 'GAME_STARTED',
             });
             dispatch({
-                type: 'RESET_MESSAGE',
+                type: 'CLEAR_MESSAGE',
             })
         },
     };

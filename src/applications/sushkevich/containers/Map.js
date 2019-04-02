@@ -7,25 +7,45 @@ const mapStateToProps = (state) => ({
     viewportThreshold: state.game.viewportThreshold,
     playerCoordinateX: state.game.playerCoordinateX,
     playerCoordinateY: state.game.playerCoordinateY,
-    playerLevel: state.stats.playerStats.level,
-    skillsGot: state.stats.playerStats.skills,
-    certificatesGot: state.stats.playerStats.certificates,
+    playerLevel: state.stats.level,
+    skillsGot: state.stats.skills,
+    certificatesGot: state.stats.certificates,
 });
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        moveLeft: () => dispatch({
-            type: 'MOVE_LEFT',
-        }),
-        moveRight: () => dispatch({
-            type: 'MOVE_RIGHT',
-        }),
-        moveUp: () => dispatch({
-            type: 'MOVE_UP',
-        }),
-        moveDown: () => dispatch({
-            type: 'MOVE_DOWN',
-        }),
+        moveLeft: () => {
+            dispatch({
+                type: 'MOVE_LEFT',
+            });
+            dispatch({
+                type: 'ADD_STEP',
+            })
+        },
+        moveRight: () => {
+            dispatch({
+                type: 'MOVE_RIGHT',
+            });
+            dispatch({
+                type: 'ADD_STEP',
+            })
+        },
+        moveUp: () => {
+            dispatch({
+                type: 'MOVE_UP',
+            });
+            dispatch({
+                type: 'ADD_STEP',
+            });
+        },
+        moveDown: () => {
+            dispatch({
+                type: 'MOVE_DOWN',
+            });
+            dispatch({
+                type: 'ADD_STEP',
+            });
+        },
         scrollMap: (newViewportRows) => dispatch({
             type: 'SCROLL_MAP',
             payload: newViewportRows,

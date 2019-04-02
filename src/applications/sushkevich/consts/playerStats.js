@@ -1,7 +1,7 @@
 export default {
     LEVEL: 'level',
     HIGHSCORE: 'highscore',
-    EXPERIENCE: 'experience',
+    STEPS: 'steps',
     SKILLS: 'skills',
     CERTIFICATES: 'certificates',
 }

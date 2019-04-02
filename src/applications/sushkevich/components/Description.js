@@ -9,6 +9,7 @@ const Description = (props) => {
                     <p>Collect {config.skills} skills on the first level.</p>
                     <p>Collect {config.certificates} certificates on the second level.</p>
                     <p>Finally beat the boss on the third level.</p>
+                    <p>Try to make as less steps as you can.</p>
                 </div>
                 <button onClick={props.onPlayClick}>Play game</button>
             </div>

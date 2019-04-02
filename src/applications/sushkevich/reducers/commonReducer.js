@@ -8,7 +8,7 @@ const initialState = {
 function commonReducer(state = initialState, action) {
     switch (action.type) {
 
-        case 'PLAY_GAME':
+        case 'GAME_STARTED':
             return update(state, {
                 $merge: {
                     view: viewsConsts.GAME,
