@@ -12,7 +12,7 @@ export default {
         PLAYER_EXPERIENCE: 2500,
     },
     '3': {
-        SKILL_COUNT: 25,
+        SKILL_COUNT: 50,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 5,
         CERTIFICATION_EXPERIENCE: 500,
@@ -20,7 +20,7 @@ export default {
         PLAYER_EXPERIENCE: 5000,
     },
     '4': {
-        SKILL_COUNT: 25,
+        SKILL_COUNT: 95,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
         CERTIFICATION_EXPERIENCE: 500,

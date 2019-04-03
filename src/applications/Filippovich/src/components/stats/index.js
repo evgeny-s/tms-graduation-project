@@ -9,7 +9,7 @@ const mapStateToProps = state => ({
     experience: state.games.experience,
     experienceLeftToCollect: state.games.experienceLeftToCollect,
     skills: state.games.skills,
-    skillsLeftToCollect: 10,
+    skillsLeftToCollect: state.games.skillsLeftToCollect,
     certifications: state.games.certifications,
     certificationsLeftToCollect: state.games.certificationsLeftToCollect,
     ultimate: state.games.ultimate,

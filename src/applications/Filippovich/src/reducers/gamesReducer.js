@@ -51,7 +51,26 @@ function gamesReducer(state = initialState, action)
                     experience: state.experience + 100,
                 }
             });
+        case 'PLAYER_INJURED':
+            return update(state, {
+                $merge: {
+                    health: state.health - action.payload,
+                }
+            });
+        case 'PLAYER_LEVEL_UPPED':
+            let levelStats = {};
 
+            levelStats['health'] = state.health + playerStats[state.level + 1].PLAYER_HEALTH;
+            levelStats['experienceLeftToCollect'] = playerStats[state.level + 1].PLAYER_EXPERIENCE;
+            levelStats['skillsLeftToCollect'] = playerStats[state.level + 1].SKILL_COUNT;
+            levelStats['level'] = state.level + 1;
+
+            return update(state, {
+                // $merge: {
+                //     level: state.level + 1,
+                // },
+                $merge: levelStats,
+            });
         case 'CLICK_SOUND_BUTTON':
             return update(state, {
                 $merge: {

@@ -123,6 +123,9 @@ const mapDispatchToProps = dispatch => ({
         playerInjured : (count) => dispatch({
             type: 'PLAYER_INJURED',
             payload: count,
+        }),
+        playerLevelUpped: () => dispatch({
+            type: 'PLAYER_LEVEL_UPPED',
         })
     }
 );
@@ -137,24 +140,25 @@ class Map extends React.Component
                 this.props.itemNotEdited(_keyType);
             }
             if (gameService.isNextItem(itemTypes.SKILL, _keyType, this.props.koordsPlayer, this.props.db)) {
-                if (levelService.checkLevelLogic(this.props.level, itemTypes.SKILL)[0]) {
+                if (levelService.checkLevelLogic(this.props.level, itemTypes.SKILL)) {
                     this.props.getSkill();
                     this.props.itemEdited(_keyType);
+                    if (levelService.checkLevelUp(this.props.level, itemTypes.SKILL, this.props.skills)) {
+                        this.props.playerLevelUpped();
+                    }
+                } else {
+                    this.props.playerInjured();
                 }
+
             }
             if (gameService.isNextItem(itemTypes.CERTIFICATION, _keyType, this.props.koordsPlayer, this.props.db)) {
 
-                // if () {
-                //
-                // } else {
-                //     this.props.itemNotEdited(_keyType);
-                // }
-                let q = levelService.checkLevelLogic(this.props.level, itemTypes.CERTIFICATION, this.props.skills);
-                if (q[0]) {
+                let levelLogic = levelService.checkLevelLogic(this.props.level, itemTypes.CERTIFICATION, this.props.skills);
+                if (levelLogic.accepted) {
                         this.props.getCertification();
                         this.props.itemEdited(_keyType);
                 } else {
-                    this.props.playerInjured(p[1]);
+                    this.props.playerInjured(levelLogic[1]);
                     this.props.itemNotEdited(_keyType);
 
                 }
