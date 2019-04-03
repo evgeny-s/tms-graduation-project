@@ -1,10 +1,8 @@
 import React, {memo} from 'react';
-import {GiRobotGolem, GiSpikedDragonHead,
-    GiChewedSkull, GiHarryPotterSkull, GiPirateSkull, GiSurprisedSkull} from 'react-icons/gi';
 
-import certificationTypes from "../../consts/certificationTypes";
-import itemTypes from "../../consts/itemTypes";
-import { Certifications, Ultimate, Medecine, Skills } from "../../consts/certificationTypes';
+
+import itemTypes from '../../consts/itemTypes';
+import { Certifications, Ultimate, Medecine, Skills, BOSS } from '../../consts/itemIcons';
 import './item.css'
 
 function Item({type})
@@ -12,24 +10,24 @@ function Item({type})
     let icon;
     switch (type) {
         case itemTypes.BOSSWALLSMALL:
-            icon = <GiRobotGolem color='red'/>;
+            icon = BOSS.BOSSWALLSMALL;
             break;
         case itemTypes.BOSSWALLBIG:
-            icon = <GiSpikedDragonHead color='red'/>;
+            icon = BOSS.BOSSWALLBIG;
             break;
         case itemTypes.BOSS:
-            icon = <GiRobotGolem color='red'/>;
+            icon = BOSS.BOSS1;
             break;
-        // case itemTypes.BOSSWALLSMALL:
-        //     icon = <GiRobotGolem color='red'/>;
-        //     break;
-        // case itemTypes.BOSSWALLSMALL:
-        //     icon = <GiRobotGolem color='red'/>;
-        //     break;
-        // case itemTypes.BOSSWALLSMALL:
-        //     icon = <GiRobotGolem color='red'/>;
-        //     break;
-        case itemTypes.POLE:
+        case itemTypes.MEDECINE:
+            icon = Medecine.Life;
+            break;
+        case itemTypes.CERTIFICATION:
+            icon = Certifications.Helmet1;
+            break;
+        case itemTypes.ULTIMATE:
+            icon = Ultimate.Fire;
+            break;
+        case itemTypes.SKILL:
             icon = Skills.SimpleSkill;
             break;
 

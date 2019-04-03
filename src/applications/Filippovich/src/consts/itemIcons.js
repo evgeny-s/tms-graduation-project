@@ -4,7 +4,9 @@ import {
     GiShardSword, GiBrain, GiInvisible, GiMuscularTorso, GiCelebrationFire, GiLightningTrio,
     GiWhirlwind, GiHeartBottle
 } from 'react-icons/gi';
-import {DiReact} from "react-icons/di";
+import {GiChewedSkull, GiHarryPotterSkull, GiPirateSkull, GiSurprisedSkull} from 'react-icons/gi';
+import {GiRobotGolem, GiSpikedDragonHead} from 'react-icons/gi';
+import {GiSecretBook} from "react-icons/gi";
 
 const Certifications = {
     Helmet1: <GiVikingHelmet color='orange'/>,
@@ -25,11 +27,20 @@ const Ultimate = {
 };
 
 const Medecine = {
-    Life: <GiHeartBottle color='red'/>
+    Life: <GiHeartBottle color='green'/>
 };
 
 const Skills = {
-    SimpleSkill: <DiReact color='yellow'/>
+    SimpleSkill: <GiSecretBook color='yellow'/>
 };
 
-export {Certifications, Medecine, Skills, Ultimate};
+const BOSS = {
+    BOSSWALLSMALL: <GiRobotGolem color='red'/>,
+    BOSSWALLBIG: <GiSpikedDragonHead color='red'/>,
+    BOSS1: <GiChewedSkull color='black'/>,
+    BOSS2: <GiHarryPotterSkull color='black'/>,
+    BOSS3: <GiPirateSkull color='black'/>,
+    BOSS4: <GiSurprisedSkull color='black'/>
+};
+
+export {Certifications, Medecine, Skills, Ultimate, BOSS};

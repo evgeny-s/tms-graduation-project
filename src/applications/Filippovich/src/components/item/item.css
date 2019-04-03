@@ -3,40 +3,45 @@
     width: 30px;
     height: 30px;
     border: 1px solid black;
+
+
+    background-color: #e2e2e2;
+
 }
 
 .pole{
-    background-color: #bfbfbf;
+    /*background-color: #e2e2e2;*/
 }
 
-.wall{
+.itemLine .wall{
     background-color: #292929;
 }
 
 .skill{
-    background-color: #dada00;
+    /*background-color: #dada00;*/
 }
 
-.certificate{
-    background-color: rgb(255, 170, 0);
+.itemLine .certificate{
+    /*background-color: rgb(255, 170, 0);*/
 }
 
 .bossWallSmall{
-    background-color: rgb(255, 255, 255);
+    /*background-color: rgb(255, 255, 255);*/
 }
 
 .bossWallBig{
-    background-color: rgb(255, 255, 255);
+    /*background-color: rgb(255, 255, 255);*/
 }
 
 .boss{
-    background-color: #ff0000;
+    /*background-color: #ff0000;*/
 }
 
-.player{
+/*background-color: #bfbfbf;*/
+.itemLine .player{
     background-color: #00ff00;
 }
 
 .medecine{
-    background-color: #ff00ff;
+    /*background-color: rgba(255, 0, 255, 0.31);*/
 }

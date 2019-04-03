@@ -12,7 +12,7 @@ export default {
         PLAYER_EXPERIENCE: 2500,
     },
     '3': {
-        SKILL_COUNT: 0,
+        SKILL_COUNT: 25,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 5,
         CERTIFICATION_EXPERIENCE: 500,
@@ -20,7 +20,7 @@ export default {
         PLAYER_EXPERIENCE: 5000,
     },
     '4': {
-        SKILL_COUNT: 0,
+        SKILL_COUNT: 25,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
         CERTIFICATION_EXPERIENCE: 500,
@@ -31,7 +31,7 @@ export default {
 
     },
     '5': {
-        SKILL_COUNT: 0,
+        SKILL_COUNT: 25,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
         CERTIFICATION_EXPERIENCE: 500,
@@ -42,6 +42,9 @@ export default {
         PLAYER_EXPERIENCE: 9500,
     },
     DAMAGE: {
+        CERTIFICATION: 100,
+        ULTIMATE: 450,
+        HEALTH_ELIXIR: 0,
         SMALLBOSS: 500,
         BIGBOSS: 1000,
         BOSS: 500,

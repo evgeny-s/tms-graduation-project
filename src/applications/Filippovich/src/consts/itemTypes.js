@@ -8,4 +8,5 @@ export default {
     BOSS: "boss",
     POLE: "pole",
     MEDECINE: 'medecine',
+    ULTIMATE: 'ultimate',
 };
