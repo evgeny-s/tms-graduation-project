@@ -71,6 +71,7 @@ function gamesReducer(state = initialState, action)
             levelStats['experienceLeftToCollect'] = playerStats[state.level + 1].PLAYER_EXPERIENCE;
             levelStats['skillsLeftToCollect'] = playerStats[state.level + 1].SKILL_COUNT;
             levelStats['certificationsLeftToCollect'] = playerStats[state.level + 1].CERTIFICATION_COUNT;
+            levelStats['ultimateLeftToCollect'] = playerStats[state.level + 1].ULTIMATE_COUNT;
             levelStats['level'] = state.level + 1;
 
             return update(state, {

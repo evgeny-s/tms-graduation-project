@@ -1,13 +1,13 @@
 export default {
     maxLevel: 5,
     '1': {
-        SKILL_COUNT: 5,
+        SKILL_COUNT: 10,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
         CERTIFICATION_EXPERIENCE: 0,
         ULTIMATE_EXPERIENCE: 0,
         PLAYER_HEALTH: 100,
-        PLAYER_EXPERIENCE: 300,
+        PLAYER_EXPERIENCE: 1000,
         DAMAGE: {
             SKILL: 0,
             CERTIFICATION: 100,
@@ -25,7 +25,7 @@ export default {
         CERTIFICATION_EXPERIENCE: 0,
         ULTIMATE_EXPERIENCE: 0,
         PLAYER_HEALTH: 500,
-        PLAYER_EXPERIENCE: 500,
+        PLAYER_EXPERIENCE: 2500,
         DAMAGE: {
             SKILL: 0,
             CERTIFICATION: 0,
@@ -41,6 +41,7 @@ export default {
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 5,
         CERTIFICATION_EXPERIENCE: 500,
+        ULTIMATE_COUNT: 0,
         ULTIMATE_EXPERIENCE: 0,
         PLAYER_HEALTH: 1000,
         PLAYER_EXPERIENCE: 5000,
