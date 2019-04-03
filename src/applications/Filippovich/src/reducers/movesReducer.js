@@ -114,7 +114,6 @@ function movesReducer(state = initialState, action)
             });
         case 'ITEM_NOT_EDITED':
             let tempPoleType = state.db[state.koordsPlayer.y + action.payload.y][state.koordsPlayer.x + action.payload.x];
-            console.log(tempPoleType);
             return update(state, {
                 db: {
                     [state.koordsPlayer.y + action.payload.y]: {

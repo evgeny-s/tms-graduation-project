@@ -8,6 +8,9 @@ import itemTypes from '../../consts/itemTypes';
 import keyTypes from '../../consts/keyTypes';
 import playerStats from '../../consts/playerStats';
 
+const fields = [
+    'skill', 'certificate', 'ultimate', 'medecine', 'bossWallSmall', 'bossWallBig', 'boss'
+];
 
 const mapStateToProps = state => ({
     koordsPlayer: state.moves.koordsPlayer,
@@ -120,12 +123,15 @@ const mapDispatchToProps = dispatch => ({
                 }
             })
         },
-        playerInjured : (count) => dispatch({
+        playerInjured: (count) => dispatch({
             type: 'PLAYER_INJURED',
             payload: count,
         }),
         playerLevelUpped: () => dispatch({
             type: 'PLAYER_LEVEL_UPPED',
+        }),
+        playerKilled: () => dispatch({
+            type: 'PLAYER_KILLED',
         })
     }
 );
@@ -133,73 +139,192 @@ const mapDispatchToProps = dispatch => ({
 
 class Map extends React.Component
 {
+
+    _itemLogic = (itemType, _keyType, koords, db, level) =>
+    {
+        // if (gameService.isNextItem(itemType, _keyType, koords, db)) {
+            if (levelService.checkLevelLogic(level, itemType)) {
+                switch (itemType) {
+                    case itemTypes.SKILL:
+                        this.props.getSkill();
+                        break;
+                    case itemTypes.CERTIFICATION:
+                        this.props.getCertification();
+                        break;
+                    case itemTypes.ULTIMATE:
+                        this.props.getUltimate();
+                        break;
+                    case itemTypes.MEDECINE:
+                        this.props.getMedicine();
+                        break;
+                    case itemTypes.BOSSWALLSMALL:
+                    case itemTypes.BOSSWALLBIG:
+                    case itemTypes.BOSS:
+                        this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
+                        if (levelService.checkPlayerKilled(this.props.health)) {
+                            this.props.playerKilled();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+                this.props.itemEdited(_keyType);
+
+                if (levelService.checkLevelUp(level, this.props.skills, this.props.certifications, this.props.ultimate)) {
+                    this.props.playerLevelUpped();
+                }
+            } else {
+                this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
+                if (levelService.checkPlayerKilled(this.props.health)) {
+                    this.props.playerKilled();
+                }
+                this.props.itemNotEdited(_keyType);
+            }
+        // }
+    };
+
     _moveLogic = (_keyType) =>
     {
         if (!gameService.isWall(_keyType, this.props.koordsPlayer, this.props.db)) {
             if (gameService.isNextItem(itemTypes.POLE, _keyType, this.props.koordsPlayer, this.props.db)) {
                 this.props.itemNotEdited(_keyType);
             }
-            if (gameService.isNextItem(itemTypes.SKILL, _keyType, this.props.koordsPlayer, this.props.db)) {
-                if (levelService.checkLevelLogic(this.props.level, itemTypes.SKILL)) {
-                    this.props.getSkill();
-                    this.props.itemEdited(_keyType);
-                    if (levelService.checkLevelUp(this.props.level, itemTypes.SKILL, this.props.skills)) {
-                        this.props.playerLevelUpped();
+
+            for(let item in itemTypes){
+                if (itemTypes[item] !== itemTypes.POLE
+                    && itemTypes[item] !== itemTypes.PLAYER
+                    && itemTypes[item] !== itemTypes.WALL)
+                {
+                    if (gameService.isNextItem(itemTypes[item], _keyType, this.props.koordsPlayer, this.props.db))
+                    {
+                        this._itemLogic(itemTypes[item], _keyType, this.props.koordsPlayer, this.props.db, this.props.level);
                     }
-                } else {
-                    this.props.playerInjured();
-                }
-
-            }
-            if (gameService.isNextItem(itemTypes.CERTIFICATION, _keyType, this.props.koordsPlayer, this.props.db)) {
-
-                let levelLogic = levelService.checkLevelLogic(this.props.level, itemTypes.CERTIFICATION, this.props.skills);
-                if (levelLogic.accepted) {
-                        this.props.getCertification();
-                        this.props.itemEdited(_keyType);
-                } else {
-                    this.props.playerInjured(levelLogic[1]);
-                    this.props.itemNotEdited(_keyType);
-
-                }
-
-                // if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT) {
-                //     this.props.getCertification();
-                //     this.props.itemEdited(_keyType);
-                // } else {
-                //     this.props.itemNotEdited(_keyType);
-                // }
-            }
-
-            if (gameService.isNextItem(itemTypes.ULTIMATE, _keyType, this.props.koordsPlayer, this.props.db)) {
-
-                this.props.getUltimate();
-                this.props.itemEdited(_keyType);
-            }
-
-
-            if (gameService.isNextItem(itemTypes.MEDECINE, _keyType, this.props.koordsPlayer, this.props.db)) {
-                this.props.getMedicine();
-                this.props.itemEdited(_keyType);
-            }
-
-
-            if (gameService.isNextItem(itemTypes.BOSSWALLSMALL, _keyType, this.props.koordsPlayer, this.props.db)) {
-                if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
-                    && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
-                    this.props.bossWallRuined();
-                    this.props.itemEdited(_keyType);
-                } else {
-                    this.props.itemNotEdited(_keyType);
-                }
-            }
-
-            if (gameService.isNextItem(itemTypes.BOSS, _keyType, this.props.koordsPlayer, this.props.db)) {
-                if (this.props.skills >= playerStats[this.props.level].SKILL_COUNT
-                    && this.props.certifications >= playerStats[this.props.level].CERTIFICATION_COUNT) {
 
                 }
             }
+
+
+
+            // if (gameService.isNextItem(itemTypes.SKILL, _keyType, this.props.koordsPlayer, this.props.db)) {
+            //     if (levelService.checkLevelLogic(this.props.level, itemTypes.SKILL)) {
+            //         this.props.getSkill();
+            //         this.props.itemEdited(_keyType);
+            //
+            //         if (levelService.checkLevelUp(this.props.level, this.props.skills,
+            //             this.props.certifications, this.props.ultimate)) {
+            //             this.props.playerLevelUpped();
+            //         }
+            //     } else {
+            //         this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.SKILL));
+            //         if (levelService.checkPlayerKilled(this.props.health)) {
+            //             this.props.playerKilled();
+            //         }
+            //         this.props.itemNotEdited(_keyType);
+            //     }
+            //
+            // }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//             if (gameService.isNextItem(itemTypes.CERTIFICATION, _keyType, this.props.koordsPlayer, this.props.db)) {
+//                 if (levelService.checkLevelLogic(this.props.level, itemTypes.CERTIFICATION)) {
+//                     this.props.getCertification();
+//                     this.props.itemEdited(_keyType);
+//
+//                     if (levelService.checkLevelUp(this.props.level, this.props.skills,
+//                         this.props.certifications, this.props.ultimate)) {
+//                         this.props.playerLevelUpped();
+//                     }
+//                 } else {
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.CERTIFICATION));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemNotEdited(_keyType);
+//                 }
+//             }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//             if (gameService.isNextItem(itemTypes.ULTIMATE, _keyType, this.props.koordsPlayer, this.props.db)) {
+//                 if (levelService.checkLevelLogic(this.props.level, itemTypes.ULTIMATE)) {
+//                     this.props.getUltimate();
+//                     this.props.itemEdited(_keyType);
+//
+//                     if (levelService.checkLevelUp(this.props.level, this.props.skills,
+//                         this.props.certifications, this.props.ultimate)) {
+//                         this.props.playerLevelUpped();
+//                     }
+//                 } else {
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.ULTIMATE));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemNotEdited(_keyType);
+//                 }
+//             }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//             if (gameService.isNextItem(itemTypes.MEDECINE, _keyType, this.props.koordsPlayer, this.props.db)) {
+//                 if (levelService.checkLevelLogic(this.props.level, itemTypes.MEDECINE)) {
+//                     this.props.getMedicine();
+//                     this.props.itemEdited(_keyType);
+//                 } else {
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.MEDECINE));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemNotEdited(_keyType);
+//                 }
+//             }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//             if (gameService.isNextItem(itemTypes.BOSSWALLSMALL, _keyType, this.props.koordsPlayer, this.props.db)) {
+//                 if (levelService.checkLevelLogic(this.props.level, itemTypes.BOSSWALLSMALL)) {
+//                     // this.props.bossWallRuined();
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.BOSSWALLSMALL));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemEdited(_keyType);
+//                 } else {
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.BOSSWALLSMALL));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemNotEdited(_keyType);
+//                 }
+//             }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//             if (gameService.isNextItem(itemTypes.BOSSWALLBIG, _keyType, this.props.koordsPlayer, this.props.db)) {
+//                 if (levelService.checkLevelLogic(this.props.level, itemTypes.BOSSWALLBIG)) {
+//                     // this.props.bossWallRuined();
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.BOSSWALLBIG));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemEdited(_keyType);
+//                 } else {
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.BOSSWALLBIG));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemNotEdited(_keyType);
+//                 }
+//             }
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+//             if (gameService.isNextItem(itemTypes.BOSS, _keyType, this.props.koordsPlayer, this.props.db)) {
+//                 if (levelService.checkLevelLogic(this.props.level, itemTypes.BOSS)) {
+//                     // this.props.bossWallRuined();
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.BOSS));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemEdited(_keyType);
+//                 } else {
+//                     this.props.playerInjured(levelService.checkLevelDamage(this.props.level, itemTypes.BOSS));
+//                     if (levelService.checkPlayerKilled(this.props.health)) {
+//                         this.props.playerKilled();
+//                     }
+//                     this.props.itemNotEdited(_keyType);
+//                 }
+//
+//
+//             }
 
             return true;
         } else

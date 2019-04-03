@@ -1,8 +1,7 @@
 import React, {memo} from 'react';
 
-
 import itemTypes from '../../consts/itemTypes';
-import { Certifications, Ultimate, Medecine, Skills, BOSS } from '../../consts/itemIcons';
+import { Skills, Certifications, Ultimate, Medecine, BOSS } from '../../consts/itemIcons';
 import './item.css'
 
 function Item({type})
@@ -30,7 +29,8 @@ function Item({type})
         case itemTypes.SKILL:
             icon = Skills.SimpleSkill;
             break;
-
+        default:
+            icon = null;
     }
     console.log('render');
     return (

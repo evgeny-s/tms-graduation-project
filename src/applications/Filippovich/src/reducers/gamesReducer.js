@@ -2,6 +2,7 @@ import update from 'immutability-helper';
 import playerStats from '../consts/playerStats';
 
 const initialState = {
+    gameOver: false,
     buttonText: 'Sound On',
     level: 1,
     health: playerStats['1'].PLAYER_HEALTH,
@@ -57,18 +58,22 @@ function gamesReducer(state = initialState, action)
                     health: state.health - action.payload,
                 }
             });
+        case 'PLAYER_KILLED':
+            return update(state, {
+                $merge: {
+                    gameOver: true,
+                }
+            });
         case 'PLAYER_LEVEL_UPPED':
             let levelStats = {};
 
-            levelStats['health'] = state.health + playerStats[state.level + 1].PLAYER_HEALTH;
+            levelStats['health'] = playerStats[state.level + 1].PLAYER_HEALTH;
             levelStats['experienceLeftToCollect'] = playerStats[state.level + 1].PLAYER_EXPERIENCE;
             levelStats['skillsLeftToCollect'] = playerStats[state.level + 1].SKILL_COUNT;
+            levelStats['certificationsLeftToCollect'] = playerStats[state.level + 1].CERTIFICATION_COUNT;
             levelStats['level'] = state.level + 1;
 
             return update(state, {
-                // $merge: {
-                //     level: state.level + 1,
-                // },
                 $merge: levelStats,
             });
         case 'CLICK_SOUND_BUTTON':
