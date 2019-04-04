@@ -2,18 +2,6 @@ import mapItemTypesConsts from '../consts/mapItemTypes';
 
 class GameService {
 
-    isSkill(map, targetY, targetX) {
-        return (map[targetY][targetX] === mapItemTypesConsts.SKILL);
-    };
-
-    isCertificate(map, targetY, targetX) {
-        return (map[targetY][targetX] === mapItemTypesConsts.CERTIFICATE);
-    };
-
-    isBoss(map, targetY, targetX) {
-        return (map[targetY][targetX] === mapItemTypesConsts.BOSS);
-    };
-
     isNotWall(map, wallY, wallX) {
         return (map[wallY][wallX] !== mapItemTypesConsts.WALL && map[wallY][wallX] !== mapItemTypesConsts.BOSS_WALL);
     };
@@ -30,6 +18,18 @@ class GameService {
         else {
             return (this.isNotBorder(map, targetY, targetX) && this.isNotWall(map, targetY, targetX));
         }
+    };
+
+    isSkill(map, targetY, targetX) {
+        return (map[targetY][targetX] === mapItemTypesConsts.SKILL);
+    };
+
+    isCertificate(map, targetY, targetX) {
+        return (map[targetY][targetX] === mapItemTypesConsts.CERTIFICATE);
+    };
+
+    isBoss(map, targetY, targetX) {
+        return (map[targetY][targetX] === mapItemTypesConsts.BOSS);
     };
 
     isLevelUp(itemsGot, itemsAll) {

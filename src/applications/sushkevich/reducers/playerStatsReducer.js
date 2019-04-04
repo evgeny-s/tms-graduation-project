@@ -46,6 +46,13 @@ function playerStatsReducer(state = initialState, action) {
                 }
             });
 
+        case 'RESET_STATS':
+            return update(state, {
+                $merge: {
+                    ...initialState
+                }
+            });
+
         default:
             return state;
     }

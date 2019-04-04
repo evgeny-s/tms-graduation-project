@@ -11,6 +11,20 @@ const mapDispatchToProps = (dispatch) => {
         recordHighscore: () => dispatch({
             type: 'RECORD_HIGHSCORE',
         }),
+        resetGame: () => {
+            dispatch({
+                type: 'RESET_MAP',
+            });
+            dispatch({
+                type: 'RESET_STATS',
+            });
+            dispatch({
+                type: 'FETCH_HIGHSCORE',
+            });
+            dispatch({
+                type: 'GAME_STARTED',
+            });
+        },
     }
 };
 

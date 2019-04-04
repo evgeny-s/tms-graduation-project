@@ -3,12 +3,25 @@ import map from '../db/map';
 import mapItemTypesConsts from '../consts/mapItemTypes';
 import config from '../db/config';
 
+let initialPlayerY;
+let initialPlayerX;
+
+outer: for (let row in map) {
+    for (let col in map[row]) {
+        if (map[row][col] === mapItemTypesConsts.PLAYER) {
+            initialPlayerY = +row;
+            initialPlayerX = +col;
+            break outer;
+        }
+    }
+}
+
 const initialState = {
     viewportRows: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
     viewportThreshold: config.viewportThreshold,
     map,
-    playerCoordinateY: 6,
-    playerCoordinateX: 10,
+    playerCoordinateY: initialPlayerY,
+    playerCoordinateX: initialPlayerX,
 };
 
 function gameReducer(state = initialState, action) {
@@ -94,20 +107,31 @@ function gameReducer(state = initialState, action) {
             });
 
         case 'BREAK_BOSS_WALLS':
-            let nextMap = state.map;
+            let newState = state;
 
-            Object.keys(nextMap).map((row) => {
-                Object.keys(nextMap[row]).map((col) => {
-                    if (nextMap[row][col] === mapItemTypesConsts.BOSS_WALL) {
-                        nextMap[row][col] = mapItemTypesConsts.TRACK;
+            Object.keys(state.map).map((row) => {
+                Object.keys(state.map[row]).map((col) => {
+                    if (state.map[row][col] === mapItemTypesConsts.BOSS_WALL) {
+                        newState = update(newState, {
+                            map: {
+                                [row]: {
+                                    [col]: {
+                                        $set: mapItemTypesConsts.TRACK,
+                                    }
+                                }
+                            }
+                        });
                     }
                 })
             });
 
+            return newState;
+
+        case 'RESET_MAP':
             return update(state, {
                 $merge: {
-                    map: nextMap,
-                },
+                    ...initialState
+                }
             });
 
         default:
@@ -116,5 +140,3 @@ function gameReducer(state = initialState, action) {
 }
 
 export default gameReducer;
-
-// ВОПРОС! Как сделать фокус на карту ???

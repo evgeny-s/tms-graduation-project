@@ -14,6 +14,7 @@ class Result extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         return (
             <div className="result-container">
                 <div className="result-block">
@@ -22,7 +23,7 @@ class Result extends React.Component {
                         <p>Your score is <span>{this.props.score}</span> steps.</p>
                         {this.updateHighscore() && <p>This is a new highscore!</p>}
                     </div>
-                    <button onClick={this.props.test}>Try again</button>
+                    <button onClick={this.props.resetGame}>Try again</button>
                 </div>
             </div>
         )

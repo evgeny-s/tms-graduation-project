@@ -6,7 +6,6 @@ import Description from '../containers/Description';
 import Game from './Game';
 import PlayerStats from '../containers/PlayerStats';
 import Result from '../containers/Result';
-import Test from './Test';
 
 const Content = (props) => {
     return (
@@ -15,7 +14,6 @@ const Content = (props) => {
             {props.view === viewsConsts.DESCRIPTION && <Description/>}
             {props.view === viewsConsts.GAME && <Game/>}
             {props.view === viewsConsts.RESULT && <Result/>}
-            <Test/>
         </div>
     )
 };
