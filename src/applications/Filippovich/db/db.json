@@ -21,7 +21,8 @@
       "pole",
       "pole",
       "wall"
-    ],[
+    ],
+    [
       "pole",
       "certificate",
       "wall",
@@ -42,7 +43,8 @@
       "pole",
       "pole",
       "certificate"
-    ],[
+    ],
+    [
       "pole",
       "pole",
       "pole",
@@ -63,7 +65,8 @@
       "skill",
       "pole",
       "certificate"
-    ],[
+    ],
+    [
       "skill",
       "pole",
       "pole",
@@ -84,7 +87,8 @@
       "pole",
       "skill",
       "certificate"
-    ],[
+    ],
+    [
       "pole",
       "pole",
       "pole",
@@ -105,7 +109,8 @@
       "skill",
       "pole",
       "certificate"
-    ],[
+    ],
+    [
       "pole",
       "pole",
       "pole",
@@ -126,7 +131,8 @@
       "pole",
       "pole",
       "certificate"
-    ],[
+    ],
+    [
       "pole",
       "pole",
       "skill",
@@ -147,7 +153,8 @@
       "skill",
       "pole",
       "certificate"
-    ],[
+    ],
+    [
       "pole",
       "pole",
       "certificate",
@@ -170,12 +177,12 @@
       "certificate"
     ],
     [
-     "wall",
-     "wall",
+      "wall",
+      "wall",
       "wall",
       "pole",
       "wall",
-     "skill",
+      "skill",
       "pole",
       "ultimate",
       "pole",

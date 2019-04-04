@@ -2,7 +2,6 @@ import update from 'immutability-helper';
 import playerStats from '../consts/playerStats';
 
 const initialState = {
-    gameOver: false,
     buttonText: 'Sound On',
     level: 1,
     health: playerStats['1'].PLAYER_HEALTH,
@@ -19,6 +18,10 @@ const initialState = {
 function gamesReducer(state = initialState, action)
 {
     switch (action.type) {
+        case 'SET_DEFAULTS':
+            return update(state, {
+                $merge: initialState
+            });
         case 'SKILL_COLLECTED':
             return update(state, {
                 $merge: {
@@ -62,6 +65,7 @@ function gamesReducer(state = initialState, action)
             return update(state, {
                 $merge: {
                     gameOver: true,
+
                 }
             });
         case 'PLAYER_LEVEL_UPPED':

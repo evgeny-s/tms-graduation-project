@@ -7,15 +7,27 @@ const initialState = {
         x: 11,
         y: 12
     },
-    viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    // viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    viewPort: [],
     prevPoleType: itemTypes.POLE,
     nextPoleType: itemTypes.POLE,
-    db: db.map,
+    // db: db.map,
+    db: [],
 };
 
 function movesReducer(state = initialState, action)
 {
     switch (action.type) {
+        case 'SET_DEFAULTS':
+            return update(state, {
+                $merge: initialState
+            });
+        case 'CREATE_DB': return update(state, {
+           $merge: {
+               db: action.payload.map,
+               viewPort: action.payload.viewPort
+           }
+        });
         case 'KEY_UP':
             let newViewPort_up = state.viewPort;
             if (state.koordsPlayer.y <= state.viewPort[2] && state.koordsPlayer.y >= 3)

@@ -2,20 +2,20 @@ import React from 'react';
 import {connect} from 'react-redux';
 import './map.css';
 import ItemLine from '../itemLine';
+import viewConsts from '../../consts/views';
 import gameService from '../../services/gameService';
 import levelService from '../../services/levelService';
+import createMapService from '../../services/createMapService';
 import itemTypes from '../../consts/itemTypes';
 import keyTypes from '../../consts/keyTypes';
-import playerStats from '../../consts/playerStats';
 
-const fields = [
-    'skill', 'certificate', 'ultimate', 'medecine', 'bossWallSmall', 'bossWallBig', 'boss'
-];
 
 const mapStateToProps = state => ({
     koordsPlayer: state.moves.koordsPlayer,
     viewPort: state.moves.viewPort,
     db: state.moves.db,
+
+    inputLevelValue: state.settings.inputLevelValue,
 
     level: state.games.level,
     health: state.games.health,
@@ -130,9 +130,21 @@ const mapDispatchToProps = dispatch => ({
         playerLevelUpped: () => dispatch({
             type: 'PLAYER_LEVEL_UPPED',
         }),
+        // playerKilled: () => dispatch({
+        //     type: 'PLAYER_KILLED',
+        // }),
         playerKilled: () => dispatch({
-            type: 'PLAYER_KILLED',
-        })
+            type: 'CHANGE_VIEW',
+            payload: viewConsts.RESULTS,
+        }),
+
+        createDB: (map, viewPort) => dispatch({
+            type: 'CREATE_DB',
+            payload: {
+                map,
+                viewPort,
+            },
+        }),
     }
 );
 
@@ -228,10 +240,14 @@ class Map extends React.Component
 
     componentWillMount()
     {
+        // const {a,s} = this.props;
+        this.props.createDB(createMapService.createMap(this.props.inputLevelValue), [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+
+
         document.addEventListener("keydown", this._keyPressed);
     };
 
-    componentWillUnmout()
+    componentWillUnmount()
     {
         document.removeEventListener("keydown", this._keyPressed);
     };

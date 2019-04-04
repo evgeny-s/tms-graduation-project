@@ -35,10 +35,6 @@ class GameService
                 return false;
         }
     }
-
-
-
-
 }
 
 export default new GameService();
