@@ -4,11 +4,15 @@ import viewsConsts from '../../consts/views';
 
 
 const mapStateToProps = state => ({
-    view: state.settings.view,
+    playerList: state.highestScore.playerList,
+    // view: state.settings.view,
 
 });
 
 const mapDispatchToProps = dispatch => ({
+    fetchPlayerList: () => dispatch({
+        type: 'FETCH_PLAYER_LIST',
+    }),
     clickRestartButton: () => dispatch({
         type: 'CHANGE_VIEW',
         payload: viewsConsts.SETTINGS,
@@ -20,6 +24,11 @@ const mapDispatchToProps = dispatch => ({
 
 class Results extends React.Component
 {
+    componentWillMount()
+    {
+        this.props.fetchPlayerList();
+    }
+
     _resumeDefaults = () =>
     {
         this.props.setDefaults();
@@ -31,6 +40,16 @@ class Results extends React.Component
         return (
             <div>
                 <h1>Вы проиграли :(</h1>
+                {
+                    this.props.playerList.map(({id, name, steps, difficulty, score}) => (
+                        <div key={id}>
+                            <label>{name}</label>
+                            <label>{steps}</label>
+                            <label>{difficulty}</label>
+                            <label>{score}</label>
+                        </div>
+                    ))
+                }
                 <button onClick={this._resumeDefaults} type="button" className="btn btn-danger">Restart</button>
             </div>
         )

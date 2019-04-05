@@ -8,13 +8,13 @@ import reducer from './src/reducers';
 import './app.css';
 import withHeader from './../../hocs/withHeader';
 import App from './App'
-// import gameSaga from './sagas';
+import highestScoreSaga from './src/sagas/highestScoreSaga';
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware));
 
-// sagaMiddleware.run(gameSaga);
+sagaMiddleware.run(highestScoreSaga);
 
 function FilippovichGame() {
     return (

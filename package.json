@@ -20,7 +20,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server --watch ./src/applications/Filippovich/db/db1.json --port 3005"
+    "server": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005"
   },
   "eslintConfig": {
     "extends": "react-app"
