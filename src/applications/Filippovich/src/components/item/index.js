@@ -6,6 +6,7 @@ import './item.css'
 
 function Item({type})
 {
+
     let icon;
     switch (type) {
         case itemTypes.BOSSWALLSMALL:
@@ -15,16 +16,16 @@ function Item({type})
             icon = BOSSWALLBIG.BOSSWALLBIG1;
             break;
         case itemTypes.BOSS:
-            icon = BOSS.BOSS3;
+            icon = BOSS.BOSS1;
             break;
         case itemTypes.MEDECINE:
             icon = Medecine.Life;
             break;
         case itemTypes.CERTIFICATION:
-            icon = Certifications.Helmet1;
+            icon = Certifications.Passive1;
             break;
         case itemTypes.ULTIMATE:
-            icon = Ultimate.Fire;
+            icon = Ultimate.Wind;
             break;
         case itemTypes.SKILL:
             icon = Skills.SimpleSkill;

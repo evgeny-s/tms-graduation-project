@@ -15,33 +15,18 @@ export default class CreateMapService
         this.viewPort = [];
     }
 
-    // generatethis.map(data){
-    //     return fetch('http://localhost:3005/this.map', {
-    //         method: "POST",
-    //         body: JSON.stringify(data),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //     })
-    //         .then((res) => res.json())
-    //
-    // }
-
-
     createMap()
     {
-
         this._createGrid();
         this._createWalls();
 
         this._createBoss();
 
-        this._createSkills();
-        this._createCertification();
-        this._createUltimate();
-        this._createMedecine();
+        this._createItems(itemTypes.SKILL, 27);
+        this._createItems(itemTypes.CERTIFICATION, 6);
+        this._createItems(itemTypes.ULTIMATE, 4);
+        this._createItems(itemTypes.MEDECINE, 3);
 
-        // this._createPlayer();
         this._createViewPort();
 
         return [this.map, this.playerKoords, this.viewPort];
@@ -67,9 +52,6 @@ export default class CreateMapService
             let {X, Y} = this._createXY(start, this.map.length - 10 - start);
             if (this.map[X][Y].match(itemTypes.POLE)) {
                 this.map[X][Y] = itemTypes.PLAYER;
-                console.log(start);
-                console.log(X);
-                console.log(Y);
                 this.playerKoords.x = Y;
                 this.playerKoords.y = X;
                 counter--;
@@ -84,134 +66,77 @@ export default class CreateMapService
             this.viewPort.push(startViewPort + i);
         }
         this._createPlayer(startViewPort);
-        console.log(startViewPort, '-startViewPort');
     }
 
     _createGrid()
     {
+        let rowsCount = 0;
         switch (this.level) {
             case 1:
-                for (let i = 0; i < 25; i++) {
-                    this.map.push([]);
-                    for (let j = 0; j < 20; j++) {
-                        this.map[i].push(itemTypes.POLE);
-                    }
-                }
+                rowsCount = 25;
                 break;
             case 2:
-                for (let i = 0; i < 35; i++) {
-                    this.map.push([]);
-                    for (let j = 0; j < 20; j++) {
-                        this.map[i].push(itemTypes.POLE);
-                    }
-                }
+                rowsCount = 35;
                 break;
             case 3:
-                for (let i = 0; i < 51; i++) {
-                    this.map.push([]);
-                    for (let j = 0; j < 20; j++) {
-                        this.map[i].push(itemTypes.POLE);
-                    }
-                }
+                rowsCount = 51;
                 break;
             default:
-                break;
+                rowsCount = 25;
+        }
+        for (let i = 0; i < rowsCount; i++) {
+            this.map.push([]);
+            for (let j = 0; j < 20; j++) {
+                this.map[i].push(itemTypes.POLE);
+            }
         }
     }
 
     _createWalls()
     {
+        let wallsDensityStart = 1,
+            wallsDensityFinish = 2;
         switch (this.level) {
             case 1:
-                for (let i = 0; i < this.map.length; i++) {
-                    let indexOfWall = [];
-                    let wallPerLineCount = Math.floor(this._getRandomInt(3, 5));
-                    for (let k = 0; k < wallPerLineCount; k++) {
-                        indexOfWall.push(this._getRandomInt(0, 19))
-                    }
-                    for (let j = 0; j < indexOfWall.length; j++) {
-                        this.map[i][indexOfWall[j]] = itemTypes.WALL;
-                    }
-                }
+                wallsDensityStart = 3;
+                wallsDensityFinish = 5;
                 break;
             case 2:
-                for (let i = 0; i < this.map.length; i++) {
-                    let indexOfWall = [];
-                    let wallPerLineCount = Math.floor(this._getRandomInt(4, 6));
-                    for (let k = 0; k < wallPerLineCount; k++) {
-                        indexOfWall.push(this._getRandomInt(0, 19))
-                    }
-                    for (let j = 0; j < indexOfWall.length; j++) {
-                        this.map[i][indexOfWall[j]] = itemTypes.WALL;
-                    }
-                }
+                wallsDensityStart = 4;
+                wallsDensityFinish = 6;
                 break;
             case 3:
-                for (let i = 0; i < this.map.length; i++) {
-                    let indexOfWall = [];
-                    let wallPerLineCount = Math.floor(this._getRandomInt(5, 7));
-                    for (let k = 0; k < wallPerLineCount; k++) {
-                        indexOfWall.push(this._getRandomInt(0, 19))
-                    }
-                    for (let j = 0; j < indexOfWall.length; j++) {
-                        this.map[i][indexOfWall[j]] = itemTypes.WALL;
-                    }
-                }
+                wallsDensityStart = 5;
+                wallsDensityFinish = 7;
                 break;
             default:
-                break;
+                wallsDensityStart = 1;
+                wallsDensityFinish = 2;
 
         }
-    }
-
-    _createSkills()
-    {
-        let counter = 25;
-        while (counter) {
-            let {X, Y} = this._createXY();
-            if (this.map[X][Y].match(itemTypes.POLE)) {
-                this.map[X][Y] = itemTypes.SKILL;
-                counter--;
+        for (let i = 0; i < this.map.length; i++) {
+            let indexOfWall = [];
+            let wallPerLineCount = Math.floor(this._getRandomInt(wallsDensityStart, wallsDensityFinish));
+            for (let k = 0; k < wallPerLineCount; k++) {
+                indexOfWall.push(this._getRandomInt(0, 19))
+            }
+            for (let j = 0; j < indexOfWall.length; j++) {
+                this.map[i][indexOfWall[j]] = itemTypes.WALL;
             }
         }
     }
 
-    _createCertification()
+    _createItems(type, count)
     {
-        let counter = 5;
+        let counter = count;
         while (counter) {
             let {X, Y} = this._createXY();
             if (this.map[X][Y].match(itemTypes.POLE)) {
-                this.map[X][Y] = itemTypes.CERTIFICATION;
+                this.map[X][Y] = type;
                 counter--;
             }
         }
     }
-
-    _createUltimate()
-    {
-        let counter = 3;
-        while (counter) {
-            let {X, Y} = this._createXY();
-            if (this.map[X][Y].match(itemTypes.POLE)) {
-                this.map[X][Y] = itemTypes.ULTIMATE;
-                counter--;
-            }
-        }
-    }
-
-    _createMedecine()
-    {
-        let counter = 2;
-        while (counter) {
-            let {X, Y} = this._createXY();
-            if (this.map[X][Y].match(itemTypes.POLE)) {
-                this.map[X][Y] = itemTypes.MEDECINE;
-                counter--;
-            }
-        }
-    }
-
 
     _createBoss()
     {

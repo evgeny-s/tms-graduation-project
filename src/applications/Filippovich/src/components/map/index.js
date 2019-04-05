@@ -242,8 +242,6 @@ class Map extends React.Component
     componentWillMount()
     {
         this.props.createDB(new CreateMapService(this.props.inputLevelValue).createMap());
-
-
         document.addEventListener("keydown", this._keyPressed);
     };
 
