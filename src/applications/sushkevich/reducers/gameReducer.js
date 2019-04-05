@@ -99,6 +99,40 @@ function gameReducer(state = initialState, action) {
                 },
             });
 
+        case 'JUMP_LEFT':
+            return update(state, {
+                $merge: {
+                    playerCoordinateX: 0,
+                },
+                map: {
+                    [state.playerCoordinateY]: {
+                        [state.playerCoordinateX]: {
+                            $set: mapItemTypesConsts.TRACK
+                        },
+                        [0]: {
+                            $set: mapItemTypesConsts.PLAYER
+                        }
+                    }
+                },
+            });
+
+        case 'JUMP_RIGHT':
+            return update(state, {
+                $merge: {
+                    playerCoordinateX: config.mapSize.x - 1,
+                },
+                map: {
+                    [state.playerCoordinateY]: {
+                        [state.playerCoordinateX]: {
+                            $set: mapItemTypesConsts.TRACK
+                        },
+                        [config.mapSize.x - 1]: {
+                            $set: mapItemTypesConsts.PLAYER
+                        }
+                    }
+                },
+            });
+
         case 'SCROLL_MAP':
             return update(state, {
                 $merge: {
@@ -128,11 +162,7 @@ function gameReducer(state = initialState, action) {
             return newState;
 
         case 'RESET_MAP':
-            return update(state, {
-                $merge: {
-                    ...initialState
-                }
-            });
+            return initialState;
 
         default:
             return state;

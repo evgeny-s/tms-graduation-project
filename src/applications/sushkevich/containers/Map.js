@@ -46,6 +46,22 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'ADD_STEP',
             });
         },
+        jumpLeft: () => {
+            dispatch({
+                type: 'JUMP_LEFT',
+            });
+            dispatch({
+                type: 'ADD_STEP',
+            })
+        },
+        jumpRight: () => {
+            dispatch({
+                type: 'JUMP_RIGHT',
+            });
+            dispatch({
+                type: 'ADD_STEP',
+            })
+        },
         scrollMap: (newViewportRows) => dispatch({
             type: 'SCROLL_MAP',
             payload: newViewportRows,

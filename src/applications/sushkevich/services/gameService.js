@@ -1,22 +1,42 @@
 import mapItemTypesConsts from '../consts/mapItemTypes';
+import config from '../db/config';
 
 class GameService {
 
-    isNotWall(map, wallY, wallX) {
-        return (map[wallY][wallX] !== mapItemTypesConsts.WALL && map[wallY][wallX] !== mapItemTypesConsts.BOSS_WALL);
+    isWall(map, targetY, targetX) {
+        // console.log(targetY);
+        // console.log(targetX);
+        return (map[targetY][targetX] === mapItemTypesConsts.WALL || map[targetY][targetX] === mapItemTypesConsts.BOSS_WALL);
     };
 
-    isNotBorder(map, targetY, targetX) {
-        return !!(map[targetY] && map[targetY][targetX]);
+    isVerticalBorder(map, targetY) {
+        return !(map[targetY]);
+    };
+
+    isHorizontalBorder(map, targetY, targetX) {
+        return !(map[targetY][targetX]);
+    };
+
+    isLeftBorder(targetX) {
+        return (targetX < 0);
     }
 
-    canMove(map, targetY, targetX, level) {
-        if (level === 1) {
-            return (this.isNotBorder(map, targetY, targetX) && this.isNotWall(map, targetY, targetX) && !this.isCertificate(map, targetY, targetX));
-        }
+    isRightBorder(targetX) {
+        return (targetX === config.mapSize.x);
+    }
 
+    canJumpRight(targetX) {
+
+    }
+
+    canJump(targetX) {
+        if (targetX < 0) {
+            console.log('can Jump: true');
+            return true;
+        }
         else {
-            return (this.isNotBorder(map, targetY, targetX) && this.isNotWall(map, targetY, targetX));
+            console.log('can jump: false');
+            return false;
         }
     };
 
