@@ -4,8 +4,8 @@ import itemTypes from '../consts/itemTypes';
 
 const initialState = {
     koordsPlayer: {
-        x: 11,
-        y: 12
+        // x: 0,
+        // y: 0
     },
     // viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
     viewPort: [],
@@ -24,8 +24,12 @@ function movesReducer(state = initialState, action)
             });
         case 'CREATE_DB': return update(state, {
            $merge: {
+               viewPort: action.payload.viewPort,
                db: action.payload.map,
-               viewPort: action.payload.viewPort
+               koordsPlayer: {
+                  x: action.payload.playerKoords.x,
+                  y: action.payload.playerKoords.y,
+               },
            }
         });
         case 'KEY_UP':

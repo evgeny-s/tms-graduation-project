@@ -5,7 +5,7 @@ import ItemLine from '../itemLine';
 import viewConsts from '../../consts/views';
 import gameService from '../../services/gameService';
 import levelService from '../../services/levelService';
-import createMapService from '../../services/createMapService';
+import CreateMapService from '../../services/createMapService';
 import itemTypes from '../../consts/itemTypes';
 import keyTypes from '../../consts/keyTypes';
 
@@ -138,10 +138,11 @@ const mapDispatchToProps = dispatch => ({
             payload: viewConsts.RESULTS,
         }),
 
-        createDB: (map, viewPort) => dispatch({
+        createDB: ([map, playerKoords, viewPort]) => dispatch({
             type: 'CREATE_DB',
             payload: {
                 map,
+                playerKoords,
                 viewPort,
             },
         }),
@@ -240,8 +241,7 @@ class Map extends React.Component
 
     componentWillMount()
     {
-        // const {a,s} = this.props;
-        this.props.createDB(createMapService.createMap(this.props.inputLevelValue), [7, 8, 9, 10, 11, 12, 13, 14, 15, 16]);
+        this.props.createDB(new CreateMapService(this.props.inputLevelValue).createMap());
 
 
         document.addEventListener("keydown", this._keyPressed);
