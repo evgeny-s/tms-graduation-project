@@ -1,9 +1,9 @@
 import itemTypes from '../consts/itemTypes';
 
-class createMapService
+class createthis.mapService
 {
-    // generateMap(data){
-    //     return fetch('http://localhost:3005/map', {
+    // generatethis.map(data){
+    //     return fetch('http://localhost:3005/this.map', {
     //         method: "POST",
     //         body: JSON.stringify(data),
     //         headers: {
@@ -13,20 +13,22 @@ class createMapService
     //         .then((res) => res.json())
     //
     // }
-
-    createMap(level)
+    map = [];
+    
+    createthis.map(level)
     {
-        let map = [];
-        map = this._createGrid(level, map);
-        map = this._createWalls(level, map);
-        map = this._createSkills(level, map);
-        map = this._createCertification(level, map);
-        map = this._createUltimate(level, map);
-        map = this._createMedecine(level, map);
-        map = this._createBoss(level, map);
+        
+        this.map = this._createGrid(level, this.map);
+        this.map = this._createWalls(level, this.map);
+        this.map = this._createSkills(level, this.map);
+        this.map = this._createCertification(level, this.map);
+        this.map = this._createUltimate(level, this.map);
+        this.map = this._createMedecine(level, this.map);
+        this.map = this._createBoss(this.map);
 
+        this.mapCheck(this.map);
 
-        return map;
+        return this.map;
     }
 
     _getRandomInt(min, max)
@@ -39,221 +41,227 @@ class createMapService
         switch (level) {
             case 1:
                 for (let i = 0; i < 25; i++) {
-                    map.push([]);
+                    this.map.push([]);
                     for (let j = 0; j < 20; j++) {
-                        map[i].push(itemTypes.POLE);
+                        this.map[i].push(itemTypes.POLE);
                     }
                 }
                 break;
             case 2:
                 for (let i = 0; i < 35; i++) {
-                    map.push([]);
+                    this.map.push([]);
                     for (let j = 0; j < 20; j++) {
-                        map[i].push(itemTypes.POLE);
+                        this.map[i].push(itemTypes.POLE);
                     }
                 }
                 break;
             case 3:
                 for (let i = 0; i < 51; i++) {
-                    map.push([]);
+                    this.map.push([]);
                     for (let j = 0; j < 20; j++) {
-                        map[i].push(itemTypes.POLE);
+                        this.map[i].push(itemTypes.POLE);
                     }
                 }
                 break;
             default:
                 break;
         }
-        return map;
+        return this.map;
     }
 
-    _createWalls(level, map)
+    _createWalls(level, this.map)
     {
         switch (level) {
             case 1:
-                for (let i = 0; i < 25; i++) {
+                for (let i = 0; i < this.map.length; i++) {
                     let indexOfWall = [];
                     let wallPerLineCount = Math.floor(this._getRandomInt(3, 5));
                     for (let k = 0; k < wallPerLineCount; k++) {
                         indexOfWall.push(this._getRandomInt(0, 19))
                     }
                     for (let j = 0; j < indexOfWall.length; j++) {
-                        map[i][indexOfWall[j]] = itemTypes.WALL;
+                        this.map[i][indexOfWall[j]] = itemTypes.WALL;
                     }
                 }
                 break;
             case 2:
-                for (let i = 0; i < 35; i++) {
+                for (let i = 0; i < this.map.length; i++) {
                     let indexOfWall = [];
                     let wallPerLineCount = Math.floor(this._getRandomInt(4, 6));
                     for (let k = 0; k < wallPerLineCount; k++) {
                         indexOfWall.push(this._getRandomInt(0, 19))
                     }
                     for (let j = 0; j < indexOfWall.length; j++) {
-                        map[i][indexOfWall[j]] = itemTypes.WALL;
+                        this.map[i][indexOfWall[j]] = itemTypes.WALL;
                     }
                 }
                 break;
             case 3:
-                for (let i = 0; i < 51; i++) {
+                for (let i = 0; i < this.map.length; i++) {
                     let indexOfWall = [];
                     let wallPerLineCount = Math.floor(this._getRandomInt(5, 7));
                     for (let k = 0; k < wallPerLineCount; k++) {
                         indexOfWall.push(this._getRandomInt(0, 19))
                     }
                     for (let j = 0; j < indexOfWall.length; j++) {
-                        map[i][indexOfWall[j]] = itemTypes.WALL;
+                        this.map[i][indexOfWall[j]] = itemTypes.WALL;
                     }
                 }
                 break;
             default:
                 break;
         }
-        return map;
+        return this.map;
     }
 
-    _createSkills(level, map)
+    _createSkills(level, this.map)
     {
         switch (level) {
             case 1:
-                for (let i = 0; i < 25; i++) {
+                for (let i = 0; i < this.map.length; i++) {
                     let skillIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][skillIndex] = itemTypes.SKILL;
+                    this.map[i][skillIndex] = itemTypes.SKILL;
                 }
                 break;
             case 2:
-                for (let i = 0; i < 35; i++) {
-                    if (!(i%5)) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (!(i % 5)) continue;
                     let skillIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][skillIndex] = itemTypes.SKILL;
+                    this.map[i][skillIndex] = itemTypes.SKILL;
                 }
                 break;
             case 3:
-                for (let i = 0; i < 51; i+=2) {
+                for (let i = 0; i < this.map.length; i += 2) {
                     let skillIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][skillIndex] = itemTypes.SKILL;
+                    this.map[i][skillIndex] = itemTypes.SKILL;
                 }
                 break;
             default:
                 break;
 
         }
-        return map;
+        return this.map;
     }
 
-    _createCertification(level, map)
+    _createCertification(level, this.map)
     {
         switch (level) {
             case 1:
-                for (let i = 0; i < 25; i++) {
-                    if ( i%4 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 4 || i === 0) continue;
                     let certificationIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][certificationIndex] = itemTypes.CERTIFICATION;
+                    this.map[i][certificationIndex] = itemTypes.CERTIFICATION;
                 }
                 break;
             case 2:
-                for (let i = 0; i < 35; i++) {
-                    if (i%7 || i === 0) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 7 || i === 0) continue;
                     let certificationIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][certificationIndex] = itemTypes.CERTIFICATION;
+                    this.map[i][certificationIndex] = itemTypes.CERTIFICATION;
                 }
                 break;
             case 3:
-                for (let i = 0; i < 51; i++) {
-                    if ( i%7 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 7 || i === 0) continue;
                     let certificationIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][certificationIndex] = itemTypes.CERTIFICATION;
+                    this.map[i][certificationIndex] = itemTypes.CERTIFICATION;
                 }
                 break;
             default:
                 break;
 
         }
-        return map;
+        return this.map;
     }
 
-    _createUltimate(level, map)
+    _createUltimate(level, this.map)
     {
         switch (level) {
             case 1:
-                for (let i = 0; i < 25; i++) {
-                    if ( i%7 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 7 || i === 0) continue;
                     let ultimateIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][ultimateIndex] = itemTypes.ULTIMATE;
+                    this.map[i][ultimateIndex] = itemTypes.ULTIMATE;
                 }
                 break;
             case 2:
-                for (let i = 0; i < 35; i++) {
-                    if ( i%8 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 8 || i === 0) continue;
                     let ultimateIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][ultimateIndex] = itemTypes.ULTIMATE;
+                    this.map[i][ultimateIndex] = itemTypes.ULTIMATE;
                 }
                 break;
             case 3:
-                for (let i = 0; i < 51; i++) {
-                    if ( i%11 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 11 || i === 0) continue;
                     let ultimateIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][ultimateIndex] = itemTypes.ULTIMATE;
+                    this.map[i][ultimateIndex] = itemTypes.ULTIMATE;
                 }
                 break;
             default:
                 break;
 
         }
-        return map;
+        return this.map;
     }
 
-    _createMedecine(level, map)
+    _createMedecine(level, this.map)
     {
         switch (level) {
             case 1:
-                for (let i = 0; i < 25; i++) {
-                    if ( i%8 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 8 || i === 0) continue;
                     let medecineIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][medecineIndex] = itemTypes.MEDECINE;
+                    this.map[i][medecineIndex] = itemTypes.MEDECINE;
                 }
                 break;
             case 2:
-                for (let i = 0; i < 35; i++) {
-                    if ( i%11 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 11 || i === 0) continue;
                     let medecineIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][medecineIndex] = itemTypes.MEDECINE;
+                    this.map[i][medecineIndex] = itemTypes.MEDECINE;
                 }
                 break;
             case 3:
-                for (let i = 0; i < 51; i++) {
-                    if ( i%17 || i === 0 ) continue;
+                for (let i = 0; i < this.map.length; i++) {
+                    if (i % 17 || i === 0) continue;
                     let medecineIndex = Math.floor(this._getRandomInt(0, 19));
-                    map[i][medecineIndex] = itemTypes.MEDECINE;
+                    this.map[i][medecineIndex] = itemTypes.MEDECINE;
                 }
                 break;
             default:
                 break;
 
         }
-        return map;
+        return this.map;
     }
 
-    _createBoss(level,map)
+    _createBoss(this.map)
     {
-        switch (level) {
-            case 1:
-                let bossIndex = Math.floor(this._getRandomInt(0, 24));
-                map[bossIndex][5] = itemTypes.BOSS;
-                break;
-            case 2:
+        let bossIndexY = Math.floor(this._getRandomInt(2, 16));
+        let bossIndexX = Math.floor(this._getRandomInt(2, this.map.length - 5));
+        this.map[bossIndexX][bossIndexY] = itemTypes.BOSS;
+        this.map[bossIndexX + 1][bossIndexY] = itemTypes.BOSS;
+        this.map[bossIndexX][bossIndexY + 1] = itemTypes.BOSS;
+        this.map[bossIndexX + 1][bossIndexY + 1] = itemTypes.BOSS;
 
-                break;
-            case 3:
-
-                break;
-            default:
-                break;
-
+        for (let i = 0; i < 4; i++) {
+            this.map[bossIndexX - 1][bossIndexY - 1 + i] = itemTypes.BOSSWALLBIG;
+            this.map[bossIndexX + 2][bossIndexY - 1 + i] = itemTypes.BOSSWALLBIG;
+            this.map[bossIndexX - 1 + i][bossIndexY - 1] = itemTypes.BOSSWALLBIG;
+            this.map[bossIndexX - 1 + i][bossIndexY + 2] = itemTypes.BOSSWALLBIG;
         }
-        return map;
+
+        for (let i = 0; i < 6; i++) {
+            this.map[bossIndexX - 2][bossIndexY - 2 + i] = itemTypes.BOSSWALLSMALL;
+            this.map[bossIndexX + 3][bossIndexY - 2 + i] = itemTypes.BOSSWALLSMALL;
+            this.map[bossIndexX - 2 + i][bossIndexY - 2] = itemTypes.BOSSWALLSMALL;
+            this.map[bossIndexX - 2 + i][bossIndexY + 3] = itemTypes.BOSSWALLSMALL;
+        }
+
+        return this.map;
     }
 }
 
 
-export default new createMapService();
+export default new createthis.mapService();

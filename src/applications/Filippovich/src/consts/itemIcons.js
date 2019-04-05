@@ -34,13 +34,19 @@ const Skills = {
     SimpleSkill: <GiSecretBook color='yellow'/>
 };
 
+const BOSSWALLSMALL = {
+    BOSSWALLSMALL1: <GiRobotGolem color='red'/>,
+};
+
+const BOSSWALLBIG = {
+    BOSSWALLBIG1: <GiSpikedDragonHead color='red'/>,
+};
+
 const BOSS = {
-    BOSSWALLSMALL: <GiRobotGolem color='red'/>,
-    BOSSWALLBIG: <GiSpikedDragonHead color='red'/>,
     BOSS1: <GiChewedSkull color='black'/>,
     BOSS2: <GiHarryPotterSkull color='black'/>,
     BOSS3: <GiPirateSkull color='black'/>,
     BOSS4: <GiSurprisedSkull color='black'/>
 };
 
-export {Certifications, Medecine, Skills, Ultimate, BOSS};
+export {Certifications, Medecine, Skills, Ultimate, BOSS, BOSSWALLBIG, BOSSWALLSMALL};

@@ -1,7 +1,7 @@
 import React, {memo} from 'react';
 
 import itemTypes from '../../consts/itemTypes';
-import { Skills, Certifications, Ultimate, Medecine, BOSS } from '../../consts/itemIcons';
+import { Skills, Certifications, Ultimate, Medecine, BOSS, BOSSWALLBIG, BOSSWALLSMALL } from '../../consts/itemIcons';
 import './item.css'
 
 function Item({type})
@@ -9,13 +9,13 @@ function Item({type})
     let icon;
     switch (type) {
         case itemTypes.BOSSWALLSMALL:
-            icon = BOSS.BOSSWALLSMALL;
+            icon = BOSSWALLSMALL.BOSSWALLSMALL1;
             break;
         case itemTypes.BOSSWALLBIG:
-            icon = BOSS.BOSSWALLBIG;
+            icon = BOSSWALLBIG.BOSSWALLBIG1;
             break;
         case itemTypes.BOSS:
-            icon = BOSS.BOSS1;
+            icon = BOSS.BOSS3;
             break;
         case itemTypes.MEDECINE:
             icon = Medecine.Life;
