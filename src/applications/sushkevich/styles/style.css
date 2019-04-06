@@ -17,18 +17,22 @@
     background-color: #272727;
 }
 
-.app .stats-bar {
+.app .controls-bar {
     vertical-align: top;
     display: inline-block;
     width: 20%;
+    padding-left: 10px;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
+    font-family: 'ralewayregular', sans-serif;
+    color: #ACADB1;
 }
 
 .app .stats-bar {
-    font-family: 'ralewayregular', sans-serif;
     background-color: #2B2C35;
+    margin-bottom: 20px;
+    padding: 5px;
 }
 
 .app .stats-bar h3 {
@@ -39,8 +43,8 @@
 }
 
 .app .stats-bar ul {
-    padding: 0 5px;
-    color: #ACADB1;
+    padding: 0;
+    margin: 0;
 }
 
 .app .stats-bar li {
@@ -49,6 +53,26 @@
 
 .app .stats-bar li:first-letter {
     text-transform: uppercase;
+}
+
+.app .options-bar {
+    background-color: #2B2C35;
+    padding: 5px;
+}
+
+.app .options-bar h3 {
+    font-size: 24px;
+    color: #36DDF9;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.app .options-bar select {
+    background-color: #272727;
+    border: none;
+    color: #ACADB1;
+    outline: none;
+    cursor: pointer;
 }
 
 .app .game {

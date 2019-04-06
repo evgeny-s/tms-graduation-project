@@ -19,6 +19,9 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'RESET_STATS',
             });
             dispatch({
+                type: 'RESET_VIEWPORT',
+            });
+            dispatch({
                 type: 'FETCH_HIGHSCORE',
             });
             dispatch({

@@ -3,7 +3,7 @@ import playerStatsConsts from '../consts/playerStats';
 import config from '../db/config';
 
 
-class PlayerStats extends React.Component {
+class Stats extends React.Component {
 
     componentWillMount() {
         this.props.getHighscore();
@@ -31,4 +31,4 @@ class PlayerStats extends React.Component {
     }
 }
 
-export default PlayerStats;
+export default Stats;

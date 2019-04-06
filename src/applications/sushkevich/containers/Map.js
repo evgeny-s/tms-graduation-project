@@ -3,8 +3,8 @@ import Map from '../components/Map';
 
 const mapStateToProps = (state) => ({
     map: state.game.map,
-    viewportRows: state.game.viewportRows,
-    viewportThreshold: state.game.viewportThreshold,
+    viewportRows: state.options.viewportRows,
+    viewportThreshold: state.options.viewportThreshold,
     playerCoordinateX: state.game.playerCoordinateX,
     playerCoordinateY: state.game.playerCoordinateY,
     playerLevel: state.stats.level,

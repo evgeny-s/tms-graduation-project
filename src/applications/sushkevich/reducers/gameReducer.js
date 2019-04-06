@@ -17,8 +17,6 @@ outer: for (let row in map) {
 }
 
 const initialState = {
-    viewportRows: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
-    viewportThreshold: config.viewportThreshold,
     map,
     playerCoordinateY: initialPlayerY,
     playerCoordinateX: initialPlayerX,
@@ -131,13 +129,6 @@ function gameReducer(state = initialState, action) {
                         }
                     }
                 },
-            });
-
-        case 'SCROLL_MAP':
-            return update(state, {
-                $merge: {
-                    viewportRows: action.payload,
-                }
             });
 
         case 'BREAK_BOSS_WALLS':

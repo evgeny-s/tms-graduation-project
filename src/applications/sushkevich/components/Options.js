@@ -1,11 +1,11 @@
 import React from 'react';
+import ViewportChanger from '../containers/ViewportSelector';
 
 const Options = (props) => {
     return (
-        <div className="options-container">
-            <div className="options-bar">
-
-            </div>
+        <div className="options-bar">
+            <h3>Options</h3>
+            <ViewportChanger/>
         </div>
     )
 };
