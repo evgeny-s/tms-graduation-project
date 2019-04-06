@@ -13,6 +13,7 @@ const initialState = {
     nextPoleType: itemTypes.POLE,
     // db: db.map,
     db: [],
+    movesCount: 0,
 };
 
 function movesReducer(state = initialState, action)
@@ -52,7 +53,8 @@ function movesReducer(state = initialState, action)
                 },
                 $merge: {
                     viewPort: newViewPort_up,
-                    prevPoleType: state.nextPoleType
+                    prevPoleType: state.nextPoleType,
+                    movesCount: state.movesCount + 1,
                 }
             });
         case 'KEY_DOWN':
@@ -76,7 +78,8 @@ function movesReducer(state = initialState, action)
                 },
                 $merge: {
                     viewPort: newViewPort_down,
-                    prevPoleType: state.nextPoleType
+                    prevPoleType: state.nextPoleType,
+                    movesCount: state.movesCount + 1,
                 }
             });
         case 'KEY_LEFT':
@@ -95,6 +98,7 @@ function movesReducer(state = initialState, action)
                 },
                 $merge: {
                     prevPoleType: state.nextPoleType,
+                    movesCount: state.movesCount + 1,
                 },
             });
         case 'KEY_RIGHT':
@@ -113,6 +117,7 @@ function movesReducer(state = initialState, action)
                 },
                 $merge: {
                     prevPoleType: state.nextPoleType,
+                    movesCount: state.movesCount + 1,
                 },
             });
         case 'ITEM_EDITED':

@@ -73,7 +73,7 @@ export default class CreateMapService
         let rowsCount = 0;
         switch (this.level) {
             case 1:
-                rowsCount = 25;
+                rowsCount = 10;
                 break;
             case 2:
                 rowsCount = 35;

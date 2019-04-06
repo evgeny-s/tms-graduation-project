@@ -13,6 +13,7 @@ const initialState = {
     certificationsLeftToCollect: 0,
     ultimate: 0,
     ultimateLeftToCollect: 0,
+    bossesKilled: 0,
 };
 
 function gamesReducer(state = initialState, action)
@@ -55,17 +56,16 @@ function gamesReducer(state = initialState, action)
                     experience: state.experience + 100,
                 }
             });
+        case 'BOSS_ATTACKED':
+            return update(state, {
+                $merge: {
+                    bossesKilled: state.bossesKilled + 1,
+                }
+            });
         case 'PLAYER_INJURED':
             return update(state, {
                 $merge: {
                     health: state.health - action.payload,
-                }
-            });
-        case 'PLAYER_KILLED':
-            return update(state, {
-                $merge: {
-                    gameOver: true,
-
                 }
             });
         case 'PLAYER_LEVEL_UPPED':

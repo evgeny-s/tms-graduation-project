@@ -152,6 +152,10 @@ class LevelService
         }
     }
 
+    checkBossLifes(lifesCount){
+        return lifesCount === playerStats.bossLifes;
+    }
+
     checkPlayerKilled(health)
     {
         return health <= 0;

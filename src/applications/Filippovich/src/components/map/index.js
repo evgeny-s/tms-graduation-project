@@ -15,7 +15,7 @@ const mapStateToProps = state => ({
     viewPort: state.moves.viewPort,
     db: state.moves.db,
 
-    inputLevelValue: state.settings.inputLevelValue,
+    inputDifficultyValue: state.settings.inputDifficultyValue,
 
     level: state.games.level,
     health: state.games.health,
@@ -27,6 +27,8 @@ const mapStateToProps = state => ({
     certificationsLeftToCollect: state.games.certificationsLeftToCollect,
     ultimate: state.games.ultimate,
     ultimateLeftToCollect: state.games.ultimateLeftToCollect,
+
+    bossesKilled: state.games.bossesKilled,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -60,6 +62,9 @@ const mapDispatchToProps = dispatch => ({
         }),
         bossWallRuined: () => dispatch({
             type: 'BOSS_WALL_RUINED'
+        }),
+        bossAttacked: () => dispatch({
+            type: 'BOSS_ATTACKED'
         }),
         itemEdited: (side) =>
         {
@@ -130,14 +135,18 @@ const mapDispatchToProps = dispatch => ({
         playerLevelUpped: () => dispatch({
             type: 'PLAYER_LEVEL_UPPED',
         }),
-        // playerKilled: () => dispatch({
-        //     type: 'PLAYER_KILLED',
-        // }),
         playerKilled: () => dispatch({
+            type: 'PLAYER_KILLED',
+            payload: 'Вы проиграли :(',
+        }),
+        playerWin: () => dispatch({
+            type: 'PLAYER_WIN',
+            payload: 'Вы победили :)',
+        }),
+        goToResults: () => dispatch({
             type: 'CHANGE_VIEW',
             payload: viewConsts.RESULTS,
         }),
-
         createDB: ([map, playerKoords, viewPort]) => dispatch({
             type: 'CREATE_DB',
             payload: {
@@ -152,6 +161,17 @@ const mapDispatchToProps = dispatch => ({
 
 class Map extends React.Component
 {
+    _gameOver = (isWin) =>
+    {
+        if (isWin) {
+
+            this.props.playerWin();
+        } else {
+            this.props.playerKilled();
+            this.props.goToResults();
+        }
+    };
+
     _itemLogic = (itemType, _keyType, koords, db, level) =>
     {
         if (levelService.checkLevelLogic(level, itemType)) {
@@ -170,10 +190,19 @@ class Map extends React.Component
                     break;
                 case itemTypes.BOSSWALLSMALL:
                 case itemTypes.BOSSWALLBIG:
+                    this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
+                    if (levelService.checkPlayerKilled(this.props.health)) {
+                        this._gameOver(false);
+                    }
+                    break;
                 case itemTypes.BOSS:
                     this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
                     if (levelService.checkPlayerKilled(this.props.health)) {
-                        this.props.playerKilled();
+                        this._gameOver(false);
+                    }
+                    this.props.bossAttacked();
+                    if (levelService.checkBossLifes(this.props.bossesKilled)) {
+                        this._gameOver(true);
                     }
                     break;
                 default:
@@ -186,7 +215,7 @@ class Map extends React.Component
         } else {
             this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
             if (levelService.checkPlayerKilled(this.props.health)) {
-                this.props.playerKilled();
+                this._gameOver(false);
             }
             this.props.itemNotEdited(_keyType);
         }
@@ -241,7 +270,7 @@ class Map extends React.Component
 
     componentWillMount()
     {
-        this.props.createDB(new CreateMapService(this.props.inputLevelValue).createMap());
+        this.props.createDB(new CreateMapService(this.props.inputDifficultyValue).createMap());
         document.addEventListener("keydown", this._keyPressed);
     };
 

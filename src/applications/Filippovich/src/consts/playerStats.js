@@ -1,5 +1,6 @@
 export default {
     maxLevel: 5,
+    bossLifes: 4,
     '1': {
         SKILL_COUNT: 10,
         SKILL_EXPERIENCE: 100,

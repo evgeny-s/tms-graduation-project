@@ -8,7 +8,7 @@ import './gameSettings.css';
 
 const mapStateToProps = state => ({
     inputNameValue: state.settings.inputNameValue,
-    inputLevelValue: state.settings.inputLevelValue,
+    inputDifficultyValue: state.settings.inputDifficultyValue,
 });
 
 const mapDispatchToProps = dispatch => ({

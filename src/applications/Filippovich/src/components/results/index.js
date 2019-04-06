@@ -1,12 +1,13 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PlayerResult from './playerResult';
 import viewsConsts from '../../consts/views';
+import './results.css';
 
 
 const mapStateToProps = state => ({
     playerList: state.highestScore.playerList,
-    // view: state.settings.view,
-
+    userResultMessage: state.highestScore.userResultMessage,
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -38,20 +39,31 @@ class Results extends React.Component
     render()
     {
         return (
-            <div>
-                <h1>Вы проиграли :(</h1>
-                {
-                    this.props.playerList.map(({id, name, steps, difficulty, score}) => (
-                        <div key={id}>
-                            <label>{name}</label>
-                            <label>{steps}</label>
-                            <label>{difficulty}</label>
-                            <label>{score}</label>
-                        </div>
-                    ))
-                }
-                <button onClick={this._resumeDefaults} type="button" className="btn btn-danger">Restart</button>
-            </div>
+            <>
+                <h3 className='offset-md-1 col-11 user-message'>{this.props.userResultMessage}</h3>
+                    <table className='table table-sm table-hover col-10 offset-md-1 fixed_header'>
+                       <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Player Name</th>
+                            <th>Step's count</th>
+                            <th>Difficulty</th>
+                            <th>Total score</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {
+                            this.props.playerList.map(({id, name, steps, difficulty, score}, index) => (
+                                <PlayerResult key={id} index={index + 1} name={name} steps={steps}
+                                              difficulty={difficulty} score={score}/>
+                            ))
+                        }
+                        </tbody>
+                    </table>
+                <button onClick={this._resumeDefaults} type='button'
+                        className='col-2 offset-md-9 btn btn-danger'>Restart
+                </button>
+            </>
         )
     }
 }

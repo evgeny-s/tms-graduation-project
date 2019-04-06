@@ -2,7 +2,7 @@ import update from 'immutability-helper';
 
 const initialState = {
     inputNameValue: '',
-    inputLevelValue: 1
+    inputDifficultyValue: 1
 };
 
 function settingsReducer(state = initialState, action)
@@ -21,7 +21,7 @@ function settingsReducer(state = initialState, action)
         case 'ON_INPUT_LEVEL_CHANGED':
             return update(state, {
                 $merge: {
-                    inputLevelValue: action.payload,
+                    inputDifficultyValue: action.payload,
                 }
             });
         default:

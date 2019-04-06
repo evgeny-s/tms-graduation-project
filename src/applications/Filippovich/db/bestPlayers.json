@@ -1,11 +1,46 @@
 {
   "playerList": [
     {
-      "id": 1,
       "name": "Player-1",
-      "steps": "1",
+      "steps": 543,
       "difficulty": "Easy",
-      "score": "2"
+      "score": 543,
+      "id": 1
+    },
+    {
+      "name": "Kirill",
+      "steps": 398,
+      "difficulty": "Easy",
+      "score": 398,
+      "id": 2
+    },
+    {
+      "name": "кирилл",
+      "steps": 161,
+      "difficulty": "Hard",
+      "score": 161,
+      "id": 3
+    },
+    {
+      "name": "123123123",
+      "steps": 180,
+      "difficulty": "Hard",
+      "score": 180,
+      "id": 4
+    },
+    {
+      "name": "qwe123qwe123",
+      "steps": 181,
+      "difficulty": "Hard",
+      "score": 181,
+      "id": 5
+    },
+    {
+      "name": "fdsaf",
+      "steps": 124,
+      "difficulty": "Hard",
+      "score": 124,
+      "id": 6
     }
   ]
 }

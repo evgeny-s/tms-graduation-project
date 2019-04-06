@@ -3,11 +3,15 @@ import viewsConsts from '../consts/views';
 
 
 const initialState = {
-    view: viewsConsts.GAME,
+    view: viewsConsts.SETTINGS,
 };
 
 function commonReducer(state = initialState, action) {
     switch (action.type) {
+        case 'SET_DEFAULTS':
+            return update(state, {
+                $merge: initialState
+            });
         case 'CHANGE_VIEW':
             return update(state, {
                 $merge: {
