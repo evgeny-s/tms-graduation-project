@@ -1,7 +1,7 @@
 import React from 'react';
 import playerStatsConsts from '../consts/playerStats';
 import config from '../db/config';
-
+import PropTypes from 'prop-types';
 
 class Stats extends React.Component {
 
@@ -30,5 +30,10 @@ class Stats extends React.Component {
         )
     }
 }
+
+Stats.propTypes = {
+    playerStats: PropTypes.object,
+};
+
 
 export default Stats;

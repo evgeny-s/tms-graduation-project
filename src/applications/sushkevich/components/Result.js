@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 class Result extends React.Component {
 
@@ -7,14 +8,12 @@ class Result extends React.Component {
             this.props.recordHighscore();
             return true;
         }
-
         else {
             return false;
         }
     }
 
     render() {
-        console.log(this.props);
         return (
             <div className="result-container">
                 <div className="result-block">
@@ -29,5 +28,10 @@ class Result extends React.Component {
         )
     }
 }
+
+Result.propTypes = {
+    score: PropTypes.number,
+    highscore: PropTypes.number,
+};
 
 export default Result;

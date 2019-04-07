@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import viewsConsts from '../consts/views';
 
@@ -20,6 +21,10 @@ const Content = (props) => {
             {props.view === viewsConsts.RESULT && <Result/>}
         </div>
     )
+};
+
+Content.propTypes = {
+    view: PropTypes.string,
 };
 
 export default Content;

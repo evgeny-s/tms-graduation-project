@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../db/config';
+import PropTypes from 'prop-types';
 
 const ViewportSelector = (props) => {
     return (
@@ -14,6 +15,11 @@ const ViewportSelector = (props) => {
             </select>
         </div>
     )
+};
+
+ViewportSelector.propTypes = {
+    map: PropTypes.object,
+    playerY: PropTypes.number,
 };
 
 export default ViewportSelector;

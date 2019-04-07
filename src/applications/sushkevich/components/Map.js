@@ -2,6 +2,7 @@ import React from 'react';
 import MapItem from './MapItem';
 import gameService from '../services/gameService';
 import config from '../db/config';
+import PropTypes from 'prop-types';
 
 class Map extends React.Component {
 
@@ -126,5 +127,16 @@ class Map extends React.Component {
         )
     }
 }
+
+Map.propTypes = {
+    map: PropTypes.object,
+    viewportRows: PropTypes.array,
+    viewportThreshold: PropTypes.number,
+    playerCoordinateX: PropTypes.number,
+    playerCoordinateY: PropTypes.number,
+    playerLevel: PropTypes.number,
+    skillsGot: PropTypes.number,
+    certificatesGot: PropTypes.number,
+};
 
 export default Map;

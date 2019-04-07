@@ -6,18 +6,35 @@ import config from '../db/config';
 let initialPlayerY;
 let initialPlayerX;
 
-outer: for (let row in map) {
+for (let row in map) {
     for (let col in map[row]) {
         if (map[row][col] === mapItemTypesConsts.PLAYER) {
             initialPlayerY = +row;
             initialPlayerX = +col;
-            break outer;
         }
     }
 }
 
+function renderMap(rows, cols) {
+    let initialMap = {};
+
+    for (let i = 0; i < rows; i++) {
+        let initialRow = {};
+        for (let j = 0; j < cols; j++) {
+            if (map[i] && map[i][j]) {
+                initialRow[j] = map[i][j];
+            } else {
+                initialRow[j] = mapItemTypesConsts.TRACK;
+            }
+        }
+        initialMap[i] = initialRow;
+    }
+
+    return initialMap;
+}
+
 const initialState = {
-    map,
+    map: renderMap(config.mapSize.y, config.mapSize.x),
     playerCoordinateY: initialPlayerY,
     playerCoordinateX: initialPlayerX,
 };

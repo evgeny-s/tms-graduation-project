@@ -6,8 +6,8 @@ export default {
     viewportThreshold: 2,
     viewportSizes: [10,12,14],
     mapSize: {
-        x: 20,
-        y: 100,
+        x: 19,
+        y: 99,
     },
 }
 
