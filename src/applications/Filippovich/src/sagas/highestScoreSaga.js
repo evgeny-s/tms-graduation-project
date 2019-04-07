@@ -16,7 +16,7 @@ function* playerWin()
     let movesCount = yield select(state => state.moves.movesCount + 1);
     let difficulty = yield select(state => state.settings.inputDifficultyValue);
     newResults.steps = movesCount;
-    newResults.difficulty = levelList[difficulty + 1];
+    newResults.difficulty = levelList[difficulty - 1];
     newResults.score = movesCount * difficulty;
 
     let item = yield call(highestScoreService.addResultToDB, newResults);

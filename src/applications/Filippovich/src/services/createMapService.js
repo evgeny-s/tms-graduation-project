@@ -49,7 +49,7 @@ export default class CreateMapService
     {
         let counter = 1;
         while (counter) {
-            let {X, Y} = this._createXY(start, this.map.length - 10 - start);
+            let {X, Y} = this._createXY(start + 2, this.map.length - 10 - start + 2);
             if (this.map[X][Y].match(itemTypes.POLE)) {
                 this.map[X][Y] = itemTypes.PLAYER;
                 this.playerKoords.x = Y;
@@ -73,7 +73,7 @@ export default class CreateMapService
         let rowsCount = 0;
         switch (this.level) {
             case 1:
-                rowsCount = 10;
+                rowsCount = 25;
                 break;
             case 2:
                 rowsCount = 35;

@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import db from '../../db/db';
+// import db from '../../db/db';
 import itemTypes from '../consts/itemTypes';
 
 const initialState = {

@@ -41,6 +41,19 @@
       "difficulty": "Hard",
       "score": 124,
       "id": 6
+    },
+    {
+      "name": "уцк",
+      "steps": 526,
+      "score": 1578,
+      "id": 7
+    },
+    {
+      "name": "10",
+      "steps": 241,
+      "difficulty": "Hard",
+      "score": 482,
+      "id": 8
     }
   ]
 }
