@@ -24,7 +24,7 @@ function AppsTable() {
                 </tr>
                 <tr>
                     <th scope="row">2</th>
-                    <td>Игрушко</td>
+                    <td>Бродилка</td>
                     <td>Кирилл</td>
                     <td><Link className="btn btn-success" to="/filippovich">Перейти {'>'}</Link></td>
                 </tr>

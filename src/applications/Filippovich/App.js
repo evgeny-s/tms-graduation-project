@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import GameSettings from './src/components/gameSettings';
 import Stats from './src/components/stats';
 import Panel from './src/components/panel';
@@ -11,6 +12,7 @@ import './app.css';
 const mapStateToProps = state => ({
     view: state.common.view,
 });
+
 
 function App({view})
 {
@@ -24,10 +26,13 @@ function App({view})
                                             <Panel/>
                                         </React.Fragment>}
                 {view === views.RESULTS && <Results/>}
-
             </div>
         </div>
     );
 }
+
+App.propTypes = {
+    view: PropTypes. string,
+};
 
 export default connect(mapStateToProps)(App);

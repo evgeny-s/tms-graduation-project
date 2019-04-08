@@ -1,5 +1,5 @@
 export default {
-    SETTINGS: 'settings',
-    GAME: 'game',
-    RESULTS: 'results',
+    SETTINGS: "settings",
+    GAME: "game",
+    RESULTS: "results",
 };

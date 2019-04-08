@@ -54,6 +54,13 @@
       "difficulty": "Hard",
       "score": 482,
       "id": 8
+    },
+    {
+      "name": "rew",
+      "steps": 204,
+      "difficulty": "Easy",
+      "score": 204,
+      "id": 9
     }
   ]
 }

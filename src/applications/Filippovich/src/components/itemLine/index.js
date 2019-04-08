@@ -1,16 +1,21 @@
 import React from 'react';
-import './itemLine.css'
+import PropTypes from 'prop-types';
 import Item from '../item';
+import './itemLine.css'
 
-function ItemLine({itemsType, yKoord})
-{
+function ItemLine({itemsType, yKoord}) {
     return (
         <div className="itemLine">
             {
-                itemsType.map((value, index) => ( <Item key={index} yKoord={yKoord} xKoord={index} type={value}/> ))
+                itemsType.map((value, index) => (<Item key={index} yKoord={yKoord} xKoord={index} type={value}/>))
             }
         </div>
     );
 }
+
+ItemLine.propTypes = {
+    itemsType: PropTypes.arrayOf(PropTypes.string),
+    yKoord: PropTypes.number,
+};
 
 export default ItemLine;

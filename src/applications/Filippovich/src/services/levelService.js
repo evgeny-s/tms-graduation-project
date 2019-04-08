@@ -160,8 +160,6 @@ class LevelService
     {
         return health <= 0;
     }
-
-
 }
 
 export default new LevelService();

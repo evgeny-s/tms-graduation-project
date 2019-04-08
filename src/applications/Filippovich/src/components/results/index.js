@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import PlayerResult from './playerResult';
 import viewsConsts from '../../consts/views';
@@ -25,19 +26,16 @@ const mapDispatchToProps = dispatch => ({
 
 class Results extends React.Component
 {
-    componentWillMount()
-    {
+    componentWillMount() {
         this.props.fetchPlayerList();
     }
 
-    _resumeDefaults = () =>
-    {
+    _resumeDefaults = () => {
         this.props.setDefaults();
         this.props.clickRestartButton();
     };
 
-    render()
-    {
+    render() {
         return (
             <>
                 <h3 className='offset-md-1 col-11 user-message'>{this.props.userResultMessage}</h3>
@@ -67,5 +65,20 @@ class Results extends React.Component
         )
     }
 }
+
+Results.propsTypes = {
+    playerList: PropTypes.arrayOf(PropTypes.shape({
+        name: PropTypes.string,
+        steps: PropTypes.number,
+        difficulty: PropTypes.string,
+        score: PropTypes.number,
+        id: PropTypes.number,
+    })),
+    userResultMessage: PropTypes.string,
+
+    fetchPlayerList: PropTypes.func,
+    clickRestartButton: PropTypes.func,
+    setDefaults: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

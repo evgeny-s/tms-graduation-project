@@ -1,9 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function PlayerResult(props)
 {
     return(
-        <tr key={props.id}>
+        <tr >
             <th scope="row">{props.index}</th>
             <td>{props.name}</td>
             <td>{props.steps}</td>
@@ -13,4 +14,12 @@ function PlayerResult(props)
     )
 }
 
+PlayerResult.propTypes = {
+    index: PropTypes.number,
+    name: PropTypes.string,
+    steps: PropTypes.number,
+    difficulty: PropTypes.string,
+    score: PropTypes.number,
+};
+// key={props.id}
 export default PlayerResult;

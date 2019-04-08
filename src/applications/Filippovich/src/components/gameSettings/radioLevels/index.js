@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 
 
 const mapStateToProps = state => ({
     inputDifficultyValue: state.settings.inputDifficultyValue,
-
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -15,7 +15,7 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-function RadioLevels({value, difficultyValueChanged, inputDifficultyValue, index})
+function RadioLevels({inputDifficultyValue, difficultyValueChanged, index, value})
 {
     let check = false;
     if ((index) === inputDifficultyValue) {
@@ -27,11 +27,17 @@ function RadioLevels({value, difficultyValueChanged, inputDifficultyValue, index
                     <input className="form-check-input" type="radio" name="levelRadios" id={index}
                            value={value} onClick={difficultyValueChanged} defaultChecked={check}/>
                     {value}
-                    <span className="checkmark"></span>
+                    <span className="checkmark"> </span>
                 </label>
             </div>
     )
 }
 
+RadioLevels.propTypes = {
+    inputDifficultyValue: PropTypes.number,
+    difficultyValueChanged: PropTypes.func,
+    index: PropTypes.number,
+    value: PropTypes.string,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RadioLevels);

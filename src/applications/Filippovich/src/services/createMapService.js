@@ -1,17 +1,15 @@
 import itemTypes from '../consts/itemTypes';
-
+import mapSettings from '../consts/mapSettings';
 export default class CreateMapService
 {
     constructor(_level)
     {
         this.map = [];
         this.level = _level;
-
         this.playerKoords = {
             x: 0,
             y: 0,
         };
-
         this.viewPort = [];
     }
 
@@ -22,25 +20,25 @@ export default class CreateMapService
 
         this._createBoss();
 
-        this._createItems(itemTypes.SKILL, 27);
-        this._createItems(itemTypes.CERTIFICATION, 6);
-        this._createItems(itemTypes.ULTIMATE, 4);
-        this._createItems(itemTypes.MEDECINE, 3);
+        this._createItems(itemTypes.SKILL, mapSettings.skillCount);
+        this._createItems(itemTypes.CERTIFICATION, mapSettings.certificationCount);
+        this._createItems(itemTypes.ULTIMATE, mapSettings.ultimateCount);
+        this._createItems(itemTypes.MEDECINE, mapSettings.medecineCount);
 
         this._createViewPort();
 
         return [this.map, this.playerKoords, this.viewPort];
     }
 
-    _getRandomInt(min, max)
+    static _getRandomInt(min, max)
     {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
     _createXY(xStart = 0, xFinish = 0, yStart = 0, yFinish = 0)
     {
-        let X = Math.floor(this._getRandomInt(xStart, this.map.length - 1 - xFinish));
-        let Y = Math.floor(this._getRandomInt(yStart, 19 - yFinish));
+        let X = Math.floor(CreateMapService._getRandomInt(xStart, this.map.length - 1 - xFinish));
+        let Y = Math.floor(CreateMapService._getRandomInt(yStart, 19 - yFinish));
         return {X, Y}
     }
 
@@ -61,7 +59,7 @@ export default class CreateMapService
 
     _createViewPort()
     {
-        let startViewPort = this._getRandomInt(0, this.map.length - 1 - 10);
+        let startViewPort = CreateMapService._getRandomInt(0, this.map.length - 1 - 10);
         for (let i = 0; i < 10; i++) {
             this.viewPort.push(startViewPort + i);
         }
@@ -73,13 +71,13 @@ export default class CreateMapService
         let rowsCount = 0;
         switch (this.level) {
             case 1:
-                rowsCount = 25;
+                rowsCount = mapSettings._1LevelRowsCount;
                 break;
             case 2:
-                rowsCount = 35;
+                rowsCount = mapSettings._2LevelRowsCount;
                 break;
             case 3:
-                rowsCount = 51;
+                rowsCount = mapSettings._3LevelRowsCount;
                 break;
             default:
                 rowsCount = 25;
@@ -94,20 +92,20 @@ export default class CreateMapService
 
     _createWalls()
     {
-        let wallsDensityStart = 1,
-            wallsDensityFinish = 2;
+        let wallsDensityStart,
+            wallsDensityFinish;
         switch (this.level) {
             case 1:
-                wallsDensityStart = 3;
-                wallsDensityFinish = 5;
+                wallsDensityStart = mapSettings._1LevelWallsDensityStart;
+                wallsDensityFinish = mapSettings._1LevelWallsDensityFinish;
                 break;
             case 2:
-                wallsDensityStart = 4;
-                wallsDensityFinish = 6;
+                wallsDensityStart = mapSettings._2LevelWallsDensityStart;
+                wallsDensityFinish = mapSettings._2LevelWallsDensityFinish;
                 break;
             case 3:
-                wallsDensityStart = 5;
-                wallsDensityFinish = 7;
+                wallsDensityStart = mapSettings._3LevelWallsDensityStart;
+                wallsDensityFinish = mapSettings._3LevelWallsDensityFinish;
                 break;
             default:
                 wallsDensityStart = 1;
@@ -116,9 +114,9 @@ export default class CreateMapService
         }
         for (let i = 0; i < this.map.length; i++) {
             let indexOfWall = [];
-            let wallPerLineCount = Math.floor(this._getRandomInt(wallsDensityStart, wallsDensityFinish));
+            let wallPerLineCount = Math.floor(CreateMapService._getRandomInt(wallsDensityStart, wallsDensityFinish));
             for (let k = 0; k < wallPerLineCount; k++) {
-                indexOfWall.push(this._getRandomInt(0, 19))
+                indexOfWall.push(CreateMapService._getRandomInt(0, 19))
             }
             for (let j = 0; j < indexOfWall.length; j++) {
                 this.map[i][indexOfWall[j]] = itemTypes.WALL;

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import './map.css';
+import PropTypes from 'prop-types';
 import ItemLine from '../itemLine';
 import viewConsts from '../../consts/views';
 import gameService from '../../services/gameService';
@@ -8,6 +8,7 @@ import levelService from '../../services/levelService';
 import CreateMapService from '../../services/createMapService';
 import itemTypes from '../../consts/itemTypes';
 import keyTypes from '../../consts/keyTypes';
+import './map.css';
 
 
 const mapStateToProps = state => ({
@@ -161,8 +162,7 @@ const mapDispatchToProps = dispatch => ({
 
 class Map extends React.Component
 {
-    _gameOver = (isWin) =>
-    {
+    _gameOver = (isWin) => {
         if (isWin) {
 
             this.props.playerWin();
@@ -172,8 +172,7 @@ class Map extends React.Component
         }
     };
 
-    _itemLogic = (itemType, _keyType, koords, db, level) =>
-    {
+    _itemLogic = (itemType, _keyType, koords, db, level) => {
         if (levelService.checkLevelLogic(level, itemType)) {
             switch (itemType) {
                 case itemTypes.SKILL:
@@ -221,8 +220,7 @@ class Map extends React.Component
         }
     };
 
-    _moveLogic = (_keyType) =>
-    {
+    _moveLogic = (_keyType) => {
         if (!gameService.isWall(_keyType, this.props.koordsPlayer, this.props.db)) {
             if (gameService.isNextItem(itemTypes.POLE, _keyType, this.props.koordsPlayer, this.props.db)) {
                 this.props.itemNotEdited(_keyType);
@@ -239,8 +237,7 @@ class Map extends React.Component
             return false;
     };
 
-    _keyPressed = (e) =>
-    {
+    _keyPressed = (e) => {
         let keyType;
         switch (e.keyCode) {
             case 37:
@@ -268,14 +265,12 @@ class Map extends React.Component
         }
     };
 
-    componentWillMount()
-    {
+    componentWillMount() {
         this.props.createDB(new CreateMapService(this.props.inputDifficultyValue).createMap());
         document.addEventListener("keydown", this._keyPressed);
     };
 
-    componentWillUnmount()
-    {
+    componentWillUnmount() {
         document.removeEventListener("keydown", this._keyPressed);
     };
 
@@ -291,5 +286,47 @@ class Map extends React.Component
         );
     }
 }
+
+Map.propTypes = {
+    koordsPlayer: PropTypes.shape({
+        x: PropTypes.number,
+        y: PropTypes.number,
+    }),
+    viewPort: PropTypes.arrayOf(PropTypes.number),
+    db: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
+    inputDifficultyValue: PropTypes.number,
+    level: PropTypes.number,
+    health: PropTypes.number,
+    experience: PropTypes.number,
+    experienceLeftToCollect: PropTypes.number,
+    skills: PropTypes.number,
+    skillsLeftToCollect: PropTypes.number,
+    certifications: PropTypes.number,
+    certificationsLeftToCollect: PropTypes.number,
+    ultimate: PropTypes.number,
+    ultimateLeftToCollect: PropTypes.number,
+    bossesKilled: PropTypes.number,
+
+    keyLeft: PropTypes.func,
+    keyDown: PropTypes.func,
+    keyUp: PropTypes.func,
+    keyRight: PropTypes.func,
+    getSkill: PropTypes.func,
+    getCertification: PropTypes.func,
+    getUltimate: PropTypes.func,
+    getMedicine: PropTypes.func,
+    bossWallRuined: PropTypes.func,
+    bossAttacked: PropTypes.func,
+    itemEdited: PropTypes.func,
+    itemNotEdited: PropTypes.func,
+    playerInjured: PropTypes.func,
+    playerLevelUpped: PropTypes.func,
+    playerKilled: PropTypes.func,
+    playerWin: PropTypes.func,
+    goToResults: PropTypes.func,
+    createDB: PropTypes.func,
+
+
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Map);

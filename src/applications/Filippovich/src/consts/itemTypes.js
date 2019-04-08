@@ -7,6 +7,6 @@ export default {
     BOSSWALLBIG: "bossWallBig",
     BOSS: "boss",
     POLE: "pole",
-    MEDECINE: 'medecine',
-    ULTIMATE: 'ultimate',
+    MEDECINE: "medecine",
+    ULTIMATE: "ultimate",
 };

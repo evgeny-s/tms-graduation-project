@@ -1,12 +1,12 @@
 import React, {memo} from 'react';
-
+import PropTypes from 'prop-types';
 import itemTypes from '../../consts/itemTypes';
 import { Skills, Certifications, Ultimate, Medecine, BOSS, BOSSWALLBIG, BOSSWALLSMALL } from '../../consts/itemIcons';
 import './item.css'
 
+
 function Item({type})
 {
-
     let icon;
     switch (type) {
         case itemTypes.BOSSWALLSMALL:
@@ -39,5 +39,9 @@ function Item({type})
             {icon}
         </div>)
 }
+
+Item.propTypes = {
+    type: PropTypes.string,
+};
 
 export default memo(Item);

@@ -1,5 +1,5 @@
 export default [
-    'Easy',
-    'Medium',
-    'Hard',
+    "Easy",
+    "Medium",
+    "Hard",
 ];

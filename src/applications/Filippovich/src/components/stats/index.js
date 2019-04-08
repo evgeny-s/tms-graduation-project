@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import './stats.css'
 
 const mapStateToProps = state => ({
@@ -26,7 +27,6 @@ const mapDispatchToProps = dispatch => ({
 
 });
 
-
 function Stats({
                    name, level, health, experience, experienceLeftToCollect, skills, skillsLeftToCollect,
                    certifications, certificationsLeftToCollect, ultimate, ultimateLeftToCollect, buttonText, clickSoundButton
@@ -46,5 +46,21 @@ function Stats({
     );
 }
 
+Stats.propTypes = {
+    buttonText: PropTypes.string,
+    name: PropTypes.string,
+    level: PropTypes.number,
+    health: PropTypes.number,
+    experience: PropTypes.number,
+    experienceLeftToCollect: PropTypes.number,
+    skills: PropTypes.number,
+    skillsLeftToCollect: PropTypes.number,
+    certifications: PropTypes.number,
+    certificationsLeftToCollect: PropTypes.number,
+    ultimate: PropTypes.number,
+    ultimateLeftToCollect: PropTypes.number,
+
+    clickSoundButton: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Stats);

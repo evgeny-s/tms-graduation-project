@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import PropTypes from 'prop-types';
 import RadioLevels from './radioLevels';
 import viewConsts from '../../consts/views';
 import levelsList from '../../consts/levelsList';
@@ -57,5 +58,11 @@ function GameSettings({inputNameValue, onStartGame, onInputNameChanged, onModalS
     )
 }
 
+GameSettings.propTypes = {
+    inputNameValue: PropTypes.string,
+    onStartGame: PropTypes.func,
+    onInputNameChanged: PropTypes.func,
+    onModalShow: PropTypes.func,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);
