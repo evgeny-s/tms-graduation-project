@@ -17,4 +17,4 @@ class HighscoreService {
     };
 }
 
-export default new HighscoreService;
+export default new HighscoreService();

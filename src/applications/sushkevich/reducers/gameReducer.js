@@ -6,16 +6,17 @@ import config from '../db/config';
 let initialPlayerY;
 let initialPlayerX;
 
-for (let row in map) {
+outer: for (let row in map) {
     for (let col in map[row]) {
         if (map[row][col] === mapItemTypesConsts.PLAYER) {
             initialPlayerY = +row;
             initialPlayerX = +col;
+            break outer;
         }
     }
 }
 
-function renderMap(rows, cols) {
+function initializeMap(rows, cols) {
     let initialMap = {};
 
     for (let i = 0; i < rows; i++) {
@@ -34,7 +35,7 @@ function renderMap(rows, cols) {
 }
 
 const initialState = {
-    map: renderMap(config.mapSize.y, config.mapSize.x),
+    map: initializeMap(config.mapSize.y, config.mapSize.x),
     playerCoordinateY: initialPlayerY,
     playerCoordinateX: initialPlayerX,
 };
@@ -124,7 +125,7 @@ function gameReducer(state = initialState, action) {
                         [state.playerCoordinateX]: {
                             $set: mapItemTypesConsts.TRACK
                         },
-                        [0]: {
+                        0: {
                             $set: mapItemTypesConsts.PLAYER
                         }
                     }
@@ -151,8 +152,8 @@ function gameReducer(state = initialState, action) {
         case 'BREAK_BOSS_WALLS':
             let newState = state;
 
-            Object.keys(state.map).map((row) => {
-                Object.keys(state.map[row]).map((col) => {
+            Object.keys(state.map).forEach((row) => {
+                Object.keys(state.map[row]).forEach((col) => {
                     if (state.map[row][col] === mapItemTypesConsts.BOSS_WALL) {
                         newState = update(newState, {
                             map: {

@@ -32,6 +32,7 @@ class Stats extends React.Component {
 }
 
 Stats.propTypes = {
+    getHighscore: PropTypes.func,
     playerStats: PropTypes.object,
 };
 

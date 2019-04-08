@@ -56,4 +56,4 @@ class GameService {
     }
 }
 
-export default new GameService;
+export default new GameService();

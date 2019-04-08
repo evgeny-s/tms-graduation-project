@@ -3,6 +3,7 @@ import MapItem from './MapItem';
 import gameService from '../services/gameService';
 import config from '../db/config';
 import PropTypes from 'prop-types';
+import gameLevelsConsts from '../consts/gameLevels';
 
 class Map extends React.Component {
 
@@ -72,13 +73,13 @@ class Map extends React.Component {
                 }
             }
 
-            !(this.props.playerLevel === 1 && gameService.isCertificate(this.props.map, targetY, targetX))
+            !(this.props.playerLevel === gameLevelsConsts.LEVEL_FIRST && gameService.isCertificate(this.props.map, targetY, targetX))
             && this.moveItem(targetY, targetX, moveFunction);
         }
     };
 
     moveItem = (targetY, targetX, moveFunction) => {
-        if (this.props.playerLevel === 1 && gameService.isSkill(this.props.map, targetY, targetX)) {
+        if (this.props.playerLevel === gameLevelsConsts.LEVEL_FIRST && gameService.isSkill(this.props.map, targetY, targetX)) {
             this.props.getSkill();
             this.clearNotificationsMessage();
 
@@ -87,7 +88,7 @@ class Map extends React.Component {
             }
         }
 
-        if (this.props.playerLevel === 2 && gameService.isCertificate(this.props.map, targetY, targetX)) {
+        if (this.props.playerLevel === gameLevelsConsts.LEVEL_SECOND && gameService.isCertificate(this.props.map, targetY, targetX)) {
             this.props.getCertificate();
             this.clearNotificationsMessage();
 
@@ -97,7 +98,7 @@ class Map extends React.Component {
             }
         }
 
-        if (this.props.playerLevel === 3 && gameService.isBoss(this.props.map, targetY, targetX)) {
+        if (this.props.playerLevel === gameLevelsConsts.LEVEL_THIRD && gameService.isBoss(this.props.map, targetY, targetX)) {
             this.props.finishGame();
         }
 
@@ -112,12 +113,12 @@ class Map extends React.Component {
                         return (
                             <div key={rowId} className={`map-row row-${rowId}`}>
                                 {
-                                    Object.keys(this.props.map[rowId]).map((col, i) => {
-                                        return <MapItem
+                                    Object.keys(this.props.map[rowId]).map((col, i) => (
+                                        <MapItem
                                             key={`${rowId}-${i}`}
                                             type={this.props.map[rowId][col]}
                                             id={`${rowId}:${col}`}/>
-                                    })
+                                    ))
                                 }
                             </div>
                         )
