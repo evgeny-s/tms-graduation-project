@@ -3,7 +3,6 @@ import playerStats from '../consts/playerStats';
 import rules from '../consts/rules';
 
 const initialState = {
-    buttonText: 'Sound On',
     level: 1,
     ruleText: rules.level1,
     logText: 'The game has begun...',
@@ -97,12 +96,6 @@ function gamesReducer(state = initialState, action)
             levelStats['logText'] = action.payload;
             return update(state, {
                 $merge: levelStats,
-            });
-        case 'CLICK_SOUND_BUTTON':
-            return update(state, {
-                $merge: {
-                    buttonText: action.payload,
-                }
             });
         default:
             return state;

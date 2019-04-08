@@ -1,29 +1,29 @@
 export default {
     level1:
-        "1. Игрок должен собирать Обычные Умения. \n" +
-        "2. Сертификаты пока что убивают. \n" +
-        "3. Ультимэйт атаки пока что наносят урон. \n" +
-        "4. Эликсир здоровья пока что невозможно подобрать. \n" +
-        "5. Стражи Босса мгновенно убивают.",
+        "1. Player must collect Simple Skills. \n" +
+        "2. Certificates kill a player. \n" +
+        "3. Ultimate Skills kill a player. \n" +
+        "4. Elixir of health cannot be picked up. \n" +
+        "5. Boss Guardians kill instantly.",
     level2:
-        "1. Игрок должен собирать Обычные Умения. \n" +
-        "2. Сертификаты пока что ранят. \n" +
-        "3. Ультимэйт атаки пока что наносят урон. \n" +
-        "4. Эликсир здоровья пока что невозможно подобрать. \n" +
-        "5. Стражи Босса мгновенно убивают.",
+        "1. Player must collect Simple Skills. \n" +
+        "2. Certificates wound player. \n" +
+        "3. Ultimate Skills kill a player. \n" +
+        "4. Elixir of health cannot be picked up. \n" +
+        "5. Boss Guardians kill instantly.",
     level3:
-        "1. Игрок должен собирать Сертификаты. \n" +
-        "2. Можно попутно собирать Умения. \n" +
-        "3. Ультимэйт атаки пока что наносят урон. \n" +
-        "4. Эликсир здоровья пока что невозможно подобрать. \n" +
-        "5. Стражи Босса ранят.",
+        "1. Player must collect Certificates. \n" +
+        "2. You can still collect Simple Skills. \n" +
+        "3. Ultimate Skills wound player. \n" +
+        "4. Elixir of health cannot be picked up. \n" +
+        "5. Boss Guardians wound player.",
     level4:
-        "1. Игрок должен собирать Ультимэйт Умения. \n" +
-        "2. Можно попутно собирать Сертификаты. \n" +
-        "3. Можно попутно собирать Обычные Умения. \n" +
-        "4. Эликсир здоровья пока что невозможно подобрать. \n" +
-        "5. Стражи Босса ранят.",
+        "1. Player must collect Ultimate Skills. \n" +
+        "2. You can still collect Simple Skills. \n" +
+        "3. You can still collect Certificates. \n" +
+        "4. Elixir of health cannot be picked up. \n" +
+        "5. Boss Guardians wound player.",
     level5:
-        "1. Игрок должен собрать Эликсир Здоровья. \n" +
-        "2. Убить Босса",
+        "1. Player must collect Elixir of health. \n" +
+        "2. Player must kill bosses",
 }

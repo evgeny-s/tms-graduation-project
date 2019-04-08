@@ -146,9 +146,9 @@ const mapDispatchToProps = dispatch => ({
         playerInjured: (count) => {
             let logText = '';
             if (count) {
-                logText = '"Player" was injured.';
+                logText = 'Player was injured.';
             } else {
-                logText = '"Player" can\'t take this item.';
+                logText = 'Player can\'t take this item.';
             }
             dispatch({
                 type: 'PLAYER_INJURED',

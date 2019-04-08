@@ -4,7 +4,7 @@ export default {
     ultimateCount: 4,
     medecineCount: 3,
 
-    _1LevelRowsCount: 10,
+    _1LevelRowsCount: 25,
     _2LevelRowsCount: 35,
     _3LevelRowsCount: 51,
 

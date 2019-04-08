@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import './stats.css'
 
 const mapStateToProps = state => ({
-    buttonText: state.games.buttonText,
     name: state.settings.inputNameValue,
     level: state.games.level,
     health: state.games.health,
@@ -18,19 +17,9 @@ const mapStateToProps = state => ({
     ultimateLeftToCollect: state.games.ultimateLeftToCollect,
 });
 
-const mapDispatchToProps = dispatch => ({
-    clickSoundButton: (e) =>
-        dispatch({
-            type: 'CLICK_SOUND_BUTTON',
-            payload: e.target.innerText === 'Sound Off' ? 'Sound On' : 'Sound Off',
-        }),
 
-});
-
-function Stats({
-                   name, level, health, experience, experienceLeftToCollect, skills, skillsLeftToCollect,
-                   certifications, certificationsLeftToCollect, ultimate, ultimateLeftToCollect, buttonText, clickSoundButton
-               })
+function Stats({ name, level, health, experience, experienceLeftToCollect, skills, skillsLeftToCollect,
+                   certifications, certificationsLeftToCollect, ultimate, ultimateLeftToCollect})
 {
     return (
         <div className="user-stats col-3">
@@ -41,13 +30,11 @@ function Stats({
             <p>Skills: {skills}/{skillsLeftToCollect}</p>
             <p>Certifications: {certifications}/{certificationsLeftToCollect}</p>
             <p>Ultimate skills: {ultimate}/{ultimateLeftToCollect}</p>
-            <button onClick={clickSoundButton} type="button" className="btn btn-success">{buttonText}</button>
         </div>
     );
 }
 
 Stats.propTypes = {
-    buttonText: PropTypes.string,
     name: PropTypes.string,
     level: PropTypes.number,
     health: PropTypes.number,
@@ -59,8 +46,6 @@ Stats.propTypes = {
     certificationsLeftToCollect: PropTypes.number,
     ultimate: PropTypes.number,
     ultimateLeftToCollect: PropTypes.number,
-
-    clickSoundButton: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Stats);
+export default connect(mapStateToProps)(Stats);

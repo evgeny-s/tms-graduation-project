@@ -61,6 +61,13 @@
       "difficulty": "Easy",
       "score": 204,
       "id": 9
+    },
+    {
+      "name": "непкаувкенг",
+      "steps": 165,
+      "difficulty": "Easy",
+      "score": 165,
+      "id": 10
     }
   ]
 }
