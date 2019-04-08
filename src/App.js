@@ -4,7 +4,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 import Clicker from './applications/clicker';
 import AppsTable from './AppsTable';
-import Vlad from './applications/vlad-seven'
+import Seven from './applications/vlad-seven/index'
+import Six from './applications/vlad-six/index'
 
 class App extends Component {
   render() {
@@ -13,7 +14,8 @@ class App extends Component {
         <div className="container">
           <Route path="/" exact component={AppsTable} />
           <Route path="/app1" exact component={Clicker}/>
-          <Route path="/vlad-seven" exact component={Vlad}/>
+          <Route path="/vlad-seven" exact component={Seven}/>
+          <Route path="/vlad-six" exact component={Six}/>
         </div>
       </Router>
     );

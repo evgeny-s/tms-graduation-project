@@ -1,0 +1,100 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container{
+  max-width: 1440px;
+}
+
+#book {
+  background: rgba(155, 107, 216, .18);
+  ::-webkit-scrollbar {
+    width: 10px;
+    background: rgba(0, 0, 0, .1);
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, .3);
+  }
+  margin: auto;
+  width: 100%;
+  min-height: calc(100vh - 60px);
+  position: relative;
+
+  .start {
+    width: 40%;
+    letter-spacing: 3px;
+    h1 {
+      font: 600 32px 'Times New Roman';
+      text-align: center;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      &:after {
+        content: '';
+        display: block;
+        width: 80%;
+        height: 2px;
+        background: #82AFFF;
+        margin: 0 auto 10px;
+      }
+    }
+    p {
+      text-indent: 25px;
+      margin: 0 0 10px 0;
+      font: 500 24px 'Times New Roman';
+      text-align: justify;
+    }
+  }
+  header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: radial-gradient(ellipse at center, rgba(255, 158, 2, 1) 0%, rgba(255, 158, 2, 1) 100%);
+    h1 {
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      text-decoration: underline;
+      font-size: 28px;
+      margin: 10px;
+      color: #fff;
+    }
+    .section {
+      display: flex;
+      select, input {
+        text-transform: uppercase;
+        margin-right: 10px;
+        padding: 10px;
+        border-radius: 5px;
+        border: none;
+        font-size: 12px;
+      }
+      button {
+        margin-right: 15px;
+        display: block;
+        padding: 0 10px;
+        background: linear-gradient(45deg, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+        color: #000;
+        border: 1px solid #fff;
+        transition: .3s;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
+        &:disabled {
+          color: #999;
+          cursor: default;
+          text-decoration: none;
+          border: 1px solid #999;
+        }
+      }
+    }
+  }
+}
+
+
+
+
+

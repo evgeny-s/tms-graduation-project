@@ -1,0 +1,76 @@
+$border-color: #ddd;
+$width: calc(100% - 20px);
+
+form {
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  margin: 0 10px;
+  z-index: 5;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  flex: 6;
+  padding: 5px;
+  background: #fff;
+  p{
+    text-indent: 15px;
+    width: 50%;
+    font-weight: bold;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    color: #666;
+    margin: 0;
+    label{
+      padding: 10px;
+      width: 100%;
+      margin-right: 10px;
+      input {
+        width: $width;
+        border: 1px solid $border-color;
+        border-radius: 10px;
+        text-align: center;
+        height: 50px;
+      }
+    }
+  }
+  textarea {
+    margin-right: 10px;
+    border-radius: 10px;
+    border: 1px solid $border-color;
+    padding: 10px;
+    resize: none;
+    width: $width;
+    height: 300px;
+  }
+  select{
+    border-radius: 10px;
+    border: 1px solid $border-color;
+    width: $width;
+    font-size: 13px;
+    text-transform: uppercase;
+    height: 50px;
+    margin-right:15px;
+    padding-left: 20px;
+  }
+  button {
+    display: block;
+    padding: 10px;
+    background: #FFF06B;
+    border: 1px solid $border-color;
+    color: #888;
+    width: 20%;
+    margin: auto;
+    transition: .3s;
+    cursor: pointer;
+    border-radius: 5px;
+    &:hover{
+      background: #87E8A9;
+      color: #444;
+    }
+    &:disabled{
+      background: #ddd;
+      color: #666666;
+    }
+  }
+}
