@@ -1,9 +1,10 @@
 import React, {Component} from 'react';
-import {BrowserRouter as Router, Route} from 'react-router-dom';
+import {BrowserRouter as Router, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 import FilippovichGame from './applications/Filippovich';
 import Clicker from './applications/clicker';
+import Game from './applications/sushkevich';
 import AppsTable from './AppsTable';
 
 class App extends Component
@@ -15,6 +16,7 @@ class App extends Component
                 <div className="container">
                     <Route path="/" exact component={AppsTable}/>
                     <Route path="/app1" exact component={Clicker}/>
+                    <Route path="/s-sushkevich" exact component={Game}/>
                     <Route path="/filippovich" exact component={FilippovichGame}/>
                 </div>
             </Router>

@@ -1,0 +1,211 @@
+
+.app header {
+    background-color: #1F2C23;
+    color: #FEFAE7;
+    text-align: center;
+    font-family: 'ralewayregular', sans-serif;
+    border-bottom: 1px solid #68D3B2;
+    display: flex;
+    min-height: 35px;
+}
+
+.app header .header-text {
+    margin: auto;
+}
+
+.app .content {
+    background-color: #272727;
+}
+
+.app .controls-bar {
+    vertical-align: top;
+    display: inline-block;
+    width: 20%;
+    padding-left: 10px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    font-family: 'ralewayregular', sans-serif;
+    color: #ACADB1;
+}
+
+.app .stats-bar {
+    background-color: #2B2C35;
+    margin-bottom: 20px;
+    padding: 5px;
+}
+
+.app .stats-bar h3 {
+    font-size: 24px;
+    color: #36DDF9;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.app .stats-bar ul {
+    padding: 0;
+    margin: 0;
+}
+
+.app .stats-bar li {
+    list-style-type: none;
+}
+
+.app .stats-bar li:first-letter {
+    text-transform: uppercase;
+}
+
+.app .options-bar {
+    background-color: #2B2C35;
+    padding: 5px;
+}
+
+.app .options-bar h3 {
+    font-size: 24px;
+    color: #36DDF9;
+    text-align: center;
+    text-decoration: underline;
+}
+
+.app .options-bar select {
+    background-color: #272727;
+    border: none;
+    color: #ACADB1;
+    outline: none;
+    cursor: pointer;
+}
+
+.app .game {
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.app .description {
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.app .description-block {
+    font-family: 'ralewayregular', sans-serif;
+    background-color: #2B2C35;
+    color: #ACADB1;
+    display: block;
+    max-width: 80%;
+    border: 1px solid #68D3B2;
+    margin: 80px auto;
+}
+
+.app .description-block button {
+    color: #36DBF6;
+    background-color: #272727;
+    border: 1px solid #585858;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    outline: none;
+    user-select: none;
+}
+
+.app .description-block .description-text {
+    margin: 20px 0;
+}
+
+.app .description-block p {
+    margin: 0;
+}
+
+.app .map {
+    display: inline-block;
+    border: 1px solid #68D3B2;
+    margin: 80px 0;
+    outline: none;
+}
+
+.app .map-row {
+    display: flex;
+}
+
+.app .map-item {
+    width: 30px;
+    height: 30px;
+    text-align: center;
+}
+
+.app .track {
+    background-color: #412865;
+}
+
+.app .player {
+    background-color: #00671A;
+    color: #ffffff;
+}
+
+.app .wall {
+    background-color: #232323;
+}
+
+.app .certificate {
+    background-color: #FC2034;
+}
+
+.app .skill {
+    background-color: #39FFD5;
+    color: #F7B653;
+}
+
+.app .boss-wall {
+    background-color: #FADA56;
+}
+
+.app .boss {
+    background-color: #FC2034;
+}
+
+.app .result-container {
+    text-align: center;
+    display: inline-block;
+    width: 80%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.app .result-block {
+    font-family: 'ralewayregular', sans-serif;
+    background-color: #2B2C35;
+    color: #ACADB1;
+    display: block;
+    max-width: 80%;
+    border: 1px solid #68D3B2;
+    margin: 80px auto;
+}
+
+.app .result-block button {
+    color: #36DBF6;
+    background-color: #272727;
+    border: 1px solid #585858;
+    border-radius: 2px;
+    margin-bottom: 20px;
+    outline: none;
+    user-select: none;
+}
+
+.app .result-block .result-text {
+    margin: 20px 0;
+}
+
+.app .result-block .result-text p {
+    margin: 0;
+}
+
+.app .result-block .result-text span {
+    color: #FEFAE7;
+    font-weight: 700;
+}
