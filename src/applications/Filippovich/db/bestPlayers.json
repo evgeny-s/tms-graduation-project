@@ -1,80 +1,11 @@
 {
   "playerList": [
     {
-      "name": "Player-1",
-      "steps": 543,
-      "difficulty": "Easy",
-      "score": 543,
-      "id": 1
-    },
-    {
       "name": "Kirill",
       "steps": 398,
       "difficulty": "Easy",
       "score": 398,
-      "id": 2
-    },
-    {
-      "name": "кирилл",
-      "steps": 161,
-      "difficulty": "Hard",
-      "score": 161,
-      "id": 3
-    },
-    {
-      "name": "123123123",
-      "steps": 180,
-      "difficulty": "Hard",
-      "score": 180,
-      "id": 4
-    },
-    {
-      "name": "qwe123qwe123",
-      "steps": 181,
-      "difficulty": "Hard",
-      "score": 181,
-      "id": 5
-    },
-    {
-      "name": "fdsaf",
-      "steps": 124,
-      "difficulty": "Hard",
-      "score": 124,
-      "id": 6
-    },
-    {
-      "name": "уцк",
-      "steps": 526,
-      "score": 1578,
-      "id": 7
-    },
-    {
-      "name": "10",
-      "steps": 241,
-      "difficulty": "Hard",
-      "score": 482,
-      "id": 8
-    },
-    {
-      "name": "rew",
-      "steps": 204,
-      "difficulty": "Easy",
-      "score": 204,
-      "id": 9
-    },
-    {
-      "name": "непкаувкенг",
-      "steps": 165,
-      "difficulty": "Easy",
-      "score": 165,
-      "id": 10
-    },
-    {
-      "name": "fbg",
-      "steps": 457,
-      "difficulty": "Medium",
-      "score": 914,
-      "id": 11
+      "id": 1
     }
   ]
 }
