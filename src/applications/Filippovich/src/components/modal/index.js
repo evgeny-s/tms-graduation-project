@@ -1,20 +1,7 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
-
-
-const mapStateToProps = state => ({
-    isShowModal: state.settings.isShowModal,
-});
-
-const mapDispatchToProps = dispatch => ({
-    onModalHide: () => dispatch({
-        type: 'SHOW_MODAL',
-        payload: false,
-    })
-});
 
 
 function ModalMessage({isShowModal, onModalHide})
@@ -39,4 +26,4 @@ ModalMessage.propTypes = {
     onModalHide: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ModalMessage);
+export default ModalMessage;

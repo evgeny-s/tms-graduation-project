@@ -1,31 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import RadioLevels from './radioLevels';
-import viewConsts from '../../consts/views';
+import RadioLevels from '../../containers/radioLevels';
 import levelsList from '../../consts/levelsList';
-import ModalMessage from '../modal'
+import ModalMessage from '../../containers/modalMessage';
 import './gameSettings.css';
-
-
-const mapStateToProps = state => ({
-    inputNameValue: state.settings.inputNameValue,
-});
-
-const mapDispatchToProps = dispatch => ({
-    onStartGame: () => dispatch({
-        type: 'CHANGE_VIEW',
-        payload: viewConsts.GAME,
-    }),
-    onInputNameChanged: (e) => dispatch({
-        type: "ON_INPUT_NAME_CHANGED",
-        payload: e.target.value,
-    }),
-    onModalShow: () => dispatch({
-        type: 'SHOW_MODAL',
-        payload: true,
-    })
-});
 
 
 function GameSettings({inputNameValue, onStartGame, onInputNameChanged, onModalShow})
@@ -65,4 +43,4 @@ GameSettings.propTypes = {
     onModalShow: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(GameSettings);
+export default GameSettings;

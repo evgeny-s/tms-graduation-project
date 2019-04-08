@@ -1,21 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import './stats.css'
-
-const mapStateToProps = state => ({
-    name: state.settings.inputNameValue,
-    level: state.games.level,
-    health: state.games.health,
-    experience: state.games.experience,
-    experienceLeftToCollect: state.games.experienceLeftToCollect,
-    skills: state.games.skills,
-    skillsLeftToCollect: state.games.skillsLeftToCollect,
-    certifications: state.games.certifications,
-    certificationsLeftToCollect: state.games.certificationsLeftToCollect,
-    ultimate: state.games.ultimate,
-    ultimateLeftToCollect: state.games.ultimateLeftToCollect,
-});
 
 
 function Stats({ name, level, health, experience, experienceLeftToCollect, skills, skillsLeftToCollect,
@@ -48,4 +33,4 @@ Stats.propTypes = {
     ultimateLeftToCollect: PropTypes.number,
 };
 
-export default connect(mapStateToProps)(Stats);
+export default Stats;

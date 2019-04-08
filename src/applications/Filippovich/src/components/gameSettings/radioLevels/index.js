@@ -1,19 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-
-const mapStateToProps = state => ({
-    inputDifficultyValue: state.settings.inputDifficultyValue,
-});
-
-const mapDispatchToProps = dispatch => ({
-    difficultyValueChanged: (e) => dispatch({
-        type: 'ON_DIFFICULTY_VALUE_CHANGED',
-        payload: parseInt(e.target.id),
-    }),
-
-});
 
 function RadioLevels({inputDifficultyValue, difficultyValueChanged, index, value})
 {
@@ -40,4 +27,4 @@ RadioLevels.propTypes = {
     value: PropTypes.string,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(RadioLevels);
+export default RadioLevels;

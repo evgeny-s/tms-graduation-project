@@ -1,13 +1,9 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import Map from '../map';
-import GameLog from '../gameLog';
+import Map from '../../containers/map';
+import GameLog from '../../containers/gameLog';
 import './panel.css';
 
-const mapStateToProps = state => ({
-    ruleText: state.games.ruleText,
-});
 
 function Panel({ruleText}) {
     return (
@@ -23,4 +19,4 @@ Panel.propTypes = {
     ruleText: PropTypes.string,
 };
 
-export default connect(mapStateToProps)(Panel);
+export default Panel;

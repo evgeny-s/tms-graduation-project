@@ -1,10 +1,10 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
-import GameSettings from './src/components/gameSettings';
-import Stats from './src/components/stats';
-import Panel from './src/components/panel';
-import Results from './src/components/results';
+import GameSettings from './src/containers/gameSettings';
+import Stats from './src/containers/stats';
+import Panel from './src/containers/panel';
+import Results from './src/containers/results';
 import views from './src/consts/views';
 import './app.css';
 

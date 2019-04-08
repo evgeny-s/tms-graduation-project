@@ -1,13 +1,6 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import './gameLog.css';
-
-
-const mapStateToProps = state => ({
-    logText: state.games.logText,
-    movesCount: state.moves.movesCount,
-});
 
 function GameLog({logText, movesCount}) {
     return (
@@ -24,4 +17,4 @@ GameLog.propTypes = {
     movesCount: PropTypes.number,
 };
 
-export default connect(mapStateToProps)(GameLog);
+export default GameLog;

@@ -21,5 +21,5 @@ PlayerResult.propTypes = {
     difficulty: PropTypes.string,
     score: PropTypes.number,
 };
-// key={props.id}
+
 export default PlayerResult;

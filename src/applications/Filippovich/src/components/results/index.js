@@ -1,28 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {connect} from 'react-redux';
 import PlayerResult from './playerResult';
-import viewsConsts from '../../consts/views';
 import './results.css';
 
-
-const mapStateToProps = state => ({
-    playerList: state.highestScore.playerList,
-    userResultMessage: state.highestScore.userResultMessage,
-});
-
-const mapDispatchToProps = dispatch => ({
-    fetchPlayerList: () => dispatch({
-        type: 'FETCH_PLAYER_LIST',
-    }),
-    clickRestartButton: () => dispatch({
-        type: 'CHANGE_VIEW',
-        payload: viewsConsts.SETTINGS,
-    }),
-    setDefaults: () => dispatch({
-        type: 'SET_DEFAULTS',
-    })
-});
 
 class Results extends React.Component
 {
@@ -81,4 +61,4 @@ Results.propsTypes = {
     setDefaults: PropTypes.func,
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Results);
+export default Results;
