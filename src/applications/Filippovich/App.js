@@ -32,7 +32,7 @@ function App({view})
 }
 
 App.propTypes = {
-    view: PropTypes. string,
+    view: PropTypes.string,
 };
 
 export default connect(mapStateToProps)(App);

@@ -15,6 +15,7 @@ const mapStateToProps = state => ({
     koordsPlayer: state.moves.koordsPlayer,
     viewPort: state.moves.viewPort,
     db: state.moves.db,
+    logText: state.moves.logText,
 
     inputDifficultyValue: state.settings.inputDifficultyValue,
 
@@ -47,28 +48,41 @@ const mapDispatchToProps = dispatch => ({
         }),
         getSkill: () => dispatch({
             type: 'SKILL_COLLECTED',
-            payload: 100,
+            payload: {
+                exp: 100,
+                log: '"Skill" has been collected.',
+            },
         }),
         getCertification: () => dispatch({
             type: 'CERTIFICATION_COLLECTED',
-            payload: 500,
+            payload: {
+                exp: 500,
+                log: '"Certification" has been collected.',
+            },
         }),
         getUltimate: () => dispatch({
             type: 'ULTIMATE_COLLECTED',
-            payload: 1500,
+            payload: {
+                exp: 1500,
+                log: '"Ultimate skill" has been collected.',
+            },
         }),
         getMedicine: () => dispatch({
             type: 'MEDICINE_COLLECTED',
-            payload: 1000,
+            payload: {
+                med: 1000,
+                log: '"Medecine" has been collected.',
+            },
         }),
         bossWallRuined: () => dispatch({
-            type: 'BOSS_WALL_RUINED'
+            type: 'BOSS_WALL_RUINED',
+            payload: '"Boss wall" was destroyed.',
         }),
         bossAttacked: () => dispatch({
-            type: 'BOSS_ATTACKED'
+            type: 'BOSS_ATTACKED',
+            payload: '"Boss" was attacked.',
         }),
-        itemEdited: (side) =>
-        {
+        itemEdited: (side) => {
             let _x, _y;
             switch (side) {
                 case 'up':
@@ -98,8 +112,7 @@ const mapDispatchToProps = dispatch => ({
                 }
             })
         },
-        itemNotEdited: (side) =>
-        {
+        itemNotEdited: (side) => {
             let _x, _y;
             switch (side) {
                 case 'up':
@@ -126,15 +139,28 @@ const mapDispatchToProps = dispatch => ({
                 payload: {
                     x: _x,
                     y: _y,
-                }
+                },
+                log: 'Player made a move...',
             })
         },
-        playerInjured: (count) => dispatch({
-            type: 'PLAYER_INJURED',
-            payload: count,
-        }),
+        playerInjured: (count) => {
+            let logText = '';
+            if (count) {
+                logText = '"Player" was injured.';
+            } else {
+                logText = '"Player" can\'t take this item.';
+            }
+            dispatch({
+                type: 'PLAYER_INJURED',
+                payload: {
+                    count,
+                    log: logText,
+                },
+            })
+        },
         playerLevelUpped: () => dispatch({
             type: 'PLAYER_LEVEL_UPPED',
+            payload: '"Player" level upped.',
         }),
         playerKilled: () => dispatch({
             type: 'PLAYER_KILLED',
@@ -160,11 +186,9 @@ const mapDispatchToProps = dispatch => ({
 );
 
 
-class Map extends React.Component
-{
+class Map extends React.Component {
     _gameOver = (isWin) => {
         if (isWin) {
-
             this.props.playerWin();
         } else {
             this.props.playerKilled();
@@ -193,6 +217,7 @@ class Map extends React.Component
                     if (levelService.checkPlayerKilled(this.props.health)) {
                         this._gameOver(false);
                     }
+                    this.props.bossWallRuined();
                     break;
                 case itemTypes.BOSS:
                     this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
@@ -212,11 +237,11 @@ class Map extends React.Component
                 this.props.playerLevelUpped();
             }
         } else {
+            this.props.itemNotEdited(_keyType);
             this.props.playerInjured(levelService.checkLevelDamage(level, itemType));
             if (levelService.checkPlayerKilled(this.props.health)) {
                 this._gameOver(false);
             }
-            this.props.itemNotEdited(_keyType);
         }
     };
 
@@ -274,8 +299,7 @@ class Map extends React.Component
         document.removeEventListener("keydown", this._keyPressed);
     };
 
-    render()
-    {
+    render() {
         return (
             <div className="map">
                 {

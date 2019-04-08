@@ -1,19 +1,14 @@
 import update from 'immutability-helper';
-// import db from '../../db/db';
 import itemTypes from '../consts/itemTypes';
 
 const initialState = {
-    koordsPlayer: {
-        // x: 0,
-        // y: 0
-    },
-    // viewPort: [7, 8, 9, 10, 11, 12, 13, 14, 15, 16],
+    koordsPlayer: {},
     viewPort: [],
     prevPoleType: itemTypes.POLE,
     nextPoleType: itemTypes.POLE,
-    // db: db.map,
     db: [],
     movesCount: 0,
+    logText: '',
 };
 
 function movesReducer(state = initialState, action)
@@ -145,6 +140,7 @@ function movesReducer(state = initialState, action)
                 },
                 $merge: {
                     nextPoleType: tempPoleType,
+                    logText: 'qwe',
                 }
             });
         default:

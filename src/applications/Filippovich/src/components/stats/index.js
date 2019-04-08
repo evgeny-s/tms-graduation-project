@@ -34,7 +34,7 @@ function Stats({
 {
     return (
         <div className="user-stats col-3">
-            <p>"{name}" Statistics</p>
+            <p className='player-header'><span className='player-name'>{name}</span> statistics:</p>
             <p>Level: {level}</p>
             <p>Health: {health}</p>
             <p>Experience: {experience}/{experienceLeftToCollect}</p>

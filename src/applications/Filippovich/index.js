@@ -3,6 +3,7 @@ import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
+import WebFont from 'webfontloader';
 
 import reducer from './src/reducers';
 import './app.css';
@@ -15,6 +16,12 @@ const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(logger, sagaMiddleware));
 
 sagaMiddleware.run(highestScoreSaga);
+
+WebFont.load({
+    google: {
+        families: ['Vollkorn:400i', 'Kelly+Slab'],
+    }
+});
 
 function FilippovichGame() {
     return (

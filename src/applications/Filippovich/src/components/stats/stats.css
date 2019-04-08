@@ -3,3 +3,14 @@
     padding-left: 25px;
     text-align: left;
 }
+
+.user-stats .player-name{
+    font-family: 'Kelly+Slab', cursive;
+    text-decoration: underline;
+    font-size: 22px;
+    color: red;
+}
+
+p{
+    color: #0058b7;
+}
