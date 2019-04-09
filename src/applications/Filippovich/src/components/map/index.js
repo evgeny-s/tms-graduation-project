@@ -82,8 +82,9 @@ class Map extends React.Component {
                 }
             }
             return true;
-        } else
+        } else {
             return false;
+        }
     };
 
     _keyPressed = (e) => {
