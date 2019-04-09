@@ -74,67 +74,15 @@ const mapDispatchToProps = dispatch => ({
             type: 'BOSS_ATTACKED',
             payload: '"Boss" was attacked.',
         }),
-        itemEdited: (side) => {
-            let _x, _y;
-            switch (side) {
-                case 'up':
-                    _x = 0;
-                    _y = -1;
-                    break;
-                case 'down':
-                    _x = 0;
-                    _y = 1;
-                    break;
-                case 'left':
-                    _x = -1;
-                    _y = 0;
-                    break;
-                case 'right':
-                    _x = 1;
-                    _y = 0;
-                    break;
-                default:
-                    break;
-            }
-            dispatch({
-                type: 'ITEM_EDITED',
-                payload: {
-                    x: _x,
-                    y: _y,
-                }
-            })
-        },
-        itemNotEdited: (side) => {
-            let _x, _y;
-            switch (side) {
-                case 'up':
-                    _x = 0;
-                    _y = -1;
-                    break;
-                case 'down':
-                    _x = 0;
-                    _y = 1;
-                    break;
-                case 'left':
-                    _x = -1;
-                    _y = 0;
-                    break;
-                case 'right':
-                    _x = 1;
-                    _y = 0;
-                    break;
-                default:
-                    break;
-            }
-            dispatch({
-                type: 'ITEM_NOT_EDITED',
-                payload: {
-                    x: _x,
-                    y: _y,
-                },
-                log: 'Player made a move...',
-            })
-        },
+        itemEdited: (side) => dispatch({
+            type: 'ITEM_EDITED',
+            side,
+        }),
+        itemNotEdited: (side) => dispatch({
+            type: 'ITEM_NOT_EDITED',
+            side,
+            payload: 'Player made a move...',
+        }),
         playerInjured: (count) => {
             let logText = '';
             if (count) {

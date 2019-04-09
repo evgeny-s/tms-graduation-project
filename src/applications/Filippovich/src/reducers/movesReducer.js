@@ -1,5 +1,7 @@
 import update from 'immutability-helper';
 import itemTypes from '../consts/itemTypes';
+import keyTypes from '../consts/keyTypes';
+
 
 const initialState = {
     koordsPlayer: {},
@@ -11,23 +13,23 @@ const initialState = {
     logText: '',
 };
 
-function movesReducer(state = initialState, action)
-{
+function movesReducer(state = initialState, action) {
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
                 $merge: initialState
             });
-        case 'CREATE_DB': return update(state, {
-           $merge: {
-               viewPort: action.payload.viewPort,
-               db: action.payload.map,
-               koordsPlayer: {
-                  x: action.payload.playerKoords.x,
-                  y: action.payload.playerKoords.y,
-               },
-           }
-        });
+        case 'CREATE_DB':
+            return update(state, {
+                $merge: {
+                    viewPort: action.payload.viewPort,
+                    db: action.payload.map,
+                    koordsPlayer: {
+                        x: action.payload.playerKoords.x,
+                        y: action.payload.playerKoords.y,
+                    },
+                }
+            });
         case 'KEY_UP':
             let newViewPort_up = state.viewPort;
             if (state.koordsPlayer.y <= state.viewPort[2] && state.koordsPlayer.y >= 3)
@@ -78,10 +80,16 @@ function movesReducer(state = initialState, action)
                 }
             });
         case 'KEY_LEFT':
+            let _x_left;
+            if (state.koordsPlayer.x === 0) {
+                _x_left = -19;
+            } else {
+                _x_left = 1;
+            }
             return update(state, {
                 koordsPlayer: {
                     x: {
-                        $set: state.koordsPlayer.x - 1
+                        $set: state.koordsPlayer.x - _x_left
                     }
                 },
                 db: {
@@ -97,10 +105,16 @@ function movesReducer(state = initialState, action)
                 },
             });
         case 'KEY_RIGHT':
+            let _x_right;
+            if (state.koordsPlayer.x === 19) {
+                _x_right = -19;
+            } else {
+                _x_right = 1;
+            }
             return update(state, {
                 koordsPlayer: {
                     x: {
-                        $set: state.koordsPlayer.x + 1
+                        $set: state.koordsPlayer.x + _x_right
                     }
                 },
                 db: {
@@ -116,10 +130,39 @@ function movesReducer(state = initialState, action)
                 },
             });
         case 'ITEM_EDITED':
+            let _x_edited, _y_edited;
+            switch (action.side) {
+                case keyTypes.UP:
+                    _x_edited = 0;
+                    _y_edited = -1;
+                    break;
+                case keyTypes.DOWN:
+                    _x_edited = 0;
+                    _y_edited = 1;
+                    break;
+                case keyTypes.LEFT:
+                    if (state.koordsPlayer.x === 0) {
+                        _x_edited = 19;
+                    } else {
+                        _x_edited = -1;
+                    }
+                    _y_edited = 0;
+                    break;
+                case keyTypes.RIGHT:
+                    if (state.koordsPlayer.x === 19) {
+                        _x_edited = -19;
+                    } else {
+                        _x_edited = 1;
+                    }
+                    _y_edited = 0;
+                    break;
+                default:
+                    break;
+            }
             return update(state, {
                 db: {
-                    [state.koordsPlayer.y + action.payload.y]: {
-                        [state.koordsPlayer.x + action.payload.x]: {
+                    [state.koordsPlayer.y + _y_edited]: {
+                        [state.koordsPlayer.x + _x_edited]: {
                             $set: itemTypes.PLAYER
                         }
                     }
@@ -129,18 +172,46 @@ function movesReducer(state = initialState, action)
                 }
             });
         case 'ITEM_NOT_EDITED':
-            let tempPoleType = state.db[state.koordsPlayer.y + action.payload.y][state.koordsPlayer.x + action.payload.x];
+            let _x_not_edited, _y_not_edited;
+            switch (action.side) {
+                case keyTypes.UP:
+                    _x_not_edited = 0;
+                    _y_not_edited = -1;
+                    break;
+                case keyTypes.DOWN:
+                    _x_not_edited = 0;
+                    _y_not_edited = 1;
+                    break;
+                case keyTypes.LEFT:
+                    if (state.koordsPlayer.x === 0) {
+                        _x_not_edited = 19;
+                    } else {
+                        _x_not_edited = -1;
+                    }
+                    _y_not_edited = 0;
+                    break;
+                case keyTypes.RIGHT:
+                    if (state.koordsPlayer.x === 19) {
+                        _x_not_edited = -19;
+                    } else {
+                        _x_not_edited = 1;
+                    }
+                    _y_not_edited = 0;
+                    break;
+                default:
+                    break;
+            }
+            let tempPoleType = state.db[state.koordsPlayer.y + _y_not_edited][state.koordsPlayer.x + _x_not_edited];
             return update(state, {
                 db: {
-                    [state.koordsPlayer.y + action.payload.y]: {
-                        [state.koordsPlayer.x + action.payload.x]: {
+                    [state.koordsPlayer.y + _y_not_edited]: {
+                        [state.koordsPlayer.x + _x_not_edited]: {
                             $set: itemTypes.PLAYER
                         }
                     }
                 },
                 $merge: {
                     nextPoleType: tempPoleType,
-                    logText: 'qwe',
                 }
             });
         default:

@@ -6,6 +6,20 @@
       "difficulty": "Easy",
       "score": 398,
       "id": 1
+    },
+    {
+      "name": "kjhg",
+      "steps": 320,
+      "difficulty": "Easy",
+      "score": 320,
+      "id": 2
+    },
+    {
+      "name": "gfd",
+      "steps": 395,
+      "difficulty": "Easy",
+      "score": 395,
+      "id": 3
     }
   ]
 }

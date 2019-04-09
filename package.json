@@ -22,8 +22,8 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "serverFilippovich": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005"
     "eject": "react-scripts eject",
+    "serverFilippovich": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005",
     "server": "json-server --watch ./src/applications/sushkevich/db/highscore.json --port 4000"
   },
   "eslintConfig": {

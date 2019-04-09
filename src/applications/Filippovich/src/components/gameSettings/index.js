@@ -1,17 +1,17 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import RadioLevels from '../../containers/radioLevels';
-import levelsList from '../../consts/levelsList';
+import difficultyList from '../../consts/difficultyList';
 import ModalMessage from '../../containers/modalMessage';
 import './gameSettings.css';
 
 
-function GameSettings({inputNameValue, onStartGame, onInputNameChanged, onModalShow})
-{
-    const _clickStartButton = () =>
-    {
+function GameSettings({inputNameValue, onStartGame, onInputNameChanged, clearInputNameValue, onModalShow}) {
+    const _clickStartButton = () => {
         if (inputNameValue !== '') {
+            localStorage.setItem("name", inputNameValue);
             onStartGame();
+
         } else {
             onModalShow();
         }
@@ -27,7 +27,7 @@ function GameSettings({inputNameValue, onStartGame, onInputNameChanged, onModalS
                     <input type="text" className='form-control name-input' placeholder='Input Player Name'
                            onChange={onInputNameChanged} value={inputNameValue}/>
                     <label className='difficulty-label col-12'>Select difficulty:</label>
-                    {levelsList.map((item, index) => <RadioLevels key={index} index={index + 1} value={item}/>)}
+                    {difficultyList.map((item, index) => <RadioLevels key={index} index={index + 1} value={item}/>)}
 
                 </div>
                 <button onClick={_clickStartButton} type="button" className="btn btn-primary">Start Game</button>

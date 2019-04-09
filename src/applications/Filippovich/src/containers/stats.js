@@ -1,7 +1,6 @@
 import {connect} from "react-redux";
 import Stats from '../components/stats';
 
-
 const mapStateToProps = state => ({
     name: state.settings.inputNameValue,
     level: state.games.level,

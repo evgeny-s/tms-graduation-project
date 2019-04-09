@@ -1,7 +1,7 @@
 import update from 'immutability-helper';
 
 const initialState = {
-    inputNameValue: '',
+    inputNameValue: localStorage.getItem("name") || '',
     inputDifficultyValue: 1,
     isShowModal: false,
 };
@@ -11,7 +11,13 @@ function settingsReducer(state = initialState, action)
     switch (action.type) {
         case 'SET_DEFAULTS':
             return update(state, {
-                $merge: initialState
+                $set: initialState
+            });
+        case 'FETCH_PLAYER_NAME':
+            return update(state, {
+                $merge: {
+                    inputNameValue: localStorage.getItem("name") || '',
+                }
             });
         case 'ON_INPUT_NAME_CHANGED':
             return update(state, {

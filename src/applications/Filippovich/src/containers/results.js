@@ -18,6 +18,9 @@ const mapDispatchToProps = dispatch => ({
     }),
     setDefaults: () => dispatch({
         type: 'SET_DEFAULTS',
+    }),
+    getPlayerName: () => dispatch({
+        type: 'FETCH_PLAYER_NAME'
     })
 });
 

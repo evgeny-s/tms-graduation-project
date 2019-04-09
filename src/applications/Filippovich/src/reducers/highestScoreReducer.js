@@ -18,7 +18,7 @@ function HighestScoreReducer(state = initialState, action)
                     playerList: action.payload,
                 }
             });
-        case "ITEM_UPDATED":
+        case 'ITEM_UPDATED':
             let itemIndexToUpdate;
             state.playerList.forEach((item, index) => {
                 if (item.id === action.payload.id) {
@@ -47,7 +47,6 @@ function HighestScoreReducer(state = initialState, action)
             });
         default:
             return state;
-
     }
 }
 

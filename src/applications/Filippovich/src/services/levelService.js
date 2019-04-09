@@ -1,4 +1,5 @@
-import itemTypes from "../consts/itemTypes";
+import itemTypes from '../consts/itemTypes';
+import levelsList from '../consts/levelsList';
 import playerStats from '../consts/playerStats';
 
 
@@ -7,7 +8,7 @@ class LevelService
     checkLevelLogic(level, itemType)
     {
         switch (level) {
-            case 1:
+            case levelsList.LEVEL_1:
                 switch (itemType) {
                     case itemTypes.SKILL:
                         return true;
@@ -16,7 +17,7 @@ class LevelService
                     default:
                         return false;
                 }
-            case 2:
+            case levelsList.LEVEL_2:
                 switch (itemType) {
                     case itemTypes.SKILL:
                         return true;
@@ -25,7 +26,7 @@ class LevelService
                     default:
                         return false;
                 }
-            case 3:
+            case levelsList.LEVEL_3:
                 switch (itemType) {
                     case itemTypes.SKILL:
                         return true;
@@ -34,7 +35,7 @@ class LevelService
                     default:
                         return false;
                 }
-            case 4:
+            case levelsList.LEVEL_4:
                 switch (itemType) {
                     case itemTypes.SKILL:
                         return true;
@@ -47,7 +48,7 @@ class LevelService
                     default:
                         return false;
                 }
-            case 5:
+            case levelsList.LEVEL_5:
                 switch (itemType) {
                     case itemTypes.SKILL:
                         return true;
@@ -72,78 +73,78 @@ class LevelService
     }
 
     checkLevelUp(level, skillCount, certioficationCount, ultimateCount)
-    { 
+    {
         if (level < playerStats.maxLevel) {
-            return playerStats[level].SKILL_EXPERIENCE * skillCount
-                + playerStats[level].CERTIFICATION_EXPERIENCE * certioficationCount
-                + playerStats[level].ULTIMATE_EXPERIENCE * ultimateCount
-                >= playerStats[level].PLAYER_EXPERIENCE;
+            return playerStats[`LEVEL_${level}`].SKILL_EXPERIENCE * skillCount
+                + playerStats[`LEVEL_${level}`].CERTIFICATION_EXPERIENCE * certioficationCount
+                + playerStats[`LEVEL_${level}`].ULTIMATE_EXPERIENCE * ultimateCount
+                >= playerStats[`LEVEL_${level}`].PLAYER_EXPERIENCE;
         }
     }
 
     checkLevelDamage(level, itemType)
     {
         switch (level) {
-            case 1:
+            case levelsList.LEVEL_1:
                 switch (itemType) {
                     case itemTypes.CERTIFICATION:
-                        return playerStats[level].DAMAGE.CERTIFICATION;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.CERTIFICATION;
                     case itemTypes.ULTIMATE:
-                        return playerStats[level].DAMAGE.ULTIMATE;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.ULTIMATE;
                     case itemTypes.BOSSWALLSMALL:
-                        return playerStats[level].DAMAGE.BOSSWALLSMALL;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLSMALL;
                     case itemTypes.BOSSWALLBIG:
-                        return playerStats[level].DAMAGE.BOSSWALLBIG;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLBIG;
                     case itemTypes.BOSS:
-                        return playerStats[level].DAMAGE.BOSS;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSS;
                     default:
                         return 0;
                 }
-            case 2:
-                switch (itemType) {
-                    case itemTypes.ULTIMATE:
-                        return playerStats[level].DAMAGE.ULTIMATE;
-                    case itemTypes.BOSSWALLSMALL:
-                        return playerStats[level].DAMAGE.BOSSWALLSMALL;
-                    case itemTypes.BOSSWALLBIG:
-                        return playerStats[level].DAMAGE.BOSSWALLBIG;
-                    case itemTypes.BOSS:
-                        return playerStats[level].DAMAGE.BOSS;
-                    default:
-                        return 0;
-                }
-            case 3:
+            case levelsList.LEVEL_2:
                 switch (itemType) {
                     case itemTypes.ULTIMATE:
-                        return playerStats[level].DAMAGE.ULTIMATE;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.ULTIMATE;
                     case itemTypes.BOSSWALLSMALL:
-                        return playerStats[level].DAMAGE.BOSSWALLSMALL;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLSMALL;
                     case itemTypes.BOSSWALLBIG:
-                        return playerStats[level].DAMAGE.BOSSWALLBIG;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLBIG;
                     case itemTypes.BOSS:
-                        return playerStats[level].DAMAGE.BOSS;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSS;
                     default:
                         return 0;
                 }
-            case 4:
+            case levelsList.LEVEL_3:
                 switch (itemType) {
+                    case itemTypes.ULTIMATE:
+                        return playerStats[`LEVEL_${level}`].DAMAGE.ULTIMATE;
                     case itemTypes.BOSSWALLSMALL:
-                        return playerStats[level].DAMAGE.BOSSWALLSMALL;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLSMALL;
                     case itemTypes.BOSSWALLBIG:
-                        return playerStats[level].DAMAGE.BOSSWALLBIG;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLBIG;
                     case itemTypes.BOSS:
-                        return playerStats[level].DAMAGE.BOSS;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSS;
                     default:
                         return 0;
                 }
-            case 5:
+            case levelsList.LEVEL_4:
                 switch (itemType) {
                     case itemTypes.BOSSWALLSMALL:
-                        return playerStats[level].DAMAGE.BOSSWALLSMALL;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLSMALL;
                     case itemTypes.BOSSWALLBIG:
-                        return playerStats[level].DAMAGE.BOSSWALLBIG;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLBIG;
                     case itemTypes.BOSS:
-                        return playerStats[level].DAMAGE.BOSS;
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSS;
+                    default:
+                        return 0;
+                }
+            case levelsList.LEVEL_5:
+                switch (itemType) {
+                    case itemTypes.BOSSWALLSMALL:
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLSMALL;
+                    case itemTypes.BOSSWALLBIG:
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSSWALLBIG;
+                    case itemTypes.BOSS:
+                        return playerStats[`LEVEL_${level}`].DAMAGE.BOSS;
                     default:
                         return 0;
                 }

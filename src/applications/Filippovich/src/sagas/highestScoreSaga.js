@@ -1,7 +1,7 @@
 import {call, put, takeLatest, all, select} from 'redux-saga/effects';
 import highestScoreService from '../services/highestScoreService';
 import viewConsts from '../consts/views';
-import levelList from '../consts/levelsList';
+import difficultyList from '../consts/difficultyList';
 
 function* fetchList()
 {
@@ -16,7 +16,7 @@ function* playerWin()
     let movesCount = yield select(state => state.moves.movesCount + 1);
     let difficulty = yield select(state => state.settings.inputDifficultyValue);
     newResults.steps = movesCount;
-    newResults.difficulty = levelList[difficulty - 1];
+    newResults.difficulty = difficultyList[difficulty - 1];
     newResults.score = movesCount * difficulty;
 
     let item = yield call(highestScoreService.addResultToDB, newResults);

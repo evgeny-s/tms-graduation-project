@@ -1,7 +1,7 @@
 export default {
     maxLevel: 5,
     bossLifes: 4,
-    '1': {
+    LEVEL_1: {
         SKILL_COUNT: 10,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
@@ -19,7 +19,7 @@ export default {
             BOSS: 5000,
         },
     },
-    '2': {
+    LEVEL_2: {
         SKILL_COUNT: 25,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
@@ -37,7 +37,7 @@ export default {
             BOSS: 5000,
         },
     },
-    '3': {
+    LEVEL_3: {
         SKILL_COUNT: 0,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 5,
@@ -56,7 +56,7 @@ export default {
             BOSS: 5000,
         },
     },
-    '4': {
+    LEVEL_4: {
         SKILL_COUNT: 0,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,
@@ -77,7 +77,7 @@ export default {
         },
 
     },
-    '5': {
+    LEVEL_5: {
         SKILL_COUNT: 0,
         SKILL_EXPERIENCE: 100,
         CERTIFICATION_COUNT: 0,

@@ -1,9 +1,8 @@
 import itemTypes from '../consts/itemTypes';
 import mapSettings from '../consts/mapSettings';
-export default class CreateMapService
-{
-    constructor(_level)
-    {
+
+export default class {
+    constructor(_level) {
         this.map = [];
         this.level = _level;
         this.playerKoords = {
@@ -13,8 +12,7 @@ export default class CreateMapService
         this.viewPort = [];
     }
 
-    createMap()
-    {
+    createMap() {
         this._createGrid();
         this._createWalls();
 
@@ -30,21 +28,17 @@ export default class CreateMapService
         return [this.map, this.playerKoords, this.viewPort];
     }
 
-    static _getRandomInt(min, max)
-    {
+    _getRandomInt(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
 
-    _createXY(xStart = 0, xFinish = 0, yStart = 0, yFinish = 0)
-    {
-        let X = Math.floor(CreateMapService._getRandomInt(xStart, this.map.length - 1 - xFinish));
-        let Y = Math.floor(CreateMapService._getRandomInt(yStart, 19 - yFinish));
+    _createXY(xStart = 0, xFinish = 0, yStart = 0, yFinish = 0) {
+        let X = Math.floor(this._getRandomInt(xStart, this.map.length - 1 - xFinish));
+        let Y = Math.floor(this._getRandomInt(yStart, 19 - yFinish));
         return {X, Y}
     }
 
-
-    _createPlayer(start)
-    {
+    _createPlayer(start) {
         let counter = 1;
         while (counter) {
             let {X, Y} = this._createXY(start + 2, this.map.length - 10 - start + 2);
@@ -57,17 +51,15 @@ export default class CreateMapService
         }
     }
 
-    _createViewPort()
-    {
-        let startViewPort = CreateMapService._getRandomInt(0, this.map.length - 1 - 10);
+    _createViewPort() {
+        let startViewPort = this._getRandomInt(0, this.map.length - 1 - 10);
         for (let i = 0; i < 10; i++) {
             this.viewPort.push(startViewPort + i);
         }
         this._createPlayer(startViewPort);
     }
 
-    _createGrid()
-    {
+    _createGrid() {
         let rowsCount = 0;
         switch (this.level) {
             case 1:
@@ -90,8 +82,7 @@ export default class CreateMapService
         }
     }
 
-    _createWalls()
-    {
+    _createWalls() {
         let wallsDensityStart,
             wallsDensityFinish;
         switch (this.level) {
@@ -114,9 +105,9 @@ export default class CreateMapService
         }
         for (let i = 0; i < this.map.length; i++) {
             let indexOfWall = [];
-            let wallPerLineCount = Math.floor(CreateMapService._getRandomInt(wallsDensityStart, wallsDensityFinish));
+            let wallPerLineCount = Math.floor(this._getRandomInt(wallsDensityStart, wallsDensityFinish));
             for (let k = 0; k < wallPerLineCount; k++) {
-                indexOfWall.push(CreateMapService._getRandomInt(0, 19))
+                indexOfWall.push(this._getRandomInt(0, 19))
             }
             for (let j = 0; j < indexOfWall.length; j++) {
                 this.map[i][indexOfWall[j]] = itemTypes.WALL;
@@ -124,8 +115,7 @@ export default class CreateMapService
         }
     }
 
-    _createItems(type, count)
-    {
+    _createItems(type, count) {
         let counter = count;
         while (counter) {
             let {X, Y} = this._createXY();
@@ -136,8 +126,7 @@ export default class CreateMapService
         }
     }
 
-    _createBoss()
-    {
+    _createBoss() {
         let {X, Y} = this._createXY(2, 4, 2, 3);
         this.map[X][Y] = itemTypes.BOSS;
         this.map[X + 1][Y] = itemTypes.BOSS;

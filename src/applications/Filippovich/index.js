@@ -8,7 +8,7 @@ import WebFont from 'webfontloader';
 import reducer from './src/reducers';
 import './app.css';
 import withHeader from './../../hocs/withHeader';
-import App from './App'
+import App from './src/containers/app';
 import highestScoreSaga from './src/sagas/highestScoreSaga';
 
 const sagaMiddleware = createSagaMiddleware();

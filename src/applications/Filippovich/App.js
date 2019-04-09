@@ -1,5 +1,4 @@
 import React from 'react';
-import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import GameSettings from './src/containers/gameSettings';
 import Stats from './src/containers/stats';
@@ -7,12 +6,6 @@ import Panel from './src/containers/panel';
 import Results from './src/containers/results';
 import views from './src/consts/views';
 import './app.css';
-
-
-const mapStateToProps = state => ({
-    view: state.common.view,
-});
-
 
 function App({view})
 {
@@ -35,4 +28,4 @@ App.propTypes = {
     view: PropTypes.string,
 };
 
-export default connect(mapStateToProps)(App);
+export default App;

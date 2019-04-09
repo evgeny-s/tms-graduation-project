@@ -33,7 +33,6 @@ function Item({type})
         default:
             icon = null;
     }
-    console.log('render');
     return (
         <div className={type}>
             {icon}

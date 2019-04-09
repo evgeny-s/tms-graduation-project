@@ -3,7 +3,6 @@ import GameSettings from '../components/gameSettings';
 import viewConsts from "../consts/views";
 
 
-
 const mapStateToProps = state => ({
     inputNameValue: state.settings.inputNameValue,
 });
@@ -20,7 +19,7 @@ const mapDispatchToProps = dispatch => ({
     onModalShow: () => dispatch({
         type: 'SHOW_MODAL',
         payload: true,
-    })
+    }),
 });
 
 

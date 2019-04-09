@@ -13,6 +13,7 @@ class Results extends React.Component
     _resumeDefaults = () => {
         this.props.setDefaults();
         this.props.clickRestartButton();
+        this.props.getPlayerName();
     };
 
     render() {

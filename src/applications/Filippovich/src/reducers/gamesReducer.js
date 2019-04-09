@@ -1,16 +1,17 @@
 import update from 'immutability-helper';
+import levelsList from '../consts/levelsList';
 import playerStats from '../consts/playerStats';
 import rules from '../consts/rules';
 
 const initialState = {
-    level: 1,
+    level: levelsList.LEVEL_1,
     ruleText: rules.level1,
     logText: 'The game has begun...',
-    health: playerStats['1'].PLAYER_HEALTH,
+    health: playerStats[`LEVEL_${levelsList.LEVEL_1}`].PLAYER_HEALTH,
     experience: 0,
-    experienceLeftToCollect: playerStats['1'].PLAYER_EXPERIENCE,
+    experienceLeftToCollect: playerStats[`LEVEL_${levelsList.LEVEL_1}`].PLAYER_EXPERIENCE,
     skills: 0,
-    skillsLeftToCollect: playerStats['1'].SKILL_COUNT,
+    skillsLeftToCollect: playerStats[`LEVEL_${levelsList.LEVEL_1}`].SKILL_COUNT,
     certifications: 0,
     certificationsLeftToCollect: 0,
     ultimate: 0,
@@ -68,7 +69,6 @@ function gamesReducer(state = initialState, action)
                 $merge: {
                     bossesKilled: state.bossesKilled + 1,
                     logText: action.payload,
-
                 }
             });
         case 'PLAYER_INJURED':
@@ -81,18 +81,18 @@ function gamesReducer(state = initialState, action)
         case 'ITEM_NOT_EDITED':
             return update(state, {
                 $merge: {
-                    logText: action.log,
+                    logText: action.payload,
                 }
             });
         case 'PLAYER_LEVEL_UPPED':
             let levelStats = {};
-            levelStats['health'] = playerStats[state.level + 1].PLAYER_HEALTH;
-            levelStats['experienceLeftToCollect'] = playerStats[state.level + 1].PLAYER_EXPERIENCE;
-            levelStats['skillsLeftToCollect'] = playerStats[state.level + 1].SKILL_COUNT;
-            levelStats['certificationsLeftToCollect'] = playerStats[state.level + 1].CERTIFICATION_COUNT;
-            levelStats['ultimateLeftToCollect'] = playerStats[state.level + 1].ULTIMATE_COUNT;
+            levelStats['health'] = playerStats[`LEVEL_${state.level + 1}`].PLAYER_HEALTH;
+            levelStats['experienceLeftToCollect'] = playerStats[`LEVEL_${state.level + 1}`].PLAYER_EXPERIENCE;
+            levelStats['skillsLeftToCollect'] = playerStats[`LEVEL_${state.level + 1}`].SKILL_COUNT;
+            levelStats['certificationsLeftToCollect'] = playerStats[`LEVEL_${state.level + 1}`].CERTIFICATION_COUNT;
+            levelStats['ultimateLeftToCollect'] = playerStats[`LEVEL_${state.level + 1}`].ULTIMATE_COUNT;
             levelStats['level'] = state.level + 1;
-            levelStats['ruleText'] = rules[`level${state.level + 1}`];
+            levelStats['ruleText'] = rules[`LEVEL_${state.level + 1}`];
             levelStats['logText'] = action.payload;
             return update(state, {
                 $merge: levelStats,
