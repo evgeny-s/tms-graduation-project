@@ -1,5 +1,6 @@
 import itemTypes from '../consts/itemTypes';
 import mapSettings from '../consts/mapSettings';
+import {Difficulty} from "../consts/difficultyList";
 
 export default class {
     constructor(_level) {
@@ -62,13 +63,13 @@ export default class {
     _createGrid() {
         let rowsCount = 0;
         switch (this.level) {
-            case 1:
+            case Difficulty.EASY:
                 rowsCount = mapSettings._1LevelRowsCount;
                 break;
-            case 2:
+            case Difficulty.MEDIUM:
                 rowsCount = mapSettings._2LevelRowsCount;
                 break;
-            case 3:
+            case Difficulty.HARD:
                 rowsCount = mapSettings._3LevelRowsCount;
                 break;
             default:
@@ -86,15 +87,15 @@ export default class {
         let wallsDensityStart,
             wallsDensityFinish;
         switch (this.level) {
-            case 1:
+            case Difficulty.EASY:
                 wallsDensityStart = mapSettings._1LevelWallsDensityStart;
                 wallsDensityFinish = mapSettings._1LevelWallsDensityFinish;
                 break;
-            case 2:
+            case Difficulty.MEDIUM:
                 wallsDensityStart = mapSettings._2LevelWallsDensityStart;
                 wallsDensityFinish = mapSettings._2LevelWallsDensityFinish;
                 break;
-            case 3:
+            case Difficulty.HARD:
                 wallsDensityStart = mapSettings._3LevelWallsDensityStart;
                 wallsDensityFinish = mapSettings._3LevelWallsDensityFinish;
                 break;

@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
     difficultyValueChanged: (e) => dispatch({
         type: 'ON_DIFFICULTY_VALUE_CHANGED',
-        payload: parseInt(e.target.id),
+        payload: e.target.value,
     }),
 
 });

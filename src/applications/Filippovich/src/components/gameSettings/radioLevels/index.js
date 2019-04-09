@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 function RadioLevels({inputDifficultyValue, difficultyValueChanged, index, value})
 {
     let check = false;
-    if ((index) === inputDifficultyValue) {
+    if ((value) === inputDifficultyValue) {
         check = true;
     }
     return (
@@ -21,7 +21,7 @@ function RadioLevels({inputDifficultyValue, difficultyValueChanged, index, value
 }
 
 RadioLevels.propTypes = {
-    inputDifficultyValue: PropTypes.number,
+    inputDifficultyValue: PropTypes.string,
     difficultyValueChanged: PropTypes.func,
     index: PropTypes.number,
     value: PropTypes.string,

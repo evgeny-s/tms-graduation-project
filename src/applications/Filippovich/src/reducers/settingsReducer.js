@@ -1,8 +1,9 @@
 import update from 'immutability-helper';
+import {Difficulty} from '../consts/difficultyList';
 
 const initialState = {
     inputNameValue: localStorage.getItem("name") || '',
-    inputDifficultyValue: 1,
+    inputDifficultyValue: Difficulty.EASY,
     isShowModal: false,
 };
 

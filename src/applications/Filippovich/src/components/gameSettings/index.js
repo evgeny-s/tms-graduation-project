@@ -28,7 +28,6 @@ function GameSettings({inputNameValue, onStartGame, onInputNameChanged, clearInp
                            onChange={onInputNameChanged} value={inputNameValue}/>
                     <label className='difficulty-label col-12'>Select difficulty:</label>
                     {difficultyList.map((item, index) => <RadioLevels key={index} index={index + 1} value={item}/>)}
-
                 </div>
                 <button onClick={_clickStartButton} type="button" className="btn btn-primary">Start Game</button>
             </div>

@@ -143,7 +143,7 @@ Map.propTypes = {
     }),
     viewPort: PropTypes.arrayOf(PropTypes.number),
     db: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.string)),
-    inputDifficultyValue: PropTypes.number,
+    inputDifficultyValue: PropTypes.string,
     level: PropTypes.number,
     health: PropTypes.number,
     experience: PropTypes.number,
