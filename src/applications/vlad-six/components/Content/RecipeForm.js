@@ -6,7 +6,7 @@ import Input from './Form/InputTitle';
 
 import './Form/Form.scss';
 
-const RecipeFrom = ({edit, onHandleChangeRecipe, onSubmit, openForm, ...rest}) => {
+const RecipeFrom = ({editRecipe, onHandleChangeRecipe, onSubmit, openForm, ...rest}) => {
     if(!openForm) return null;
 
     let {title, type, description, ingredients} = rest,
@@ -24,7 +24,7 @@ const RecipeFrom = ({edit, onHandleChangeRecipe, onSubmit, openForm, ...rest}) =
                     type='button'
                     disabled={disabled}
             >
-                {!edit ? 'Добавить' : 'Редактировать'}
+                {!editRecipe ? 'Добавить' : 'Редактировать'}
             </button>
         </form>
     );
