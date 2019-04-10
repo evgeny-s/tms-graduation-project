@@ -12,7 +12,7 @@ function setViewportRows(size, firstRow) {
 }
 
 const initialState = {
-    viewportRows: setViewportRows(config.viewportSizes[0], 0),
+    viewportRows: setViewportRows(config.defaultViewportSize, 0),
     viewportThreshold: config.viewportThreshold,
 };
 

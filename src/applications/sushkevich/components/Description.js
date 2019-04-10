@@ -1,5 +1,6 @@
 import React from 'react';
 import config from '../db/config';
+import MapSelector from '../containers/MapSelector';
 
 const Description = (props) => {
     return (
@@ -11,6 +12,7 @@ const Description = (props) => {
                     <p>Finally beat the boss on the third level.</p>
                     <p>Try to make as less steps as you can.</p>
                 </div>
+                <MapSelector/>
                 <button onClick={props.onPlayClick}>Play game</button>
             </div>
         </div>
