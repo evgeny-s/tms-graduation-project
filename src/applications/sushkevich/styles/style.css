@@ -121,6 +121,18 @@
     margin: 0;
 }
 
+.app .map-selector {
+    margin-bottom: 20px;
+}
+
+.app .map-selector select {
+    background-color: #272727;
+    border: none;
+    color: #ACADB1;
+    outline: none;
+    cursor: pointer;
+}
+
 .app .map {
     display: inline-block;
     border: 1px solid #68D3B2;

@@ -25,7 +25,7 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'FETCH_HIGHSCORE',
             });
             dispatch({
-                type: 'GAME_STARTED',
+                type: 'RETRY_GAME',
             });
         },
     }

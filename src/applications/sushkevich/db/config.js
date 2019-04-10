@@ -1,4 +1,4 @@
-export default {
+const params = {
     skills: 25,
     certificates: 3,
     viewportThreshold: 2,
@@ -7,5 +7,10 @@ export default {
         x: 20,
         y: 100,
     },
-}
+    mapTrackRatio: .8,
+};
 
+export default {
+    ...params,
+    defaultViewportSize: params.viewportSizes[0],
+}
