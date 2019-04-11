@@ -22,6 +22,13 @@ function commonReducer(state = initialState, action) {
                 }
             });
 
+        case 'RETRY_GAME':
+            return update(state, {
+                $merge: {
+                    view: viewsConsts.DESCRIPTION,
+                }
+            });
+
         default:
             return state;
     }

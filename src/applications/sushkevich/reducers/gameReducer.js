@@ -1,43 +1,15 @@
 import update from 'immutability-helper';
-import map from '../db/map';
 import mapItemTypesConsts from '../consts/mapItemTypes';
 import config from '../db/config';
+import mapModesConsts from '../consts/mapModes';
+import mapService from '../services/mapService';
 
-let initialPlayerY;
-let initialPlayerX;
-
-outer: for (let row in map) {
-    for (let col in map[row]) {
-        if (map[row][col] === mapItemTypesConsts.PLAYER) {
-            initialPlayerY = +row;
-            initialPlayerX = +col;
-            break outer;
-        }
-    }
-}
-
-function initializeMap(rows, cols) {
-    let initialMap = {};
-
-    for (let i = 0; i < rows; i++) {
-        let initialRow = {};
-        for (let j = 0; j < cols; j++) {
-            if (map[i] && map[i][j]) {
-                initialRow[j] = map[i][j];
-            } else {
-                initialRow[j] = mapItemTypesConsts.TRACK;
-            }
-        }
-        initialMap[i] = initialRow;
-    }
-
-    return initialMap;
-}
+let initialMap = mapService.generateDefaultMap(config.mapSize.y, config.mapSize.x);
 
 const initialState = {
-    map: initializeMap(config.mapSize.y, config.mapSize.x),
-    playerCoordinateY: initialPlayerY,
-    playerCoordinateX: initialPlayerX,
+    map: initialMap,
+    playerCoordinateY: mapService.getInitialPlayerY(initialMap),
+    playerCoordinateX: mapService.getInitialPlayerX(initialMap),
 };
 
 function gameReducer(state = initialState, action) {
@@ -169,6 +141,26 @@ function gameReducer(state = initialState, action) {
             });
 
             return newState;
+
+        case 'CHANGE_MAP':
+            let initializedMap;
+
+            if (action.payload === mapModesConsts.RANDOM) {
+                initializedMap = mapService.generateRandomMap(config.mapSize.y, config.mapSize.x, config.skills,
+                    config.certificates, config.viewportThreshold, config.defaultViewportSize, config.mapTrackRatio);
+            }
+
+            else if (action.payload === mapModesConsts.DEFAULT) {
+                initializedMap = mapService.generateDefaultMap(config.mapSize.y, config.mapSize.x);
+            }
+
+            return update(state, {
+                $merge: {
+                    map: initializedMap,
+                    playerCoordinateY: mapService.getInitialPlayerY(initializedMap),
+                    playerCoordinateX: mapService.getInitialPlayerX(initializedMap),
+                }
+            });
 
         case 'RESET_MAP':
             return initialState;

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 const ViewportSelector = (props) => {
     return (
-        <div className="viewport-changer">
+        <div className="viewport-selector">
             <span>Viewport size: </span>
             <select onChange={props.changeViewport.bind(null, props.map, props.playerY)}>
                 {
