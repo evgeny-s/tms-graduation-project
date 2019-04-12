@@ -2,7 +2,7 @@ import update from 'immutability-helper';
 import viewsConsts from '../consts/views';
 
 const initialState = {
-    view: viewsConsts.GAME,
+    view: viewsConsts.DESCRIPTION,
 };
 
 function commonReducer(state = initialState, action) {

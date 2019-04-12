@@ -14,6 +14,7 @@ function setViewportRows(size, firstRow) {
 const initialState = {
     viewportRows: setViewportRows(config.defaultViewportSize, 0),
     viewportThreshold: config.viewportThreshold,
+    isSoundOn: false,
 };
 
 function optionsReducer(state = initialState, action) {
@@ -44,7 +45,25 @@ function optionsReducer(state = initialState, action) {
             });
 
         case 'RESET_VIEWPORT':
-            return initialState;
+            return update(state, {
+                $merge: {
+                    viewportRows: initialState.viewportRows,
+                }
+            });
+
+        case 'TOGGLE_SOUND':
+            return update(state, {
+                $merge: {
+                    isSoundOn: !state.isSoundOn,
+                }
+            });
+
+        case 'RESET_SOUND':
+            return update(state, {
+                $merge: {
+                    isSoundOn: initialState.isSoundOn,
+                }
+            });
 
         default:
             return state;

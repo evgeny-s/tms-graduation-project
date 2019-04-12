@@ -1,6 +1,6 @@
 import React from 'react';
 import ViewportSelector from '../containers/ViewportSelector';
-import AudioPlayer from '../components/AudioPlayer';
+import AudioPlayer from '../containers/AudioPlayer';
 
 const Options = (props) => {
     return (
