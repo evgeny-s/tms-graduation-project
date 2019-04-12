@@ -19,22 +19,22 @@ class App extends React.Component {
             this.props.resolvedGetData()
         }, 5000);
         
-      this.props.getAstronauts()
-         
+        this.props.getAstronauts()    
     }
+    
    time(){
         return Math.floor(this.props.timestamp % 86400 / 3600) + ':' + Math.floor(this.props.timestamp % 86400 % 3600 / 60) + ':' + Math.floor(this.props.timestamp % 86400 % 3600 % 60);
     }
     
     render(){
         const page={ backgroundImage: "url(" + space + ")", backgroundPosition: "center", backgroundSize: "cover", width:"1110px", height:"550px",color:"yellow"}
-       
+       console.log(this.props.people);
         return (
             <div style={page}>
                 
                 <AstronautsCount value = {this.props.numberOfPeople} />
             
-                {/* <Astronauts value = {console.log(this.props.people)} />*/}
+                <Astronauts value = {} />
           
                {/* <ul>
                     {this.props.people.map(per=><Astronauts key={per.toString()} value = {per} />)} 

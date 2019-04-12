@@ -10,7 +10,7 @@ const reducer = (state = {}, action) => {
         case 'PEOPLE_IN_SPACE':
             return {
                 ...state,
-                people: [action.payload.people],
+                people: action.payload.people,
                 numberOfPeople: action.payload.numberOfPeople
             };
         default:
