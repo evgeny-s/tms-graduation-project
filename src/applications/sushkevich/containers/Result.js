@@ -22,6 +22,9 @@ const mapDispatchToProps = (dispatch) => {
                 type: 'RESET_VIEWPORT',
             });
             dispatch({
+                type: 'RESET_SOUND',
+            });
+            dispatch({
                 type: 'FETCH_HIGHSCORE',
             });
             dispatch({

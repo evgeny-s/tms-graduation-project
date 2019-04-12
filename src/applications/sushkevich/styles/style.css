@@ -60,11 +60,16 @@
     padding: 5px;
 }
 
+.app .options-bar .viewport-selector {
+    margin-bottom: 10px;
+}
+
 .app .options-bar h3 {
     font-size: 24px;
     color: #36DDF9;
     text-align: center;
     text-decoration: underline;
+    margin-bottom: 10px;
 }
 
 .app .options-bar select {
@@ -73,6 +78,23 @@
     color: #ACADB1;
     outline: none;
     cursor: pointer;
+}
+
+.app .audio-player {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.app .audio-player button {
+    padding: 4px 0;
+    min-width: 80%;
+    color: #36DDF9;
+    background-color: #272727;
+    border: none;
+    outline: none;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
 }
 
 .app .game {
