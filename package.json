@@ -5,7 +5,24 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "immutability-helper": "^3.0.0",
+<<<<<<< HEAD
     "node-sass": "^4.11.0",
+    "prop-types": "latest",
+    "react": "^16.8.4",
+    "react-bootstrap": "^1.0.0-beta.6",
+    "react-dom": "^16.8.4",
+    "react-icons": "^3.5.0",
+    "react-redux": "^6.0.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.8",
+    "redux": "^4.0.1",
+<<<<<<< HEAD
+    "redux-logger": "^3.0.6",
+    "redux-saga": "^1.0.2",
+    "webfontloader": "^1.6.28"
+=======
+    "redux-saga": "^1.0.2"
+=======
     "prop-types": "latest",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.6",
@@ -18,15 +35,26 @@
     "redux-logger": "^3.0.6",
     "redux-saga": "^1.0.2",
     "webfontloader": "^1.6.28"
+>>>>>>> 77b78e054dd11faadf7c8e31b86689d409252bf0
+>>>>>>> master
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+<<<<<<< HEAD
     "serverTarasov": "json-server --watch ./db/db.json --port 3005",
     "serverFilippovich": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005",
     "server": "json-server --watch ./src/applications/sushkevich/db/highscore.json --port 4000"
+=======
+<<<<<<< HEAD
+    "server": "json-server --watch ./db/db.json --port 3005"
+=======
+    "serverFilippovich": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005",
+    "server": "json-server --watch ./src/applications/sushkevich/db/highscore.json --port 4000"
+>>>>>>> 77b78e054dd11faadf7c8e31b86689d409252bf0
+>>>>>>> master
   },
   "eslintConfig": {
     "extends": "react-app"
