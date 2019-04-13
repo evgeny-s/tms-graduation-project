@@ -2,9 +2,7 @@ import React from 'react';
 import {BrowserRouter as Router, Route} from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import FilippovichGame from './applications/Filippovich';
 import Clicker from './applications/clicker';
-import Game from './applications/sushkevich';
 import AppsTable from './AppsTable';
 import Seven from './applications/vlad-seven/index'
 import Six from './applications/vlad-six/index'
