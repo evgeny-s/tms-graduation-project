@@ -1,0 +1,14 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+#game {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  background: rgba(53, 0, 85, 0.5);
+}

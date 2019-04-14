@@ -5,6 +5,7 @@
   "dependencies": {
     "bootstrap": "^4.3.1",
     "immutability-helper": "^3.0.0",
+    "node-sass": "^4.11.0",
     "prop-types": "latest",
     "react": "^16.8.4",
     "react-bootstrap": "^1.0.0-beta.6",
@@ -23,6 +24,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "serverTarasov": "json-server --watch ./src/applications/vlad-six/db/db.json --port 3005",
     "serverFilippovich": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005",
     "server": "json-server --watch ./src/applications/sushkevich/db/highscore.json --port 4000"
   },
