@@ -1,4 +1,4 @@
-export default [
+export const TYPE_OF_RECIPES = [
     'десерт и выпечка',
     'салат',
     'основное блюдо',
@@ -6,5 +6,7 @@ export default [
     'супы',
     'паста и пиццы',
     'закуски',
-    'соусы'
+    'соусы',
 ];
+
+export let ALL_RECIPES = 'все рецепты';

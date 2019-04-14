@@ -1,20 +1,21 @@
 import React from 'react';
 import InputRange from "../GameSetting/InputRange";
 import PropTypes from "prop-types";
+import C from '../../constans/Reducers'
 
 const TaskLevel = ({level, map, gold, silver}) => {
     let message, progressBar;
 
     switch (level) {
-        case 1:
+        case C.FIRST_LEVEL:
             message = 'Level 1: collect all silver';
             progressBar = <progress max={Math.floor(map.length/20 * 5)} value={silver}/>;
             break;
-        case 2:
+        case C.SECOND_LEVEL:
             message = 'Level 2: collect all gold';
             progressBar = <progress max={Math.floor(map.length/20 * 2)} value={gold}/>;
             break;
-        case 3:
+        case C.THIRD_LEVEL:
             message = 'Level 3: kill boss';
             progressBar = null;
             break;

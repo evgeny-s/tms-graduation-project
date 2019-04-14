@@ -1,4 +1,4 @@
-export default class Map {
+export default class {
     constructor(y, x, difficulty) {
         this.map = [];
         this.y = y;

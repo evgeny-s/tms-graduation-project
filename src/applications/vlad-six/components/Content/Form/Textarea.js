@@ -4,11 +4,11 @@ const Textarea = ({onChange, ingredients, description}) => (
     <React.Fragment>
         <p>
             <label>
-                Игридиенты:
+                Ингридиенты:
                 <br/>
                 <textarea onChange={onChange}
                           name="ingredients"
-                          placeholder='Игридиенты'
+                          placeholder='Ингридиенты'
                           value={ingredients}
                 />
             </label>

@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import C from '../constans/Game'
+import C from '../constans/Reducers'
 
 const initialState = {
     rows: 100,

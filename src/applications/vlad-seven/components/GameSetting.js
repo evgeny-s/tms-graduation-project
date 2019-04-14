@@ -2,7 +2,7 @@ import React from 'react';
 import InputRange from './GameSetting/InputRange';
 import InputRadio from './GameSetting/InputRadio';
 import Start from '../containers/GameStatus';
-import L from '../constans/Levels';
+import LEVELS from '../constans/Levels';
 import './GameSetting/GameSetting.scss'
 import PropTypes from 'prop-types';
 
@@ -10,7 +10,7 @@ const GameSetting = ({mapSetting, rows, cells, difficulty}) => (
     <section className='Menu'>
         <h3>Difficulty level</h3>
         {
-            L.map( (item, i) => (
+            LEVELS.map( (item, i) => (
                 <InputRadio
                     key={i}
                     label={item.label}

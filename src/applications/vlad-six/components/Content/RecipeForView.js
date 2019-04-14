@@ -1,5 +1,5 @@
 import React from 'react';
-import A from '../../consts/Actions';
+import ACTION from '../../consts/Actions';
 
 import Ingredients from './ForView/Ingridients';
 import Description from './ForView/Description';
@@ -11,7 +11,7 @@ const RecipeForView = ({list}) => (
         <Ingredients ingredients={list.ingredients}/>
         <Description description={list.description}/>
         <Button
-            type={A.RECIPE_TO_STORE}
+            type={ACTION.RECIPE_TO_STORE}
             id={list.id}
             label={'Изменить'}
         />

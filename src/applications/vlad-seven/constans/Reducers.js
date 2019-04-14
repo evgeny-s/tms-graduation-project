@@ -15,8 +15,16 @@ export default {
     BLAST: 'BLAST',
     FINISH: 'FINISH',
 
+    MAX_BOMB: 3,
+    MAX_COUNT: 6,
+    MIN_COUNT: 3,
+
     LEFT: 65,
     RIGHT: 68,
     UP: 87,
-    DOWN: 83
+    DOWN: 83,
+
+    FIRST_LEVEL: 1,
+    SECOND_LEVEL: 2,
+    THIRD_LEVEL: 3
 }

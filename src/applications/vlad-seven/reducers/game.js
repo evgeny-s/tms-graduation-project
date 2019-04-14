@@ -1,5 +1,6 @@
 import update from 'immutability-helper';
-import C from '../constans/Game'
+import C from '../constans/Reducers';
+import CELL from '../constans/MapCellTitle';
 
 const initialState = {
     map: [],
@@ -27,12 +28,12 @@ const game = (state = initialState, action) => {
         case C.MOVE_LEFT:
             _move = moveX - 1 < 0 ? map[0].length - 1 : moveX - 1;
 
-            if (map[moveY][_move].match(/wall|locked/) === null) {
+            if (map[moveY][_move].match(`${CELL.WALL}|${CELL.LOCKED}`) === null) {
                 let mapSlice = map.slice(),
                     prevPos = _move + 1 > map[0].length - 1 ? 0 : _move + 1;
 
-                mapSlice[moveY][_move] += ' player';
-                mapSlice[moveY][prevPos] = mapSlice[moveY][prevPos].replace(/player/, '').trim();
+                mapSlice[moveY][_move] += ` ${CELL.PLAYER}`;
+                mapSlice[moveY][prevPos] = mapSlice[moveY][prevPos].replace(`${CELL.PLAYER}`, '').trim();
 
                 return update(state, {
                     $merge: {
@@ -47,12 +48,12 @@ const game = (state = initialState, action) => {
         case C.MOVE_RIGHT:
             _move = moveX + 1 > map[0].length - 1 ? 0 : moveX + 1;
 
-            if (map[moveY][_move].match(/wall|locked/) === null) {
+            if (map[moveY][_move].match(`${CELL.WALL}|${CELL.LOCKED}`) === null) {
                 let mapSlice = map.slice(),
                     prevPos = _move - 1 < 0 ? map[0].length - 1 : _move - 1;
 
-                mapSlice[moveY][_move] += ' player';
-                mapSlice[moveY][prevPos] = mapSlice[moveY][prevPos].replace(/player/, '').trim();
+                mapSlice[moveY][_move] += ` ${CELL.PLAYER}`;
+                mapSlice[moveY][prevPos] = mapSlice[moveY][prevPos].replace(`${CELL.PLAYER}`, '').trim();
 
                 return update(state, {
                     $merge: {
@@ -67,13 +68,13 @@ const game = (state = initialState, action) => {
         case C.MOVE_DOWN:
             _move = moveY + 1 > map.length - 1 ? map.length - 1 : moveY + 1;
 
-            if (map[_move][moveX].match(/wall|locked|player/) === null) {
+            if (map[_move][moveX].match(`${CELL.WALL}|${CELL.LOCKED}|${CELL.PLAYER}`) === null) {
                 let mapSlice = map.slice(),
-                    _count = count === 6 ? count : ++count;
-                (moveY < 4) && (_count = 3);
+                    _count = count === C.MAX_COUNT ? count : ++count;
+                (moveY < C.MIN_COUNT) && (_count = C.MIN_COUNT);
 
-                mapSlice[_move][moveX] += ' player';
-                mapSlice[_move - 1][moveX] = mapSlice[_move - 1][moveX].replace(/player/, '').trim();
+                mapSlice[_move][moveX] += ` ${CELL.PLAYER}`;
+                mapSlice[_move - 1][moveX] = mapSlice[_move - 1][moveX].replace(`${CELL.PLAYER}`, '').trim();
 
                 return update(state, {
                     $merge: {
@@ -89,13 +90,13 @@ const game = (state = initialState, action) => {
         case C.MOVE_UP:
             _move = moveY - 1 < 0 ? 0 : moveY - 1;
 
-            if (map[_move][moveX].match(/wall|locked|player/) === null) {
+            if (map[_move][moveX].match(`${CELL.WALL}|${CELL.LOCKED}|${CELL.PLAYER}`) === null) {
                 let mapSlice = map.slice(),
-                    _count = count === 3 ? count : --count;
-                (moveY > map.length - 4) && (_count = 6);
+                    _count = count === C.MIN_COUNT ? count : --count;
+                (moveY > map.length - C.MIN_COUNT) && (_count = C.MAX_COUNT);
 
-                mapSlice[_move][moveX] += ' player';
-                mapSlice[_move + 1][moveX] = mapSlice[_move + 1][moveX].replace(/player/, '').trim();
+                mapSlice[_move][moveX] += ` ${CELL.PLAYER}`;
+                mapSlice[_move + 1][moveX] = mapSlice[_move + 1][moveX].replace(`${CELL.PLAYER}`, '').trim();
 
                 return update(state, {
                     $merge: {
@@ -110,9 +111,9 @@ const game = (state = initialState, action) => {
 
         case C.GOLD_TO_PLAYER:
 
-            if (map[moveY][moveX].includes('gold player')) {
+            if (map[moveY][moveX].includes(`${CELL.GOLD} ${CELL.PLAYER}`)) {
                 let mapSlice = map.slice();
-                mapSlice[moveY][moveX] = 'player';
+                mapSlice[moveY][moveX] = CELL.PLAYER;
 
                 return update(state, {
                     $merge: {
@@ -129,9 +130,9 @@ const game = (state = initialState, action) => {
 
         case C.SILVER_TO_PLAYER:
 
-            if (map[moveY][moveX].includes('silver player')) {
+            if (map[moveY][moveX].includes(`${CELL.SILVER} ${CELL.PLAYER}`)) {
                 let mapSlice = map.slice();
-                mapSlice[moveY][moveX] = 'player';
+                mapSlice[moveY][moveX] = CELL.PLAYER;
 
                 return update(state, {
                     $merge: {
@@ -149,14 +150,14 @@ const game = (state = initialState, action) => {
 
         case C.BLAST:
 
-            if (state.bomb && action.payload.includes('player')) {
+            if (state.bomb && action.payload.includes(CELL.PLAYER)) {
                 let mapSlice = map.slice();
 
                 for (let i = moveY - 1; i <= moveY + 1; i++) {
                     if (i > map.length - 1 || i < 0) continue;
                     for (let j = moveX - 1; j <= moveX + 1; j++) {
                         if (j > map[0].length - 1 || j < 0) continue;
-                        mapSlice[i][j].includes('wall') && mapSlice[i].splice(j, 1, '')
+                        mapSlice[i][j].includes(CELL.WALL) && mapSlice[i].splice(j, 1, '')
                     }
                 }
 
@@ -172,9 +173,9 @@ const game = (state = initialState, action) => {
 
         case C.BOMB_TO_PLAYER:
 
-            if (map[moveY][moveX].includes('grenade player')) {
+            if (map[moveY][moveX].includes(`${CELL.GRENADA} ${CELL.PLAYER}`)) {
                 let mapSlice = map.slice();
-                mapSlice[moveY][moveX] = 'player';
+                mapSlice[moveY][moveX] = CELL.PLAYER;
 
                 return update(state, {
                     $merge: {
@@ -188,14 +189,14 @@ const game = (state = initialState, action) => {
 
         case C.FINISH:
 
-            if (map[Math.floor(map.length / 2 - 2)][Math.floor(map[0].length / 2 - 2)].includes('locked')) {
+            if (map[map.length / 2 - 2 ^ 0][map[0].length / 2 - 2 ^ 0].includes(CELL.LOCKED)) {
                 let centerY = Math.floor(map.length / 2),
                     centerX = Math.floor(map[0].length / 2),
                     mapSlice = map.slice();
 
                 for (let i = centerY - 2; i < centerY + 2; i++) {
                     for (let j = centerX - 2; j < centerX + 2; j++) {
-                        mapSlice[i][j].includes('locked') && (mapSlice[i][j] = '');
+                        mapSlice[i][j].includes(CELL.LOCKED) && (mapSlice[i][j] = '');
                     }
                 }
                 return update(state, {
@@ -205,7 +206,7 @@ const game = (state = initialState, action) => {
                 });
             }
 
-            if (map[moveY][moveX].includes('boss player')) {
+            if (map[moveY][moveX].includes(`${CELL.BOSS} ${CELL.PLAYER}`)) {
                 return update(state, {
                     $merge: {
                         ...initialState

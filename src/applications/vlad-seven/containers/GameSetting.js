@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import GameSetting from '../components/GameSetting';
-import C from '../constans/Game';
+import C from '../constans/Reducers';
 
 const mapStoreToProps = state => ({
     rows: state.gameSetting.rows,
@@ -9,14 +9,13 @@ const mapStoreToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    mapSetting(e){
+    mapSetting: (e) =>
         dispatch({
             type: C.CHANGED_MAP,
             payload: {
                 [e.target.name]: +e.target.value,
             }
         })
-    }
 });
 
 

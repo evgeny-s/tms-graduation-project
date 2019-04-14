@@ -1,5 +1,5 @@
 import update from 'immutability-helper';
-import A from '../consts/Actions';
+import ACTION from '../consts/Actions';
 
 const initialState = {
     editRecipe: false,
@@ -10,14 +10,14 @@ const control = (state = initialState, action) => {
 
     switch (action.type) {
 
-        case A.OPEN_FORM:
+        case ACTION.OPEN_FORM:
             return update(state, {
                 $merge: {
                     openForm: !state.openForm,
                 }
             });
 
-        case A.RECIPE_EDIT:
+        case ACTION.RECIPE_EDIT:
             return update(state, {
                 $merge: {
                     editRecipe: false,
@@ -26,7 +26,7 @@ const control = (state = initialState, action) => {
             });
 
 
-        case A.RECIPE_ADD:
+        case ACTION.RECIPE_ADD:
             return update(state, {
                 $merge: {
                     openForm: false,
@@ -34,7 +34,7 @@ const control = (state = initialState, action) => {
             });
 
 
-        case A.RECIPE_TO_STORE:
+        case ACTION.RECIPE_TO_STORE:
             return update(state, {
                 $merge: {
                     editRecipe: true,

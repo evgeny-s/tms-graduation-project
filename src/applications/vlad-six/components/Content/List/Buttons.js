@@ -1,5 +1,5 @@
 import React from 'react';
-import A from '../../../consts/Actions';
+import ACTION from '../../../consts/Actions';
 import {connect} from 'react-redux';
 
 import Button from '../../../containers/ButtonWithBind/BtnWithId';
@@ -9,13 +9,13 @@ const Buttons = ({editRecipe, id, openForm}) => (
         <Button
             disabled={editRecipe || openForm}
             id={id}
-            type={A.DELETE_ITEM}
+            type={ACTION.DELETE_ITEM}
             label={'Удалить'}
         />
         <Button
             disabled={editRecipe || openForm}
             id={id}
-            type={A.SHOW_RECIPE}
+            type={ACTION.SHOW_RECIPE}
             label={'Открыть'}
         />
     </div>

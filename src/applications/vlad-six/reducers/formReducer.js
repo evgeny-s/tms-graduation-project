@@ -1,5 +1,6 @@
 import update from 'immutability-helper';
-import A from '../consts/Actions'
+import ACTION from '../consts/Actions';
+import {ALL_RECIPES} from '../consts/Select';
 
 const initialState = {
     list: [],
@@ -15,14 +16,14 @@ const initialState = {
 const form = (state = initialState, action) => {
 
     switch (action.type) {
-        case A.FETCH_COMPLETED:
+        case ACTION.FETCH_COMPLETED:
             return update(state, {
                 $merge: {
                     list: action.payload
                 }
             });
 
-        case A.OPEN_FORM:
+        case ACTION.OPEN_FORM:
             return update(state, {
                 $merge: {
                     title: initialState.title,
@@ -30,15 +31,15 @@ const form = (state = initialState, action) => {
                 }
             });
 
-        case A.ON_CHANGE:
+        case ACTION.ON_CHANGE:
             return update(state, {
                 $merge: {
                     ...action.payload
                 }
             });
 
-        case A.SORT_LIST:
-            if (action.payload.includes('все')) {
+        case ACTION.SORT_LIST:
+            if (action.payload.includes(ALL_RECIPES)) {
                 return update(state, {
                     $merge: {
                         sortList: state.list.slice(),
@@ -58,7 +59,7 @@ const form = (state = initialState, action) => {
                 });
             }
 
-        case A.SORT_BY_TITLE:
+        case ACTION.SORT_BY_TITLE:
             if (action.payload.trim().length) {
                 let sortByTitle = state.list.filter(item => item.title.toLowerCase().includes(action.payload.toLowerCase()));
 
@@ -66,21 +67,21 @@ const form = (state = initialState, action) => {
                     $merge: {
                         sortList: sortByTitle,
                         title: action.payload.trim(),
-                        type: initialState.type
+                        type: initialState.type,
+                        index: initialState.index
+                    }
+                });
+            } else {
+                return update(state, {
+                    $merge: {
+                        sortList: [],
+                        title: action.payload.trim(),
+                        type: initialState.type,
                     }
                 });
             }
 
-            return update(state, {
-                $merge: {
-                    sortList: [],
-                    title: action.payload.trim(),
-                    type: initialState.type
-                }
-            });
-
-
-        case A.RECIPE_TO_STORE:
+        case ACTION.RECIPE_TO_STORE:
             let editRecipe = state.sortList.filter(item => item.id === action.payload)[0];
 
             return update(state, {
@@ -93,7 +94,7 @@ const form = (state = initialState, action) => {
                 }
             });
 
-        case A.RECIPE_EDIT:
+        case ACTION.RECIPE_EDIT:
             let index, list_edit = state.list.slice();
 
             state.list.forEach((item, i) => {
@@ -117,7 +118,7 @@ const form = (state = initialState, action) => {
             });
 
 
-        case A.RECIPE_ADD:
+        case ACTION.RECIPE_ADD:
             let list_add = state.list.slice().concat([action.payload]);
 
             return update(state, {
@@ -133,7 +134,7 @@ const form = (state = initialState, action) => {
                 }
             });
 
-        case A.SHOW_RECIPE:
+        case ACTION.SHOW_RECIPE:
             let item;
             state.sortList.forEach((recipe, i) => {
                 if (recipe.id === action.payload) {
@@ -147,7 +148,7 @@ const form = (state = initialState, action) => {
                 }
             });
 
-        case A.RECIPE_DELETE:
+        case ACTION.RECIPE_DELETE:
             return update(state, {
                 $merge: {
                     index: initialState.index,
