@@ -13,8 +13,7 @@ class Content extends React.Component{
     }
 
     render(){
-        let {openForm, sortList} = this.props,
-            component = openForm ? <Form/> : <Item/>;
+        let {openForm, sortList} = this.props;
 
         return(
             <section className='content'>
@@ -23,12 +22,12 @@ class Content extends React.Component{
                     ?
                     <React.Fragment>
                         <List/>
-                        {component}
+                        {openForm ? <Form/> : <Item/>}
                     </React.Fragment>
                     :
                     <React.Fragment>
                         <Start/>
-                        <Form/>
+                        {openForm && <Form/>}
                     </React.Fragment>
                 }
             </section>

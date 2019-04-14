@@ -8,11 +8,10 @@ const mapStoreToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-   fetchList(){
+   fetchList: () =>
        dispatch({
            type: A.FETCH_LIST
        })
-   }
 });
 
 

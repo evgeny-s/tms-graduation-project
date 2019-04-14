@@ -7,8 +7,6 @@ import Input from './Form/InputTitle';
 import './Form/Form.scss';
 
 const RecipeFrom = ({editRecipe, onHandleChangeRecipe, onSubmit, openForm, ...rest}) => {
-    if(!openForm) return null;
-
     let {title, type, description, ingredients} = rest,
         disabled = (title.trim() && description.trim() && ingredients.trim() && type.trim()) ? 0 : 1;
 

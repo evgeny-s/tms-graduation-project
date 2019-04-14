@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Game from '../components/Game';
-import C from '../constans/Game';
+import C from '../constans/Reducers';
 
 const mapStoreToProps = state => ({
     map: state.game.map,
@@ -12,52 +12,51 @@ const mapStoreToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    loadMap(map){
+    loadMap: (map) =>
         dispatch({
             type: C.LOAD_MAP,
             payload: map
-        })
-    },
-    moveLeft() {
+        }),
+
+    moveLeft: () =>
         dispatch({
             type: C.MOVE_LEFT,
-        })
-    },
-    moveRight() {
+        }),
+
+    moveRight: () =>
         dispatch({
             type: C.MOVE_RIGHT
-        })
-    },
-    moveDown() {
+        }),
+
+    moveDown: () =>
         dispatch({
             type: C.MOVE_DOWN
-        })
-    },
-    moveUp() {
+        }),
+
+    moveUp: () =>
         dispatch({
             type: C.MOVE_UP
-        })
-    },
-    removeGoldFromMap() {
+        }),
+
+    removeGoldFromMap: () =>
         dispatch({
             type: C.GOLD_TO_PLAYER
-        })
-    },
-    removeSilverFromMap() {
+        }),
+
+    removeSilverFromMap: () =>
         dispatch({
             type: C.SILVER_TO_PLAYER
-        })
-    },
-    finishGame(){
+        }),
+
+    finishGame: () =>
         dispatch({
             type: C.FINISH
-        })
-    },
-    removeBombFromMap(){
+        }),
+
+    removeBombFromMap: () =>
         dispatch({
             type: C.BOMB_TO_PLAYER
         })
-    }
 });
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import options from '../../consts/Select';
+import S from '../../consts/Select';
 
 const Select = ({onChange, list, type, openForm}) => (
     <p>
@@ -9,7 +9,7 @@ const Select = ({onChange, list, type, openForm}) => (
                 Выберите тип блюда
             </option>
             {
-                options.map((type, i) => {
+                S.TYPE_OF_RECIPES.map((type, i) => {
                     let itemLength = list.filter(item => item.type.includes(type)).length;
 
                     return(
@@ -17,7 +17,7 @@ const Select = ({onChange, list, type, openForm}) => (
                     )
                 })
             }
-            <option value={'все'}>{`Все рецепты (${list.length})`}</option>
+            <option value={S.ALL_RECIPES}>{`Все рецепты (${list.length})`}</option>
         </select>
     </p>
 );

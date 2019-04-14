@@ -12,19 +12,18 @@ const mapStoreToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    onHandleChangeRecipe(e){
+    onHandleChangeRecipe: (e) =>
         dispatch({
             type: A.ON_CHANGE,
             payload: {
                 [e.target.name]: e.target.value
             }
-        })
-    },
-    onSubmit(){
+        }),
+
+    onSubmit: () =>
         dispatch({
             type: A.SUBMIT_FORM,
         })
-    }
 });
 
 export default connect(mapStoreToProps, mapDispatchToProps)(Form)
