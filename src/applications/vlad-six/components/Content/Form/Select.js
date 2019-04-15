@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {TYPE_OF_RECIPES} from '../../../consts/Select';
+import S from '../../../consts/Select';
 
 const Select = ({onChange, list, openForm, type}) => (
     <p>
@@ -11,7 +11,7 @@ const Select = ({onChange, list, openForm, type}) => (
                     Выберите тип блюда
                 </option>
                 {
-                    TYPE_OF_RECIPES.map((type, i) => {
+                    S.TYPE_OF_RECIPES.map((type, i) => {
                         let itemLength = list.filter(item => item.type.includes(type)).length;
 
                         return(

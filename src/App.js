@@ -11,16 +11,16 @@ import Six from './applications/vlad-six'
 
 function App() {
     return (
-      <Router>
-        <div className="container">
-          <Route path="/" exact component={AppsTable} />
-          <Route path="/app1" exact component={Clicker}/>
-            <Route path="/s-sushkevich" exact component={Game}/>
-            <Route path="/filippovich" exact component={FilippovichGame}/>
-            <Route path="/vlad-seven" exact component={Seven}/>
-            <Route path="/vlad-six" exact component={Six}/>
-        </div>
-      </Router>
+        <Router>
+            <div className="container">
+                <Route path="/" exact component={AppsTable} />
+                <Route path="/app1" exact component={Clicker}/>
+                <Route path="/s-sushkevich" exact component={Game}/>
+                <Route path="/filippovich" exact component={FilippovichGame}/>
+                <Route path="/vlad-seven" exact component={Seven}/>
+                <Route path="/vlad-six" exact component={Six}/>
+            </div>
+        </Router>
     );
 }
 

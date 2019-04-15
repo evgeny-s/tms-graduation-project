@@ -1,6 +1,6 @@
 import update from 'immutability-helper';
 import ACTION from '../consts/Actions';
-import {ALL_RECIPES} from '../consts/Select';
+import S from '../consts/Select';
 
 const initialState = {
     list: [],
@@ -39,7 +39,7 @@ const form = (state = initialState, action) => {
             });
 
         case ACTION.SORT_LIST:
-            if (action.payload.includes(ALL_RECIPES)) {
+            if (action.payload.includes(S.ALL_RECIPES)) {
                 return update(state, {
                     $merge: {
                         sortList: state.list.slice(),
