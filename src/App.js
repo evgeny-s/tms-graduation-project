@@ -8,6 +8,7 @@ import Game from './applications/sushkevich';
 import AppsTable from './AppsTable';
 import Seven from './applications/vlad-seven'
 import Six from './applications/vlad-six'
+import Recipe from './applications/kotko'
 
 function App() {
     return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/filippovich" exact component={FilippovichGame}/>
             <Route path="/vlad-seven" exact component={Seven}/>
             <Route path="/vlad-six" exact component={Six}/>
+            <Route path="/kotko" exact component={Recipe}/>
         </div>
       </Router>
     );
