@@ -27,4 +27,6 @@ class SpaceInfo extends React.Component {
     }
 }
 
+
+
 export default withHeader(SpaceInfo);

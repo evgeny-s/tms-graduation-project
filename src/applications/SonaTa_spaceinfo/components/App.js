@@ -4,21 +4,23 @@ import Timestamp from './Timestamp.js';
 import Velocity from './Velocity.js';
 import {AstronautsCount, Astronauts} from './Astronauts.js';
 import space from './space.jpg';
+import Table from './Table.js';
 
+
+const records=[];
 
 class App extends React.Component {
   
     componentWillMount() {
         setInterval(() => {
-            this.props.resolvedGetData()
-        }, 1000);
+            this.props.resolvedGetData() 
+        }, 5000);
         
       this.props.getAstronauts();
-         
+        
     }
-   
-    time(){
-	   const unix = this.props.timestamp;
+
+     time(unix){
 	   const hours = Math.floor(unix % 86400 / 3600).toString();
 	   const min = Math.floor(unix % 86400 % 3600 / 60).toString();
 	   const sec = Math.floor(unix % 86400 % 3600 % 60).toString();
@@ -32,7 +34,25 @@ class App extends React.Component {
    people(){ if(this.props.people){
        return this.props.people.map((per)=>{return <li key={per.toString()}>{per}</li>})}
    }
+
+
+  
+                                    
+tab(){
+   
+      if(this.props.longitude)  {  
+        records.push(this.props);
+        }
+      console.log(records); 
+   
+      return (
+        <React.Fragment>   
+            {records.map((elem)=>{return (<tr key={elem.timestamp}><td>count</td><td>{elem.latitude}</td><td>{elem.longitude}</td><td>{elem.timestamp}</td><td>{this.time(elem.timestamp)}</td><td>*</td><td>*</td></tr>)})} 
+        </React.Fragment>
+       )                 
+    }      
     
+  
     render(){
         const page={ backgroundImage: "url(" + space + ")", backgroundPosition: "center", backgroundSize: "cover", width:"1110px", height:"550px",color:"yellow"}
         
@@ -42,21 +62,22 @@ class App extends React.Component {
                     <AstronautsCount value = {this.props.numberOfPeople} />
                     <Astronauts person = {this.people()} />
                 </div>
-                        
-                <p style={{color:"yellow", fontSize:"25px", margin:"20px"}}>Current Data on the ISS:</p>
-                <LatLong text = "Current Latitude:" value={this.props.latitude} />
-                <LatLong text = "Current Longitude:" value={this.props.longitude}/>
-                <Timestamp text = "Current Timestamp(unix):" value={this.props.timestamp}/>
-                <Timestamp text = "Current Timestamp(natural):" value={this.time()}/>
-            
-                {/*<Velocity />*/}
+                <div>        
+                    <p style={{color:"yellow", fontSize:"25px", margin:"20px"}}>Current Data on the ISS:</p>
+                    <LatLong text = "Current Latitude:" value={this.props.latitude} />
+                    <LatLong text = "Current Longitude:" value={this.props.longitude}/>
+                    <Timestamp text = "Current Timestamp(unix):" value={this.props.timestamp}/>
+                    <Timestamp text = "Current Timestamp(natural):" value={this.time(this.props.timestamp)}/>
+                    {/*<Velocity />*/}
+                </div>
+                <Table val={this.tab()}/>
             </div>
         )
       
     }
-    
-   
-   
+      
 }
+  
+
 
 export default App;

@@ -8,7 +8,10 @@ const mapStateToProps = (state) => ({
     timestamp: state.timestamp,
     
     numberOfPeople: state.numberOfPeople,
-    people: state.people
+    people: state.people,
+    
+    records:state.records
+    
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -21,11 +24,11 @@ const mapDispatchToProps = (dispatch) => ({
                         payload: {
                             latitude: json.iss_position.latitude,
                             longitude: json.iss_position.longitude,
-                            timestamp: json.timestamp
+                            timestamp: json.timestamp,
                         }
                     }))
             }),
-    getAstronauts: (data) => dispatch(
+        getAstronauts: (data) => dispatch(
             (dispatch) => {
                 return fetch('http://api.open-notify.org/astros.json')
                     .then(response => response.json())
@@ -36,10 +39,10 @@ const mapDispatchToProps = (dispatch) => ({
                             people: json.people.map(element =>{return element.name})
                         }
                     }))
-            })
-       
+            }),
+
 });
-    
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
 
