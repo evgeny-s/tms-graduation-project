@@ -2,7 +2,7 @@ import React from 'react';
 
 function Table(props){
     return (
-       <table style={{width:"100vh", marginLeft:"150px", marginTop:"100px"}}> 
+       <table cellPadding="2" cellspacing="5" style={{width:"100vh",textAlign:"center",backgroundColor:"rgba(64, 77, 96,.5)", border:"2px solid white"}}> 
            <tbody>
                 <tr> 
                     <th>Count</th> 
@@ -13,8 +13,7 @@ function Table(props){
                     <th>Velocity (km/h)</th> 
                     <th>Velocity (mph)</th> 
                 </tr>
-                {props.values}
-    {props.val}
+                {props.value}
             </tbody>  
         </table>
         )

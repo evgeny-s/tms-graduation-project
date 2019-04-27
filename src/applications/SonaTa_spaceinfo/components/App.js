@@ -35,24 +35,22 @@ class App extends React.Component {
        return this.props.people.map((per)=>{return <li key={per.toString()}>{per}</li>})}
    }
 
-
-  
                                     
-tab(){
+    tab(){
    
       if(this.props.longitude)  {  
-        records.push(this.props);
+        records.unshift(this.props);
         }
       console.log(records); 
-   
+  
       return (
         <React.Fragment>   
-            {records.map((elem)=>{return (<tr key={elem.timestamp}><td>count</td><td>{elem.latitude}</td><td>{elem.longitude}</td><td>{elem.timestamp}</td><td>{this.time(elem.timestamp)}</td><td>*</td><td>*</td></tr>)})} 
+            {records.map((elem,index)=>{return (<tr style={{border:"1px solid white"}} key={elem.timestamp}><td>{records.length-index}</td><td>{elem.latitude}</td><td>{elem.longitude}</td><td>{elem.timestamp}</td><td>{this.time(elem.timestamp)}</td><td>*</td><td>*</td></tr>)})} 
         </React.Fragment>
        )                 
     }      
     
-  
+
     render(){
         const page={ backgroundImage: "url(" + space + ")", backgroundPosition: "center", backgroundSize: "cover", width:"1110px", height:"550px",color:"yellow"}
         
@@ -70,7 +68,9 @@ tab(){
                     <Timestamp text = "Current Timestamp(natural):" value={this.time(this.props.timestamp)}/>
                     {/*<Velocity />*/}
                 </div>
-                <Table val={this.tab()}/>
+                <div style={{maxHeight:"205px", overflow: "auto", marginLeft:"150px", marginTop:"80px"}}>
+                    <Table value={this.tab()}/>
+               </div>
             </div>
         )
       

@@ -1,9 +1,9 @@
     
 import update from 'immutability-helper';
  
-let initialstate={records:[]}
+//let initialstate={records:[]}
 
-const reducer = (state=initialstate, action) => {
+const reducer = (state={}, action) => {
     switch (action.type) { 
         /*   
           case 'CURRENT_LOCATION':
