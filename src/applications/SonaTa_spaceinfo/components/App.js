@@ -22,41 +22,10 @@ componentWillMount() {
    setInterval(() => {
             this.props.resolvedGetData() 
         }, 5000);  
-        
-<<<<<<< HEAD
-        this.props.getAstronauts()    
-    }
-    
-   time(){
-        return Math.floor(this.props.timestamp % 86400 / 3600) + ':' + Math.floor(this.props.timestamp % 86400 % 3600 / 60) + ':' + Math.floor(this.props.timestamp % 86400 % 3600 % 60);
-    }
-    
-    render(){
-        const page={ backgroundImage: "url(" + space + ")", backgroundPosition: "center", backgroundSize: "cover", width:"1110px", height:"550px",color:"yellow"}
-       console.log(this.props.people);
-        return (
-            <div style={page}>
-                
-                <AstronautsCount value = {this.props.numberOfPeople} />
-            
-                <Astronauts value = {} />
-          
-               {/* <ul>
-                    {this.props.people.map(per=><Astronauts key={per.toString()} value = {per} />)} 
-                </ul>*/}
 
-                          
-                <p style={{color:"yellow", fontSize:"25px", margin:"20px"}}>Current Data on the ISS:</p>
-                <LatLong text = "Current Latitude:" value={this.props.latitude} />
-                <LatLong text = "Current Longitude:" value={this.props.longitude}/>
-                <Timestamp text = "Current Timestamp(unix):" value={this.props.timestamp}/>
-                <Timestamp text = "Current Timestamp(natural):" value={this.time}/>
-            
-                <Velocity />
-=======
-   this.props.getAstronauts();    
+            this.props.getAstronauts()    
     }
-
+     
    time(unix){
 	   const hours = Math.floor(unix % 86400 / 3600).toString();
 	   const min = Math.floor(unix % 86400 % 3600 / 60).toString();
@@ -145,7 +114,6 @@ componentWillMount() {
                 <div className="tableContainer">
                     <Table value={this.tab()}/>
                 </div>
->>>>>>> SonaTa.SpaceInfo
             </div>
         )
     } 
