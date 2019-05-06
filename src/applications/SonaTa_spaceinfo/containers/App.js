@@ -6,12 +6,8 @@ const mapStateToProps = (state) => ({
     latitude: state.latitude,
     longitude: state.longitude,
     timestamp: state.timestamp,
-    
     numberOfPeople: state.numberOfPeople,
     people: state.people,
-    
-    records:state.records
-    
 });
 
 const mapDispatchToProps = (dispatch) => ({
