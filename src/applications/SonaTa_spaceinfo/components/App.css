@@ -1,0 +1,59 @@
+.component {
+    width: 370px; 
+    height:40px; 
+    background-color:rgba(64, 77, 96,.5); 
+    color:yellow; 
+    font-size:20px; 
+    margin-bottom:5px; 
+    margin-left:15px;
+}
+
+.AstronautsCount {
+    color:#75aaf9; 
+    font-size:25px; 
+    margin:10px; 
+    text-align:center;
+}
+
+.Astronauts {
+    color:#6492d6; 
+    font-size:15px; 
+    margin-left:250px;
+}
+
+.Table {
+    width:100vh;
+    text-align:center;
+    background-color:rgba(64, 77, 96,.5); 
+    border:2px solid white;
+}
+
+.page {
+    background-image: url(./space.jpg);
+    background-position: center; 
+    background-size: cover; 
+    width:1110px; 
+    height:550px;
+    color:yellow;
+} 
+
+.pCurrentData {
+    color:yellow; 
+    font-size:25px; 
+    margin:20px;
+}
+
+.tableContainer {
+    max-height:177px; 
+    margin-left:220px; 
+    margin-top:40px; 
+    overflow: auto;
+}
+
+.astronautsContainer {
+    float:right;
+}
+
+.tr {
+    border:1px solid white;
+}
