@@ -17,7 +17,7 @@ const reducer = (state={}, action) => {
             };
         
         default:
-            return 'Sorry, try again later'
+            return state;
     }
 }
 
