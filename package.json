@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "bootstrap": "^4.3.1",
+    "node-sass": "^4.11.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-redux": "^6.0.1",
@@ -24,6 +25,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "serverTarasov": "json-server --watch ./src/applications/vlad-six/db/db.json --port 3005",
     "serverFilippovich": "json-server --watch ./src/applications/Filippovich/db/bestPlayers.json --port 3005",
     "server": "json-server --watch ./src/applications/sushkevich/db/highscore.json --port 4000"
   },

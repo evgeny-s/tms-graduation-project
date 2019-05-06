@@ -38,8 +38,26 @@ function AppsTable() {
                     <th scope="row">2</th>
                     <td>КосмосИнфо</td>
                     <td>Сона</td>
-                <td><Link className="btn btn-success" to="/SonaTa">Перейти {'>'}</Link></td>
-            </tr>
+                    <td><Link className="btn btn-success" to="/SonaTa">Перейти {'>'}</Link></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Лабиринт</td>
+                    <td>Влад</td>
+                    <td><Link className="btn btn-success" to="/vlad-seven">Перейти {'>'}</Link></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Книга рецептов</td>
+                    <td>Влад</td>
+                    <td><Link className="btn btn-success" to="/vlad-six">Перейти {'>'}</Link></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Книга рецептов</td>
+                    <td>Юля</td>
+                    <td><Link className="btn btn-success" to="/kotko">Перейти {'>'}</Link></td>
+                </tr>
                 </tbody>
             </table>
         </div>
