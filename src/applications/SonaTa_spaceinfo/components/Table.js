@@ -2,7 +2,7 @@ import React from 'react';
 
 function Table(props){
     return (
-       <table cellPadding="2" cellspacing="5" className="Table"> 
+       <table cellPadding="2" cellSpacing="5" className="Table"> 
            <tbody>
                 <tr> 
                     <th>Count</th> 

@@ -1,6 +1,7 @@
 import {connect} from 'react-redux';
 import App from '../components/App.js';
-
+import {getLatLongTimeService} from '../services/getLatLongTimeService.js'
+import {getAstronautsService} from '../services/getAstronautsService.js'
 
 const mapStateToProps = (state) => ({
     latitude: state.latitude,
@@ -11,37 +12,17 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-        resolvedGetData: (data) => dispatch(
-            (dispatch) => {
-                return fetch('http://api.open-notify.org/iss-now.json')
-                    .then(response => response.json())
-                    .then(json => dispatch({
-                        type: 'CURRENT_LOCATION',
-                        payload: {
-                            latitude: json.iss_position.latitude,
-                            longitude: json.iss_position.longitude,
-                            timestamp: json.timestamp,
-                        }
-                    }))
+        getLatLongTime: (data) => dispatch(
+            async (dispatch) => {
+                dispatch (await getLatLongTimeService(data)); 
             }),
         getAstronauts: (data) => dispatch(
-            (dispatch) => {
-                return fetch('http://api.open-notify.org/astros.json')
-                    .then(response => response.json())
-                    .then(json => dispatch({
-                        type: 'PEOPLE_IN_SPACE',
-                        payload: {
-                            numberOfPeople: json.number,
-                            people: json.people.map(element =>{return element.name})
-                        }
-                    }))
+            async (dispatch) => {
+                dispatch (await getAstronautsService(data)); 
             }),
 
-});
+});  
 
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);
-
-
-
 

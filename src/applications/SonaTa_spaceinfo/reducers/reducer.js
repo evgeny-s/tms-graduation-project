@@ -1,4 +1,3 @@
-
 const reducer = (state={}, action) => {
     switch (action.type) { 
         case 'CURRENT_LOCATION':
@@ -8,8 +7,7 @@ const reducer = (state={}, action) => {
                 longitude: action.payload.longitude,
                 timestamp: action.payload.timestamp,   
             }; 
-        case 'PEOPLE_IN_SPACE':
-           
+        case 'PEOPLE_IN_SPACE':    
             return {
                 ...state,
                 people: action.payload.people,
@@ -23,3 +21,4 @@ const reducer = (state={}, action) => {
 
 export default reducer;
 
+ 
